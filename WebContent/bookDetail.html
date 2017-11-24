@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Edit book</title>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--Bootstrap CDN-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<!--Carousel CSS-->
+<link rel="stylesheet" type="text/css" href="slick/slick.css" />
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
+<!--Carousel Javascript-->
+<script type="text/javascript" src="slick/slick.min.js"></script>
+<!--Our Javascript for homepage-->
+    <script type="text/javascript" src="scripts/index.js"></script>
+    <!-- Custom styles for this template -->
+    <link type="text/css" href="css/index.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container">
+		<!--The login top bar which holds our options to Log In and Sign Up/Register-->
+		<div class="top_bar">
+			<div class="container">
+				<div class="pull-right">
+					<ul class="pull-right">
+						<li class="login">Welcome! Admin</li>
+						<li class="login"><a href="adminView.html">admin action</a>
+						<li class="login"><a href="account.html">manage account</a></li>
+						<li class="login"><a href="">order status</a></li>
+						<li class="login shift-left"><a href="shoppingCart.html"><img
+								src="images/shopping-cart.png"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!--Navigation Bar at the top right which hold links to other sites on our page-->
+		<div class="header clearfix">
+			<nav>
+				<div class="navbar-header">
+					<h3>Logo TBD</h3>
+				</div>
+				<ul class="nav nav-pills pull-right">
+					<li role="presentation"><a href="#">Home</a></li>
+					<li role="presentation" class="active"><a href="#">Browse
+							All Books</a></li>
+					<li role="presentation"><a href="#">About</a></li>
+					<li role="presentation"><a href="#">Contact</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="bookDetailDiv">
+			<label>Title:</label> <input type="text" value="Divergent"><br><br>
+			<img src="images/Divergent_Smaller.png" alt="book image" /><br><br>
+			<label>Author:</label> <input type="text" value="Veronica Roth"><br><br>
+			<label>Subject:</label> <input type="text" value="whatever"><br><br>
+			<label>Price:</label> <input type="text" value="$10.99"><br><br>
+			<label>Product description</label> <br>
+			<textarea rows="7" cols="85">Divergent is the debut novel of American novelist Veronica Roth, published by HarperCollins Children's Books in 2011. The novel is the first of the Divergent trilogy, a series of young adult dystopian novels set in the Divergent Universe.[1] The novel Divergent features a post-apocalyptic version of Chicago and follows Beatrice "Tris" Prior as she explores her identity within a society that defines its citizens by their social and personality-related affiliation with five factions, which removes the threat of anyone exercising independent will and re-threatening the population's safety. Underlying the action and dystopian focused main plot is a romantic subplot between Tris and one of her instructors in the Dauntless faction, nicknamed Four.</textarea><br>
+			<br>
+			<div class="bdBtnDiv">
+				<button>Cancel</button>
+				<button>Delete</button>				
+				<button>Update</button>
+			</div>
+
+		</div>
+
+		<footer class="footer">
+			<p>&copy; 2016 Company, Inc.</p>
+		</footer>
+
+	</div>
+</body>
+</html>

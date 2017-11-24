@@ -1,0 +1,336 @@
+/* Space out content a bit */
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif, "Times New Roman";
+}
+
+ul li {
+    list-style-type: none;
+    display: inline;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+/* Custom page header */
+.header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+}
+
+/* Custom page footer */
+.footer {
+	margin-top: 30px;
+    padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+    .container {
+        max-width: 730px;
+    }
+}
+.container-narrow > hr {
+    margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: whitesmoke;
+}
+.jumbotron .btn {
+    padding: 14px 24px;
+    font-size: 21px;
+}
+
+/* Supporting marketing content */
+.marketing {
+    margin: 40px 0;
+}
+.marketing p + h4 {
+    margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    /* Remove the padding we set earlier */
+    .header,
+    .marketing,
+    .footer {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    /* Space out the masthead */
+    .header {
+        margin-bottom: 30px;
+    }
+    /* Remove the bottom border on the jumbotron for visual effect */
+    .jumbotron {
+        border-bottom: 0;
+    }
+}
+
+.navbar-header {
+    height: 100%;
+}
+
+.navbar-brand {
+    padding-top: 0;
+}
+
+.max_width {
+    width: 100%;
+}
+
+.white-background {
+    background-color: white;
+    border: none;
+    outline: 0;
+}
+
+#navbar_home {
+    height: 100%;
+    width: 100%;
+}
+
+#home_logo {
+    height: 100%;
+    width: 100%;
+}
+
+#search_img {
+    height: auto;
+    width: auto;
+    max-height: 20px;
+    max-width: 20px;
+}
+
+#search_bar {
+    margin-top: 30px;
+}
+
+.form-group {
+    margin-top: 10px;
+}
+
+.blue {
+    background-color: royalblue;
+    color: whitesmoke;
+}
+
+/* The login bar at the top which is currently in color*/
+.top_bar {
+    padding-top: 5px;
+    padding-right: 15px;
+    padding-left: 15px;
+    background-color: lightblue;
+    color: black;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.login {
+    padding-right: 5px;
+}
+
+/* Shifts the login option bar to the left */
+.shift-left {
+    margin-right: 35px;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.center-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* These affect the carousel arrow colors which are by default white*/
+.slick-prev:before {
+    color: midnightblue;
+}
+.slick-next:before {
+    color: midnightblue;
+}
+
+/* Carousel height and width */
+.carousel-img {
+    width: auto;
+    height: auto;
+    max-width: 150px;
+    max-height: 225px;
+}
+	
+/*Adds a border to the divs on the account page*/
+.boxes{
+	float:left;
+	width: 48%;
+	border: 1px solid black;
+	margin:5px;
+	padding: 5px;
+}
+/*Adds some style to the buttons on account page*/
+.cool_buttons{
+	background-color: lightblue;
+	font-size: 20px;
+	padding: 5px;
+	display:block;
+	width:100%;
+	margin:0 auto;
+	
+}
+
+/*To help space out the input fields on the account settings page*/
+input{
+	margin-top:5px;
+	margin-bottom: 5px;
+}
+
+
+/*Style for table showing all books*/
+table {  
+    margin: 10px;
+    width: 100%;
+}
+
+td, th {
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: whitesmoke;
+}
+
+/* About us text CSS*/
+.about-us-text {
+    font-size: 16px;
+    padding-bottom: 4px;
+}
+
+#about-us-header {
+    padding-bottom: 20px;
+}
+
+/* Style for registration page */
+.regDiv {
+	text-align: center;
+}
+.regLabel, .coLabel {
+	text-align: left;
+	font-size: small;
+}
+.regInputField, .coInputField {
+	width: 300px;
+}
+
+.regInput {
+	width: 300px;
+	margin: auto;
+}
+
+/* Style for login page */
+.loginButton {
+	width: 300px;
+	margin-top: 30px;
+}
+
+.loginFP {
+	float: right;
+	font-size: 13px;
+}
+
+/* Style for homepage search bar */
+.form-control {
+	margin-top: 0px !important;
+}
+
+.input-select {
+	padding: 0 0 !important;
+}
+
+.selectField {
+	height: 47px;
+}
+
+.input-advanced {
+	float: right;
+}
+
+/* Style for advanced search page */
+.adSearchField {
+	margin-bottom: 50px;
+}
+.asLabel {
+	display: inline-block;
+	width: 20%;
+}
+
+.asInputField {
+	width: 79%;
+}
+
+.asBtn {
+	float: right;
+}
+
+/* Style for shopping cart page */
+.cartInput {
+	width: 50px;
+}
+
+.subTotalDiv {
+	font-size: 20px;
+	text-align: right;
+}
+
+.checkoutDiv {
+	text-align: right;
+}
+
+/* Style for admin view page */
+.adminActionDiv input{
+	width: 200px;
+}
+.adminActionDiv, .addUserDiv, .addBookDiv{
+	text-align: center;
+	font-size: 18px;
+}
+
+/* Style for manage user page */
+.muCol2 {
+	text-align: right;
+}
+
+/* Style for book detail page */
+.bdBtnDiv {
+	text-align: right;
+}
+
+/* General */
+.centerDiv {
+	text-align: center;
+}
+
+.rightDiv {
+	text-align: right;
+}
