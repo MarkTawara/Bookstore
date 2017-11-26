@@ -51,6 +51,9 @@ public class bookstore_query {
 		return false;
 	}
 	
+	/*
+	 * This method is called from AddBook to add a new book to the database
+	 */
 	public void addBook(String title, String author, double price, String description, byte[] image) {
 		String query = "TBDDDDD";
 		ResultSet rs = null;
@@ -67,6 +70,13 @@ public class bookstore_query {
 
 			
 		DB_Access.disconnect(con);
+	}
+	
+	/*
+	 * This methods is called from AddToCartServlet to update a user's cart
+	 */
+	public void addToCart(String user, String isbn, int qty) { // do I need cartID?
+		// TODO this
 	}
 	
 }
