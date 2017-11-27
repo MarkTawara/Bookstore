@@ -59,31 +59,42 @@
 	
     <div class="regDiv">
         <h1 class="center-text">Create account</h1>
-        <div class="regInput">
-			<label class="regLabel"> *Username: <br>
-			<input class="regInputField" type="text" name="regUsername" value=""></label><br>
-        	<label class="regLabel"> *Email: <br>
-        	<input class="regInputField" type="text" name="regEmail" value=""></label><br>
-        	<label class="regLabel"> *Password: <br>
-        	<input class="regInputField" type="text" name="regPassword" value=""></label><br>
-        	<label class="regLabel"> *Re-enter password: <br>
-        	<input class="regInputField" type="text" name="regRePassword" value=""></label><br>
-			<label class="regLabel"> *Security Question: <br>
-        	<input class="regInputField" type="text" name="secQues" value=""></label><br>
-			<label class="regLabel"> *Security Answer: <br>
-        	<input class="regInputField" type="text" name="secAns" value=""></label><br>
-			<label class="regLabel"> *Address: <br>
-        	<input class="regInputField" type="text" name="address" value=""></label><br>
-			<label class="regLabel"> *Phone Number: <br>
-        	<input class="regInputField" type="text" name="phoneNumber" value=""></label><br>
-			<label class="regLabel"> *First Name: <br>
-        	<input class="regInputField" type="text" name="firstName" value=""></label><br>
-			<label class="regLabel"> *Last Name: <br>
-        	<input class="regInputField" type="text" name="lastName" value=""></label><br>
-			
-        	<input type="submit" value="Cancel">
-        	<input type="submit" value="Create new account">
-        </div>
+        
+        <form action="SignUpServlet">
+		First name:<br>
+		<input type="text" name="firstname"><br>
+		Last name:<br>
+		<input type="text" name="lastname"><br>
+		Email:<br>
+		<input type="text" name="email"><br>
+		Password:<br>
+		<input type="text" name="password1"><br>
+		Confirm Password:<br>
+		<input type="text" name="password2"><br>
+		Phone Number:<br>
+		<input type="text" name="phonenum"><br>
+		Shipping Address:<br>
+		Street: <br>
+		<input type="text" name="street"><br>
+		City:
+		<input type="text" name="city"><br>
+		State:
+		<input type="text" name="state"><br>
+		Zip Code:
+		<input type="text" name="zip"><br>
+		Billing Info:
+		Card Type:
+		
+		Card Number:
+		<input type="text" name="cardnum"><br>
+		Expiration Date:
+		
+		CCV:
+		
+		Billing Address:
+		<br><br>
+		<input type="submit" value="Create Account">
+		</form>
     </div>
 
     <footer class="footer">

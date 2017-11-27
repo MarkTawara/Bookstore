@@ -75,7 +75,7 @@ public class bookstore_query {
 	/*
 	 * This methods is called from AddToCartServlet to update a user's cart
 	 */
-	public void addToCart(String user, String isbn, int qty) { // do I need cartID?
+	public void addToCart(String user, String cartID, String isbn, int qty) { 
 		// TODO this
 	}
 	

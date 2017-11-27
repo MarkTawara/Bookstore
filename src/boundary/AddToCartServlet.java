@@ -40,12 +40,12 @@ public class AddToCartServlet extends HttpServlet {
 		
 		bookstore_query db = new bookstore_query();
 		
-		String userID = request.getParameter("userID");
-		String isbn = request.getParameter("isbn");
+		//String userID = request.getParameter("userID");
+		//String isbn = request.getParameter("isbn");
 		int qty = Integer.parseInt(request.getParameter("qty"));
-		// cartID?
-		
-		db.addToCart(userID, isbn, qty);
+		//String cartID = request.getParameter("cartID");
+		System.out.println(qty);
+		//db.addToCart(userID, cartID, isbn, qty);
 	}
 
 }
