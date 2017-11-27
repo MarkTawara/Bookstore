@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import logic_layer.bookstore_query;
 //import logic_layer.Logic;
@@ -32,7 +33,17 @@ public class Login_Servlet extends HttpServlet {
 		bookstore_query query = new bookstore_query();
 		
 		boolean checkLogin = query.validate_user(request, response, email, password);
-		System.out.println(checkLogin);
+		if (checkLogin) {
+			HttpSession session = request.getSession();
+			session.setAttribute("email", email);
+			
+			String name = query.get_name(request, response, email);
+			session.setAttribute("name", name);
+			System.out.println("Fuck This " + name);
+		} else {
+			System.out.println("Still Fuck This");
+		}
+		
 		/*
 		if (bookstore_query.validate_user(request, response, email, password)) {
 			

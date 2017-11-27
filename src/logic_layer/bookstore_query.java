@@ -51,6 +51,25 @@ public class bookstore_query {
 		return false;
 	}
 	
+	public static String get_name(HttpServletRequest request, HttpServletResponse response, String email) {
+		String query = "SELECT customer_name FROM registered_customer WHERE email = '"+email+"'";
+		ResultSet rs = null;
+		Connection con = DB_Access.connect();
+		
+		try{
+			rs = DB_Access.retrieve(con, query);
+			if (rs.next()) { // enter here if successfully login
+				return rs.getString("customer_name");
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+
+			
+		DB_Access.disconnect(con);
+		return "fucking Fucking Fucking FUCKING SHIBAL";
+	}
+	
 	/*
 	 * This method is called from AddBook to add a new book to the database
 	 */
@@ -77,6 +96,13 @@ public class bookstore_query {
 	 */
 	public void addToCart(String user, String cartID, String isbn, int qty) { 
 		// TODO this
+	}
+	
+	/*
+	 * 
+	 */
+	public void addNewUser() {
+		
 	}
 	
 }
