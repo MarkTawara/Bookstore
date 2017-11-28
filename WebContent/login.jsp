@@ -66,7 +66,7 @@
 				<label class="regLabel"> Email: <br>
 				<input class="regInputField" type="text" name="reg_email" value=""></label><br>
 	        	<label class="regLabel"> Password: <br>
-	        	<input class="regInputField" type="text" name="reg_password" value=""></label><br>
+	        	<input class="regInputField" type="password" name="reg_password" value=""></label><br>
 	        	<input class="loginButton" type="submit" value="Sign in"><br>
 	        	<a class="loginFP" href="forgot_password.html">Forget your password?</a>
         	</form>
