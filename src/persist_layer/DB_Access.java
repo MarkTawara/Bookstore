@@ -35,6 +35,7 @@ public class DB_Access {
 		return con;
 	} // end of connect
 	
+	//If rows = 0 after the code is ran, that means 0 rows were updated.
 	public static int insert (String query){
 		int rows = 0;
 		try {
