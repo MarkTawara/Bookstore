@@ -127,4 +127,17 @@ public class bookstore_query {
 		return r;
 	}
 	
+	//After a user submits an email for a forgotten password
+	//The database is updated to reflect the random password that was generated
+	public int changePassword(String email, String password){
+		int r = 0;
+		String query = "UPDATE registered_customer SET password = '" + password + "' WHERE email = '" + email +"'";
+		try {
+			r=DB_Access.insert(query);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return r;
+	}
+	
 }
