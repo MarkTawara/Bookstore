@@ -58,14 +58,18 @@
 	<!--Main information for the page is here-->
 	
     <div class="regDiv">
-        <h1 class="center-text">Create account</h1>
+        <h1>Create account</h1>
         
-        <form action="SignUpServlet">
+        <form action="SignUpServlet" method="post">
 		First name: <input type="text" name="firstname"><br>
 		Last name: <input type="text" name="lastname"><br>
 		Email: <input type="text" name="email"><br>
 		Password: <input type="text" name="password"><br>
 		Phone Number: <input type="text" name="phonenum"><br>
+		Subscribe to promotions and newsletter: 
+		<input type="radio" name="subscribed" value="true"> Yes
+		<input type="radio" name="subscribed" value="false"> No
+		<br>
 		<br>
 		Shipping Address:<br>
 		Street: <input type="text" name="street"><br>

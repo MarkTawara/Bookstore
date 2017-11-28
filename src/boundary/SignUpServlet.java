@@ -45,6 +45,7 @@ public class SignUpServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String phone = request.getParameter("phonenum");
+		boolean isSubscribed = Boolean.parseBoolean(request.getParameter("subscribed"));
 		String street = request.getParameter("street");
 		String city = request.getParameter("city");
 		String state = request.getParameter("state");
@@ -55,8 +56,7 @@ public class SignUpServlet extends HttpServlet {
 		String expdate = request.getParameter("expireMM") + "/" + request.getParameter("expireYY");
 		String ccv = request.getParameter("ccv");
 		
-		//db.addNewUser(name, email, password, phone, address);
-		
+		int x = db.addNewUser(name, email, password, phone, address);
 	}
 
 }

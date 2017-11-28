@@ -17,6 +17,7 @@ public class bookstore_query {
 	
 	/*
 	 * This method is called from the Login_Servlet, and it creates a query to that is executed to enter a new user into the database.
+	 * ???????????????????????????? what is this
 	 */
 	public static int insert_new_user(HttpServletRequest request, HttpServletResponse response, String name, String email, String password) {
 		String query = "INSERT INTO users (name, email, password) Values('"+name+"', '"+email+"', '"+password+"')";
@@ -99,10 +100,19 @@ public class bookstore_query {
 	}
 	
 	/*
-	 * 
+	 * This method is called from SignUpServlet to add a new user to the db
 	 */
-	public void addNewUser() {
-		
+	public int addNewUser(String name, String email, String password, String phone, String address) {
+		String query = "INSERT INTO registered_customer (customer_name, billing_address, email, shipping_address, phone_number, password)\n" + 
+				"VALUES ('" + name + "', '" + address + "', '" + email + "', '" + address + "', '" + phone + "', '" + password + "')";
+
+		int r = 0;
+		try{
+			r = DB_Access.insert(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return r;
 	}
 	
 }
