@@ -90,7 +90,6 @@ public class SignUpServlet extends HttpServlet {
 		//String ccv = request.getParameter("ccv").trim();
 		
 		String code = generateCode();
-		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate);
 		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate, isSubscribed); // ADD TO DATABASE
 		
 		sendEmail(email, code); // SEND EMAIL 
@@ -99,10 +98,6 @@ public class SignUpServlet extends HttpServlet {
 		session.setAttribute("email", email);
 		session.setAttribute("code", code);
 		
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("email", email);
-		session.setAttribute("code", code);
 		
 		doGet(request, response);
 	}
