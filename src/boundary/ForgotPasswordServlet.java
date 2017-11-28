@@ -44,18 +44,20 @@ public class ForgotPasswordServlet extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher("forgot_password_confirmation.html");
 		view.forward(request, response);
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			String email = request.getParameter("email").trim();
-			String randomPassword = getSaltString();
-			sendEmail(email, randomPassword);
+		bookstore_query db = new bookstore_query();
+		String email = request.getParameter("email").trim();
+		String randomPassword = getSaltString();
+		sendEmail(email, randomPassword);
 			
-			//CHANGE PASSWORD IN DATABASE TO MATCH randomPassword
-			
-			doGet(request,response);
+		//CHANGE PASSWORD IN DATABASE TO MATCH randomPassword
+		int changePW = db.changePassword(email, randomPassword);
+		
+		doGet(request,response);
 			
 	}
 	
