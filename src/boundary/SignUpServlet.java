@@ -44,7 +44,7 @@ public class SignUpServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("fuck this23");
+		//System.out.println("fuck this23");
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/confirm_account.jsp");
 		dispatcher.forward(request, response);
 		//request.getRequestDispatcher("confirm_account.jsp").forward(request, response);
@@ -108,8 +108,9 @@ public class SignUpServlet extends HttpServlet {
 		session.setAttribute("email", email);
 		session.setAttribute("code", code);
 		
-		doGet(request, response);
-		
+		//doGet(request, response);
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/confirm_account.jsp");
+		dispatcher.forward(request, response);
 	}
 	
 	protected String generateCode() {
