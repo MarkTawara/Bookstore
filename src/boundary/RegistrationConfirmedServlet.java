@@ -34,7 +34,7 @@ public class RegistrationConfirmedServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("message", message); // This will be available as ${message}
-        request.getRequestDispatcher("/WEB-INF/confirm_account.jsp").forward(request, response);
+        request.getRequestDispatcher("/confirm_account.jsp").forward(request, response);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class RegistrationConfirmedServlet extends HttpServlet {
 		String inputCode = request.getParameter("inputcode").trim();
 		
 		if (actualCode.equals(inputCode)) {
-			message = "Your account has been confirmed! Redirecting to sign-in page... <META http-equiv=\"refresh\" content=\"3;URL=login.html\">";
+			message = "Your account has been confirmed! Redirecting to sign-in page... <META http-equiv=\"refresh\" content=\"3;URL=login.jsp\">";
 			session.invalidate();
 			db.changeAccountStatus(email, "Active");
 		}

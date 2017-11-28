@@ -23,7 +23,7 @@
     <script type="text/javascript" src="slick/slick.min.js"></script>
     <!--Our Javascript for homepage-->
     <script type="text/javascript" src="scripts/index.js"></script>
-    <script type="text/javascript" src="scripts/validateInput.js"></script>
+    <!-- <script type="text/javascript" src="scripts/validateInput.js"></script> -->
     <!-- Custom styles for this template -->
     <link type="text/css" href="css/index.css" rel="stylesheet">
 </head>
@@ -228,7 +228,7 @@
 			Zip Code: <input type="text" name="zip2" id="zip2" required><br>
 			
 			<br><br>
-			<input type="button" id="create_account_button" value="Create Account">
+			<input type="submit" id="create_account_button" value="Create Account">
 		</form>
     </div>
 

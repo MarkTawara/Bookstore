@@ -44,10 +44,10 @@ public class SignUpServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//System.out.println("fuck this23");
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/confirm_account.jsp");
+		System.out.println("fuck this23");
+		RequestDispatcher dispatcher;
+		dispatcher = request.getRequestDispatcher("/confirm_account.jsp");
 		dispatcher.forward(request, response);
-		//request.getRequestDispatcher("confirm_account.jsp").forward(request, response);
 	}
 	
 	/**
@@ -63,13 +63,18 @@ public class SignUpServlet extends HttpServlet {
 		String email = request.getParameter("email").trim();
 		
 		if (db.isEmailAlreadyRegistered(email)) { // if email already exists
+			/*
 			System.out.println("ducking exists");
 			response.setContentType("text/html");
 			response.getWriter().write("true");
 			return;
+			*/
+			RequestDispatcher dispatcher;
+			dispatcher = request.getRequestDispatcher("/Registration_fail.jsp");
+			dispatcher.forward(request, response);
 		} else {
 			System.out.println("ducking does not exists");
-		}
+		//}
 		
 		String password = request.getParameter("password");
 		String phone = request.getParameter("phonenum").trim();
@@ -102,15 +107,14 @@ public class SignUpServlet extends HttpServlet {
 		String code = generateCode();
 		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate, isSubscribed); // ADD TO DATABASE
 		
-		//sendEmail(email, code); // SEND EMAIL 
+		sendEmail(email, code); // SEND EMAIL 
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("email", email);
 		session.setAttribute("code", code);
 		
-		//doGet(request, response);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/confirm_account.jsp");
-		dispatcher.forward(request, response);
+		doGet(request, response);
+		}
 	}
 	
 	protected String generateCode() {
