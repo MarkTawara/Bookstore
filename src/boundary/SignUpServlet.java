@@ -63,7 +63,7 @@ public class SignUpServlet extends HttpServlet {
 		String email = request.getParameter("email").trim();
 		String password = request.getParameter("password");
 		String phone = request.getParameter("phonenum").trim();
-		boolean isSubscribed = Boolean.parseBoolean(request.getParameter("subscribed"));
+		int isSubscribed = Integer.parseInt(request.getParameter("subscribed"));
 		
 		String shipStreet = request.getParameter("street").trim();
 		String shipCity = request.getParameter("city").trim();
@@ -89,7 +89,7 @@ public class SignUpServlet extends HttpServlet {
 		//String ccv = request.getParameter("ccv").trim();
 		
 		String code = generateCode();
-		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate); // ADD TO DATABASE
+		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate, isSubscribed); // ADD TO DATABASE
 		
 		sendEmail(email, code); // SEND EMAIL 
 		
