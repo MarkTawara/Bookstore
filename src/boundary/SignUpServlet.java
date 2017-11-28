@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.util.Properties;
 import java.util.Random;
@@ -88,9 +89,14 @@ public class SignUpServlet extends HttpServlet {
 		String ccv = request.getParameter("ccv").trim();
 		
 		String code = generateCode();
-		//int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress);
+		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate);
 		
 		sendEmail(email, code);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("email", email);
+		session.setAttribute("code", code);
+		
 		doGet(request, response);
 	}
 	
