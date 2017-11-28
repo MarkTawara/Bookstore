@@ -28,7 +28,8 @@ import logic_layer.bookstore_query;
 @WebServlet("/ForgotPasswordServlet")
 public class ForgotPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private boolean existingEmail = true;   
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -41,8 +42,13 @@ public class ForgotPasswordServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("forgot_password_confirmation.html");
-		view.forward(request, response);
+		if(existingEmail==false) {
+			RequestDispatcher view = request.getRequestDispatcher("forgot_password_fail.html");
+			view.forward(request, response);
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("forgot_password_confirmation.html");
+			view.forward(request, response);	
+		}
 	}
 	
 	/**
@@ -52,11 +58,16 @@ public class ForgotPasswordServlet extends HttpServlet {
 		bookstore_query db = new bookstore_query();
 		String email = request.getParameter("email").trim();
 		String randomPassword = getSaltString();
-		sendEmail(email, randomPassword);
 			
 		//CHANGE PASSWORD IN DATABASE TO MATCH randomPassword
 		int changePW = db.changePassword(email, randomPassword);
-		
+		if(changePW == 0) {
+			//No email existed - dont send an email
+			existingEmail = false;
+		}else {
+			existingEmail = true;
+			sendEmail(email, randomPassword);
+		}
 		doGet(request,response);
 			
 	}

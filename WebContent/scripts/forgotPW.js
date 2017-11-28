@@ -15,8 +15,10 @@ $(document).ready(function(){
 		var email = document.getElementById("email").value;
 		if(email.indexOf("@") == -1){
 			alert("Please use a valid form of email address.");
+			return false;
 		}else if(email.indexOf(".") == -1){
 			alert("Please use a valid form of email address.");
+			return false;
 		}
 
 	});
