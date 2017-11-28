@@ -113,6 +113,7 @@ public class bookstore_query {
 		}	
 		return r;
 	}
+	
 	/*
 	 * Changes account status (active, suspended, etc)
 	 */
@@ -140,4 +141,22 @@ public class bookstore_query {
 		return r;
 	}
 	
+	public boolean isEmailAlreadyRegistered(String email) {
+		String query = "SELECT customer_name FROM registered_customer WHERE email = '"+email+"'";
+		ResultSet rs = null;
+		Connection con = DB_Access.connect();
+		
+		try{
+			rs = DB_Access.retrieve(con, query);
+			if (rs.next()) { // enter here if email exists
+				return true;
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		DB_Access.disconnect(con);
+				
+		return false;
+	}
 }
