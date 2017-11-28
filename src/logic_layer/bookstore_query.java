@@ -102,10 +102,21 @@ public class bookstore_query {
 	/*
 	 * This method is called from SignUpServlet to add a new user to the db
 	 */
-	public int addNewUser(String name, String email, String password, String phone, String shippingAddress, String billingAddress) {
-		String query = "INSERT INTO registered_customer (customer_name, billing_address, email, shipping_address, phone_number, password)\n" + 
-				"VALUES ('" + name + "', '" + billingAddress + "', '" + email + "', '" + shippingAddress + "', '" + phone + "', '" + password + "')";
+	public int addNewUser(String name, String email, String password, String phone, String shippingAddress, String billingAddress,String cardtype, String cardnum, String expdate) {
+		String query = "INSERT INTO registered_customer (customer_name, billing_address, email, shipping_address, phone_number, password, card_type, card_num, card_exp_date)\n" + 
+				"VALUES ('" + name + "', '" + billingAddress + "', '" + email + "', '" + shippingAddress + "', '" + phone + "', '" + password + "', '" + cardtype + "', '" + cardnum + "', '" + expdate + "')";
 
+		int r = 0;
+		try{
+			r = DB_Access.insert(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return r;
+	}
+	
+	public int changeAccountStatus(String email, String status) {
+		String query = "UPDATE registered_customer SET account_status = '" + status + "' WHERE email = '" + email + "'";
 		int r = 0;
 		try{
 			r = DB_Access.insert(query);
