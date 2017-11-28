@@ -38,7 +38,6 @@ public class SignUpServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
   
     
 	/**
@@ -86,7 +85,7 @@ public class SignUpServlet extends HttpServlet {
 		String cardtype = request.getParameter("cardtype");
 		String cardnum = request.getParameter("cardnum").trim();
 		String expdate = request.getParameter("expireMM") + "/" + request.getParameter("expireYY");
-		String ccv = request.getParameter("ccv").trim();
+		//String ccv = request.getParameter("ccv").trim();
 		
 		String code = generateCode();
 		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate);
