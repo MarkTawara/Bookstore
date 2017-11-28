@@ -102,9 +102,9 @@ public class bookstore_query {
 	/*
 	 * This method is called from SignUpServlet to add a new user to the db
 	 */
-	public int addNewUser(String name, String email, String password, String phone, String address) {
+	public int addNewUser(String name, String email, String password, String phone, String shippingAddress, String billingAddress) {
 		String query = "INSERT INTO registered_customer (customer_name, billing_address, email, shipping_address, phone_number, password)\n" + 
-				"VALUES ('" + name + "', '" + address + "', '" + email + "', '" + address + "', '" + phone + "', '" + password + "')";
+				"VALUES ('" + name + "', '" + billingAddress + "', '" + email + "', '" + shippingAddress + "', '" + phone + "', '" + password + "')";
 
 		int r = 0;
 		try{
