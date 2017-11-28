@@ -28,22 +28,27 @@
 </head>
 
 <body>
-<% if (session.getAttribute("name") == null) { %>
-    <p> fuck </p>
-<% } else {%>
-    <p> sibal </p>
-<% } %>
-
 <div class="container">
     <!--The login top bar which holds our options to Log In and Sign Up/Register-->
     <div class="top_bar">
         <div class="container">
             <div class="pull-right">
-                <ul class="pull-right">
-                    <li class="login"><a href="login.html">Log In</a></li>
-                    <li class="login"><small>or</small></li>
-                    <li class="login shift-left"><a href="registration.html">Create an Account</a></li>
-                </ul>
+            		<% if (session.getAttribute("name") == null) { %>
+            			<ul class="pull-right">
+                    		<li class="login"><a href="login.html">Log In</a></li>
+                    		<li class="login"><small>or</small></li>
+                    		<li class="login shift-left"><a href="registration.html">Create an Account</a></li>
+                		</ul>
+				<% } else {%>
+    					<ul class="pull-right">
+                    		<li class="login shift-left">
+                    		<% 
+                    		String name = session.getAttribute("name").toString();
+                    		out.println("Welcome  "+ name + "        ");
+                    		%>
+                    		</li>
+                		</ul>
+				<% } %>
             </div>
         </div>
     </div>

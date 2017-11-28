@@ -28,13 +28,6 @@
 </head>
 
 <body>
-
-<% if (session.getAttribute("name") == null) { %>
-    <p> fuck </p>
-<% } else {%>
-    <p> sibal </p>
-<% } %>
-
 <div class="container">
     <!--The login top bar which holds our options to Log In and Sign Up/Register-->
     <div class="top_bar">
