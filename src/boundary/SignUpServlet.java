@@ -72,16 +72,17 @@ public class SignUpServlet extends HttpServlet {
 		String shippingAddress = shipStreet + " " + shipCity + " " + shipState + " " + shipZip;
 		
 		String billingAddress;
+		/*
 		if (request.getParameter("billingEqualsShipping") == "true") {
 			billingAddress = shippingAddress;
 		}
-		else {
+		else {*/
 			String billStreet = request.getParameter("street2").trim();
 			String billCity = request.getParameter("city2").trim();
 			String billState = request.getParameter("state2").trim();
 			String billZip = request.getParameter("zip2").trim();
 			billingAddress = billStreet + " " + billCity + " " + billState + " " + billZip;
-		}
+		//}
 		
 		String cardtype = request.getParameter("cardtype");
 		String cardnum = request.getParameter("cardnum").trim();
