@@ -54,7 +54,7 @@ public class RegistrationConfirmedServlet extends HttpServlet {
 			db.changeAccountStatus(email, "Active");
 		}
 		else {
-			message = "Validation code is incorrect.";
+			message = "Validation code is incorrect. Please try again.";
 		}
 		doGet(request, response);
 	}

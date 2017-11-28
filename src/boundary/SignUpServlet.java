@@ -45,8 +45,9 @@ public class SignUpServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		RequestDispatcher view = request.getRequestDispatcher("registration_confirmation.html");
-		view.forward(request, response);
+		//RequestDispatcher view = request.getRequestDispatcher("registration_confirmation.html");
+		//view.forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/confirm_account.jsp").forward(request, response);
 	}
 	
 	/**
@@ -88,9 +89,9 @@ public class SignUpServlet extends HttpServlet {
 		//String ccv = request.getParameter("ccv").trim();
 		
 		String code = generateCode();
-		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate);
+		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate); // ADD TO DATABASE
 		
-		sendEmail(email, code);
+		sendEmail(email, code); // SEND EMAIL 
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("email", email);

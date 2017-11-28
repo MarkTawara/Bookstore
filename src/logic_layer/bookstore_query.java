@@ -115,6 +115,9 @@ public class bookstore_query {
 		return r;
 	}
 	
+	/*
+	 * Changes account status (active, suspended, etc)
+	 */
 	public int changeAccountStatus(String email, String status) {
 		String query = "UPDATE registered_customer SET account_status = '" + status + "' WHERE email = '" + email + "'";
 		int r = 0;
