@@ -38,7 +38,6 @@ public class SignUpServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
   
     
 	/**
@@ -46,8 +45,9 @@ public class SignUpServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		RequestDispatcher view = request.getRequestDispatcher("registration_confirmation.html");
-		view.forward(request, response);
+		//RequestDispatcher view = request.getRequestDispatcher("registration_confirmation.html");
+		//view.forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/confirm_account.jsp").forward(request, response);
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public class SignUpServlet extends HttpServlet {
 		String email = request.getParameter("email").trim();
 		String password = request.getParameter("password");
 		String phone = request.getParameter("phonenum").trim();
-		boolean isSubscribed = Boolean.parseBoolean(request.getParameter("subscribed"));
+		int isSubscribed = Integer.parseInt(request.getParameter("subscribed"));
 		
 		String shipStreet = request.getParameter("street").trim();
 		String shipCity = request.getParameter("city").trim();
@@ -86,12 +86,18 @@ public class SignUpServlet extends HttpServlet {
 		String cardtype = request.getParameter("cardtype");
 		String cardnum = request.getParameter("cardnum").trim();
 		String expdate = request.getParameter("expireMM") + "/" + request.getParameter("expireYY");
-		String ccv = request.getParameter("ccv").trim();
+		//String ccv = request.getParameter("ccv").trim();
 		
 		String code = generateCode();
 		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate);
+		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate, isSubscribed); // ADD TO DATABASE
 		
-		sendEmail(email, code);
+		sendEmail(email, code); // SEND EMAIL 
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("email", email);
+		session.setAttribute("code", code);
+		
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("email", email);

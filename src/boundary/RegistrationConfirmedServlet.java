@@ -49,12 +49,12 @@ public class RegistrationConfirmedServlet extends HttpServlet {
 		String inputCode = request.getParameter("inputcode").trim();
 		
 		if (actualCode.equals(inputCode)) {
-			message = "Your account has been confirmed! Please log in.";
+			message = "Your account has been confirmed! Redirecting to sign-in page... <META http-equiv=\"refresh\" content=\"3;URL=login.html\">";
 			session.invalidate();
 			db.changeAccountStatus(email, "Active");
 		}
 		else {
-			message = "Validation code is incorrect.";
+			message = "Validation code is incorrect. Please try again.";
 		}
 		doGet(request, response);
 	}
