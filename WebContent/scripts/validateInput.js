@@ -51,7 +51,7 @@ $(document).ready(function() {
 	function check_email() {
 		var info = $("#registration_form").serializeArray();
 		
-		alert("hi");
+		//alert("hi");
 		
 		$.ajax({
 			url: 'SignUpServlet',
