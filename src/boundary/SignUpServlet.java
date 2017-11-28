@@ -9,7 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.Properties;
+import java.util.Random;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import logic_layer.bookstore_query;
+
 
 /**
  * Servlet implementation class SignUpServlet
@@ -26,6 +38,8 @@ public class SignUpServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+  
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -34,7 +48,7 @@ public class SignUpServlet extends HttpServlet {
 		RequestDispatcher view = request.getRequestDispatcher("registration_confirmation.html");
 		view.forward(request, response);
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -73,9 +87,60 @@ public class SignUpServlet extends HttpServlet {
 		String expdate = request.getParameter("expireMM") + "/" + request.getParameter("expireYY");
 		String ccv = request.getParameter("ccv").trim();
 		
-		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress);
+		String code = generateCode();
+		//int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress);
 		
+		sendEmail(email, code);
 		doGet(request, response);
+	}
+	
+	protected String generateCode() {
+		Random rand = new Random();
+		StringBuilder randomStr = new StringBuilder();
+		for (int i = 0; i < 6; i++) {
+			randomStr.append(rand.nextInt(10));
+		}
+		return randomStr.toString();
+	}
+	
+	/*
+     * Method for sending confirmation email
+     * reference:
+     * https://www.mkyong.com/java/javamail-api-sending-email-via-gmail-smtp-example/
+     */
+    protected void sendEmail(String email, String code) {
+    		final String username = "cs4050team10@gmail.com";
+		final String password = "emanSaleh17";
+
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+
+		Session session = Session.getInstance(props,
+		  new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		  });
+
+		try {
+
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("cs4050team10@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO,
+				InternetAddress.parse(email));
+			message.setSubject("Welcome to the Bookstore!");
+			message.setText("Your verification code is " + code);
+
+			Transport.send(message);
+
+			//System.out.println("Done");
+
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }
