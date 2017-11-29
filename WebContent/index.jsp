@@ -40,13 +40,15 @@
                     		<li class="login shift-left"><a href="registration.html">Create an Account</a></li>
                 		</ul>
 				<% } else {%>
-    					<ul class="pull-right">
-                    		<li class="login shift-left">
+    					<ul>
+                    		<li>
                     		<% 
                     		String name = session.getAttribute("name").toString();
                     		out.println("Welcome  "+ name + "        ");
                     		%>
                     		</li>
+                    		<li><a href="account.html">View Account</a></li>
+                    		<li><a href="LogoutServlet">Logout</a></li>
                 		</ul>
 				<% } %>
             </div>
@@ -60,7 +62,7 @@
                 <h3>Logo TBD</h3>
             </div>
             <ul class="nav nav-pills pull-right">
-                <li role="presentation" class="active"><a href="index.html">Home</a></li>
+                <li role="presentation" class="active"><a href="index.jsp">Home</a></li>
                 <li role="presentation"><a href="all_books.html">Browse All Books</a></li>
                 <li role="presentation"><a href="about.html">About</a></li>
                 <li role="presentation"><a href="#">Contact</a></li>
