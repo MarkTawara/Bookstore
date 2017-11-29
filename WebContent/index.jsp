@@ -64,7 +64,7 @@
             <ul class="nav nav-pills pull-right">
                 <li role="presentation" class="active"><a href="index.jsp">Home</a></li>
                 <li role="presentation"><a href="all_books.html">Browse All Books</a></li>
-                <li role="presentation"><a href="about.html">About</a></li>
+                <li role="presentation"><a href="about.jsp">About</a></li>
                 <li role="presentation"><a href="#">Contact</a></li>
             </ul>
         </nav>
