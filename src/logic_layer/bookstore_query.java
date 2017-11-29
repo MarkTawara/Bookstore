@@ -46,8 +46,7 @@ public class bookstore_query {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
-
-			
+	
 		DB_Access.disconnect(con);
 		return false;
 	}
