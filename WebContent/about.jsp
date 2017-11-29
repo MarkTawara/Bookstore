@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -33,11 +35,24 @@
     <div class="top_bar">
         <div class="container">
             <div class="pull-right">
-                <ul class="pull-right">
-                    <li class="login">Log In</li>
-                    <li class="login"><small>or</small></li>
-                    <li class="login shift-left">Create an Account</li>
-                </ul>
+            		<% if (session.getAttribute("name") == null) { %>
+            			<ul class="pull-right">
+                    		<li class="login"><a href="login.jsp">Log In</a></li>
+                    		<li class="login"><small>or</small></li>
+                    		<li class="login shift-left"><a href="registration.html">Create an Account</a></li>
+                		</ul>
+				<% } else {%>
+    					<ul>
+                    		<li>
+                    		<% 
+                    		String name = session.getAttribute("name").toString();
+                    		out.println("Welcome  "+ name + "        ");
+                    		%>
+                    		</li>
+                    		<li><a href="account.html">View Account</a></li>
+                    		<li><a href="LogoutServlet">Logout</a></li>
+                		</ul>
+				<% } %>
             </div>
         </div>
     </div>
