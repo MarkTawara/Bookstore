@@ -31,17 +31,17 @@ public class ForgotPasswordServlet extends HttpServlet {
     private boolean existingEmail = true;   
 	
     /**
-     * @see HttpServlet#HttpServlet()
+     * Constructor
      */
     public ForgotPasswordServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Loads certain html pages upon request
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//If there was an existing email show the user the failure page.
 		if(existingEmail==false) {
 			RequestDispatcher view = request.getRequestDispatcher("forgot_password_fail.html");
 			view.forward(request, response);
@@ -52,7 +52,7 @@ public class ForgotPasswordServlet extends HttpServlet {
 	}
 	
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Comes to doPost first.
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		bookstore_query db = new bookstore_query();
@@ -62,17 +62,18 @@ public class ForgotPasswordServlet extends HttpServlet {
 		//CHANGE PASSWORD IN DATABASE TO MATCH randomPassword
 		int changePW = db.changePassword(email, randomPassword);
 		if(changePW == 0) {
-			//No email existed - dont send an email
+			//No email existed in the database. Don't send an email
 			existingEmail = false;
 		}else {
 			existingEmail = true;
 			sendEmail(email, randomPassword);
 		}
-		doGet(request,response);
-			
+		//Load the html response pages
+		doGet(request,response);	
 	}
 	
 	//Reference: https://stackoverflow.com/questions/20536566/creating-a-random-string-with-a-z-and-0-9-in-java
+	//Creates a random password for the user
 	protected String getSaltString() {
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
@@ -85,6 +86,7 @@ public class ForgotPasswordServlet extends HttpServlet {
         return saltStr;
     }
 	
+	//Sends an email to the user with the new random password
 	protected void sendEmail(String email, String randomPassword) {
     	final String username = "cs4050team10@gmail.com";
 		final String password = "emanSaleh17";
@@ -103,18 +105,12 @@ public class ForgotPasswordServlet extends HttpServlet {
 		  });
 
 		try {
-
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("cs4050team10@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse(email));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
 			message.setSubject("Password Reset");
 			message.setText("Your new password is " + randomPassword);
-
 			Transport.send(message);
-
-			//System.out.println("Done");
-
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
