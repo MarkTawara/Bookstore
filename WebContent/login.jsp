@@ -47,7 +47,7 @@
 	        	<label class="regLabel"> Password: <br>
 	        	<input class="regInputField" type="password" name="reg_password" value=""></label><br>
 	        	<input class="loginButton" type="submit" value="Sign in"><br>
-	        	<a class="loginFP" href="forgot_password.html">Forget your password?</a>
+	        	<a class="loginFP" href="forgot_password.jsp">Forget your password?</a>
         	</form>
         </div>
     </div>

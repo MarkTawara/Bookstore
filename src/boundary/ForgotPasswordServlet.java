@@ -43,10 +43,10 @@ public class ForgotPasswordServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//If there was an existing email show the user the failure page.
 		if(existingEmail==false) {
-			RequestDispatcher view = request.getRequestDispatcher("forgot_password_fail.html");
+			RequestDispatcher view = request.getRequestDispatcher("forgot_password_fail.jsp");
 			view.forward(request, response);
 		}else {
-			RequestDispatcher view = request.getRequestDispatcher("forgot_password_confirmation.html");
+			RequestDispatcher view = request.getRequestDispatcher("forgot_password_confirmation.jsp");
 			view.forward(request, response);	
 		}
 	}
