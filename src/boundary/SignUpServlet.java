@@ -103,9 +103,10 @@ public class SignUpServlet extends HttpServlet {
 		String cardnum = request.getParameter("cardnum").trim();
 		String expdate = request.getParameter("expireMM") + "/" + request.getParameter("expireYY");
 		//String ccv = request.getParameter("ccv").trim();
+		String accountType = "customer";
 		
 		String code = generateCode();
-		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate, isSubscribed); // ADD TO DATABASE
+		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate, isSubscribed, accountType); // ADD TO DATABASE
 		
 		sendEmail(email, code); // SEND EMAIL 
 		

@@ -58,6 +58,9 @@ public class Login_Servlet extends HttpServlet {
 			String name = query.get_name(request, response, email);
 			session.setAttribute("name", name);
 			
+			//Get the type of user from the database
+			String type = query.get_type(email);
+			
 			//Send the user to the homepage upon login
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
 			try {
