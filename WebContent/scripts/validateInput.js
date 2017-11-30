@@ -4,10 +4,10 @@
 
 $(document).ready(function() {
 	$("#create_account_button").click(function() {
-		if (validateForm()) {
+		//if (validateForm()) {
 			console.log("entei the pokemon");
 			check_email();
-		}
+		//}
 	})
 	
 	/*
@@ -60,7 +60,7 @@ $(document).ready(function() {
 			success : function(responseText) {
 				// Means email exists therefore invalid
 				if (responseText == "true") {
-					$("#email_error").html("Fuck off bitch, Invalid Email");
+					$("#email_error").html("Email is already registered");
 				} else {
 					$("#email_error").html("");
 				}

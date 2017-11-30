@@ -9,8 +9,8 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>Bookstore</title>
+	<meta http-equiv="refresh" content="5; url=login.jsp" />
+    <title>Forgotten Password</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--Bootstrap CDN-->
@@ -21,9 +21,12 @@
     <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
     <!--Carousel Javascript-->
     <script type="text/javascript" src="slick/slick.min.js"></script>
+    <!-- JavaScript / jQuery for forgotPassword -->
+    <script type="text/javascript" src="scripts/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="scripts/forgotPW.js"></script>
     <!--Our Javascript for homepage-->
     <script type="text/javascript" src="scripts/index.js"></script>
-    <script src="scripts/template.js"></script>
+    <script src="scripts/template.js"></script>    
     <!-- Custom styles for this template -->
     <link type="text/css" href="css/index.css" rel="stylesheet">
 </head>
@@ -38,21 +41,12 @@
 
 	<!--Main information for the page is here-->
 	
-    <div class="regDiv">
-        <h1 class="center-text">Sign in</h1>
-        <div class="regInput">
-        	<form action="LoginServlet" method="post">
-				<label class="regLabel"> Email: <br>
-				<input class="regInputField" type="text" name="reg_email" value=""></label><br>
-	        	<label class="regLabel"> Password: <br>
-	        	<input class="regInputField" type="password" name="reg_password" value=""></label><br>
-	        	<input class="loginButton" type="submit" value="Sign in"><br>
-	        	<a class="loginFP" href="forgot_password.jsp">Forget your password?</a>
-        	</form>
-        </div>
-    </div>
+    <h1>Email Sent</h1>
+    Returning to login page...
+	<br />
+	If the page does not redirect immediately, you can <a href="login.jsp">redirect</a> manually.
 
-    <footer class="footer"></footer>
+	<footer class="footer"></footer>
 
 </div>
 </body>

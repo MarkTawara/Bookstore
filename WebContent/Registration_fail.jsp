@@ -32,15 +32,16 @@
 <body>
 <div class="container">
     <!--The login top bar which holds our options to Log In and Sign Up/Register-->
-	<div class="top_bar"></div>
-	
-		<!--Navigation Bar at the top right which hold links to other sites on our page-->
+    <div class="top_bar"></div>
+
+    <!--Navigation Bar at the top right which hold links to other sites on our page-->
     <div id="navibar" class="header clearfix"></div>
 
 	<!--Main information for the page is here-->
 	
     <div class="regDiv">
         <h1>Create account</h1>
+        This email is already registered.
         All inputs are required
         <form action="SignUpServlet" method="post" name="registration_form" id="registration_form" >
 			First name: <input type="text" name="firstname" id="firstname" required><br>

@@ -46,12 +46,14 @@ public class bookstore_query {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
-
-			
+	
 		DB_Access.disconnect(con);
 		return false;
 	}
 	
+	/*
+	 * This method is called from Login_Servlet to add get the name of the user based on their email login
+	 */
 	public static String get_name(HttpServletRequest request, HttpServletResponse response, String email) {
 		String query = "SELECT customer_name FROM registered_customer WHERE email = '"+email+"'";
 		ResultSet rs = null;
@@ -59,16 +61,34 @@ public class bookstore_query {
 		
 		try{
 			rs = DB_Access.retrieve(con, query);
-			if (rs.next()) { // enter here if successfully login
+			if (rs.next()) { // enter here if successfully gotten the customer name
 				return rs.getString("customer_name");
 			} 
 		} catch (Exception e) {
 			e.printStackTrace();
-		}	
-
-			
+		}		
 		DB_Access.disconnect(con);
-		return "fucking Fucking Fucking FUCKING SHIBAL";
+		return "Error in get_name() in bookstore_query.java";
+	}
+	
+	/*
+	 * This method is called from Login_Servlet to add get the name of the user based on their email login
+	 */
+	public static String get_type(String email) {
+		String query = "SELECT account_type FROM registered_customer WHERE email = '"+email+"'";
+		ResultSet rs = null;
+		Connection con = DB_Access.connect();
+		
+		try{
+			rs = DB_Access.retrieve(con, query);
+			if (rs.next()) { // enter here if successfully gotten the customer account type
+				return rs.getString("account_type");
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		DB_Access.disconnect(con);
+		return "Error in get_name() in bookstore_query.java";
 	}
 	
 	/*
@@ -102,9 +122,9 @@ public class bookstore_query {
 	/*
 	 * This method is called from SignUpServlet to add a new user to the db
 	 */
-	public int addNewUser(String name, String email, String password, String phone, String shippingAddress, String billingAddress,String cardtype, String cardnum, String expdate, int isSubscribed) {
-		String query = "INSERT INTO registered_customer (customer_name, billing_address, email, shipping_address, phone_number, password, card_type, card_num, card_exp_date, is_subscribed)\n" + 
-				"VALUES ('" + name + "', '" + billingAddress + "', '" + email + "', '" + shippingAddress + "', '" + phone + "', '" + password + "', '" + cardtype + "', '" + cardnum + "', '" + expdate + "', '" + isSubscribed + "')";
+	public int addNewUser(String name, String email, String password, String phone, String shippingAddress, String billingAddress,String cardtype, String cardnum, String expdate, int isSubscribed, String accountType) {
+		String query = "INSERT INTO registered_customer (customer_name, billing_address, email, shipping_address, phone_number, password, card_type, card_num, card_exp_date, is_subscribed, account_type)\n" + 
+				"VALUES ('" + name + "', '" + billingAddress + "', '" + email + "', '" + shippingAddress + "', '" + phone + "', '" + password + "', '" + cardtype + "', '" + cardnum + "', '" + expdate + "', '" + isSubscribed + "', '" + accountType + "')";
 		int r = 0;
 		try{
 			r = DB_Access.insert(query);

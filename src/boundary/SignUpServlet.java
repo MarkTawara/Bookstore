@@ -45,16 +45,16 @@ public class SignUpServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//System.out.println("fuck this23");
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/confirm_account.jsp");
+		System.out.println("fuck this23");
+		RequestDispatcher dispatcher;
+		dispatcher = request.getRequestDispatcher("/confirm_account.jsp");
 		dispatcher.forward(request, response);
-		//request.getRequestDispatcher("confirm_account.jsp").forward(request, response);
 	}
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("fuck this");
 		bookstore_query db = new bookstore_query();
 		
@@ -64,6 +64,7 @@ public class SignUpServlet extends HttpServlet {
 		String email = request.getParameter("email").trim();
 		
 		if (db.isEmailAlreadyRegistered(email)) { // if email already exists
+			/*
 			System.out.println("ducking exists");
 			response.setContentType("text/html");
 			try {
@@ -74,9 +75,13 @@ public class SignUpServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			return;
+			*/
+			RequestDispatcher dispatcher;
+			dispatcher = request.getRequestDispatcher("/Registration_fail.jsp");
+			dispatcher.forward(request, response);
 		} else {
 			System.out.println("ducking does not exists");
-		}
+		//}
 		
 		String password = request.getParameter("password");
 		String phone = request.getParameter("phonenum").trim();
@@ -105,34 +110,19 @@ public class SignUpServlet extends HttpServlet {
 		String cardnum = request.getParameter("cardnum").trim();
 		String expdate = request.getParameter("expireMM") + "/" + request.getParameter("expireYY");
 		//String ccv = request.getParameter("ccv").trim();
+		String accountType = "customer";
 		
 		String code = generateCode();
-		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate, isSubscribed); // ADD TO DATABASE
+		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate, isSubscribed, accountType); // ADD TO DATABASE
 		
-		//sendEmail(email, code); // SEND EMAIL 
+		sendEmail(email, code); // SEND EMAIL 
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("email", email);
 		session.setAttribute("code", code);
 		
-		System.out.println("duckTales");
-		
-		//doGet(request, response);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/confirm_account.jsp");
-		try {
-			System.out.println("1");
-			dispatcher.forward(request, response);
-			System.out.println("2");
-		} catch (ServletException e) {
-			System.out.println("3");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("4");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		doGet(request, response);
 		}
-		System.out.println("duckTales2");
 	}
 	
 	protected String generateCode() {
