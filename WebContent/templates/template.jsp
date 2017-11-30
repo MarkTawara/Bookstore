@@ -12,10 +12,11 @@
 				%>
 				<ul class="pull-right">
 					<li class="login"><a href="login.jsp">Log In</a></li>
-					<li class="login"><small>or</small></li>
+					<li class="login"><small>|</small></li>
 					<li class="login shift-left"><a href="Registration.jsp">Create an Account</a></li>
 				</ul>
-				<%} else {%>
+				<%} else if(session.getAttribute("type").toString().equals("customer")){%>
+				<!-- Show customer view -->
 				<ul class="pull-right">
 					<li class="login">
 						<%
@@ -24,10 +25,44 @@
 						%>
 					</li>
 					<li class="login"><a href="account.jsp">View Account</a></li>
-					<li class="login"><small>or</small></li>
+					<li class="login"><small>|</small></li>
+					<li class="login"><a href="shoppingCart.html"><img src="images/shopping-cart.png"></a></li>
+					<li class="login"><small>|</small></li>
 					<li class="login shift-left"><a href="LogoutServlet">Logout</a></li>
 				</ul>
-				<%}%>
+				<%} else if(session.getAttribute("type").toString().equals("manager")){%>
+				<!-- Show manager view -->
+				<ul class="pull-right">
+					<li class="login">
+						<%
+							String name = session.getAttribute("name").toString();
+							out.println("Welcome  " + name + "        ");
+						%>
+					</li>
+					<li class="login"><a href="account.jsp">View Account</a></li>
+					<li class="login"><small>|</small></li>
+					<li class="login"><a href="adminView.jsp">Manager Actions</a>
+					<li class="login"><small>|</small></li>
+					<li class="login shift-left"><a href="LogoutServlet">Logout</a></li>
+				</ul>
+				<%} else if(session.getAttribute("type").toString().equals("shipping")){%>
+				<!-- Show shipping employee view -->
+				<ul class="pull-right">
+					<li class="login">
+						<%
+							String name = session.getAttribute("name").toString();
+							out.println("Welcome  " + name + "        ");
+						%>
+					</li>
+					<li class="login"><a href="account.jsp">View Account</a></li>
+					<li class="login"><small>|</small></li>
+					<li class="login"><a href="shipping_manager.jsp">Shipping Actions</a>
+					<li class="login"><small>|</small></li>
+					<li class="login shift-left"><a href="LogoutServlet">Logout</a></li>
+				</ul>
+				<%}else{ %>
+				<!-- Idk if it actually goes here ever -->
+				<%} %>
 			</div>
 		</div>
 	</div>
