@@ -1,6 +1,7 @@
 package boundary;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -53,7 +54,7 @@ public class SignUpServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("fuck this");
 		bookstore_query db = new bookstore_query();
 		
@@ -65,7 +66,13 @@ public class SignUpServlet extends HttpServlet {
 		if (db.isEmailAlreadyRegistered(email)) { // if email already exists
 			System.out.println("ducking exists");
 			response.setContentType("text/html");
-			response.getWriter().write("true");
+			try {
+				response.getWriter().write("true");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("writing failed");
+				e.printStackTrace();
+			}
 			return;
 		} else {
 			System.out.println("ducking does not exists");
@@ -108,9 +115,24 @@ public class SignUpServlet extends HttpServlet {
 		session.setAttribute("email", email);
 		session.setAttribute("code", code);
 		
+		System.out.println("duckTales");
+		
 		//doGet(request, response);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/confirm_account.jsp");
-		dispatcher.forward(request, response);
+		try {
+			System.out.println("1");
+			dispatcher.forward(request, response);
+			System.out.println("2");
+		} catch (ServletException e) {
+			System.out.println("3");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("4");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("duckTales2");
 	}
 	
 	protected String generateCode() {
