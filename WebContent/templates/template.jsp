@@ -26,7 +26,7 @@
 					</li>
 					<li class="login"><a href="account.jsp">View Account</a></li>
 					<li class="login"><small>|</small></li>
-					<li class="login"><a href="shoppingCart.html"><img src="images/shopping-cart.png"></a></li>
+					<li class="login"><a href="shoppingCart.jsp"><img src="images/shopping-cart.png"></a></li>
 					<li class="login"><small>|</small></li>
 					<li class="login shift-left"><a href="LogoutServlet">Logout</a></li>
 				</ul>
@@ -67,20 +67,66 @@
 		</div>
 	</div>
 	
-	<div id="navibar" class="header clearfix">
+	<div id="navibarHome" class="header clearfix">
 		<nav>
 			<div class="navbar-header">
 				<h3>Logo TBD</h3>
 			</div>
 			<ul class="nav nav-pills pull-right">
 				<li role="presentation" class="active"><a href="index.jsp">Home</a></li>
-				<li role="presentation"><a href="all_books.html">Browse All
+				<li role="presentation"><a href="all_books.jsp">Browse All
 						Books</a></li>
 				<li role="presentation"><a href="about.jsp">About</a></li>
 				<li role="presentation"><a href="#">Contact</a></li>
 			</ul>
 		</nav>
 	</div>
+	
+	<div id="navibarBrowse" class="header clearfix">
+		<nav>
+			<div class="navbar-header">
+				<h3>Logo TBD</h3>
+			</div>
+			<ul class="nav nav-pills pull-right">
+				<li role="presentation"><a href="index.jsp">Home</a></li>
+				<li role="presentation" class="active"><a href="all_books.jsp">Browse All
+						Books</a></li>
+				<li role="presentation"><a href="about.jsp">About</a></li>
+				<li role="presentation"><a href="#">Contact</a></li>
+			</ul>
+		</nav>
+	</div>
+	
+	<div id="navibarAbout" class="header clearfix">
+		<nav>
+			<div class="navbar-header">
+				<h3>Logo TBD</h3>
+			</div>
+			<ul class="nav nav-pills pull-right">
+				<li role="presentation"><a href="index.jsp">Home</a></li>
+				<li role="presentation"><a href="all_books.jsp">Browse All
+						Books</a></li>
+				<li role="presentation" class="active"><a href="about.jsp">About</a></li>
+				<li role="presentation"><a href="#">Contact</a></li>
+			</ul>
+		</nav>
+	</div>
+	
+	<div id="navibar" class="header clearfix">
+		<nav>
+			<div class="navbar-header">
+				<h3>Logo TBD</h3>
+			</div>
+			<ul class="nav nav-pills pull-right">
+				<li role="presentation"><a href="index.jsp">Home</a></li>
+				<li role="presentation"><a href="all_books.jsp">Browse All
+						Books</a></li>
+				<li role="presentation"><a href="about.jsp">About</a></li>
+				<li role="presentation"><a href="#">Contact</a></li>
+			</ul>
+		</nav>
+	</div>
+	
 	
 	<footer class="footer">
 		<p>&copy; 2016 Company, Inc.</p>
