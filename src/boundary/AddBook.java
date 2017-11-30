@@ -51,6 +51,11 @@ public class AddBook extends HttpServlet {
 		String author = request.getParameter("author");
 		double price = Double.parseDouble(request.getParameter("price"));
 		String description = request.getParameter("descr");
+		String isbn = request.getParameter("isbn");
+		int edition = Integer.parseInt(request.getParameter("edition"));
+		String publisher = request.getParameter("publisher");
+		String publication_year = request.getParameter("publication_year");
+		int quantity_in_stock = Integer.parseInt(request.getParameter("qty_in_stock"));
 		/**
 		 * The 'Part' 'fileName' and 'InputStream' are needed for uploading an image.
 		 * The next few lines of code convert the InputStream of the 
@@ -67,8 +72,7 @@ public class AddBook extends HttpServlet {
 		}
 		
 		//Now send information collected to the logic using a method
-		base.addBook(title, author, price, description, output.toByteArray());
-		
+		base.addBook(title, author, price, isbn, edition, publisher, publication_year, description, quantity_in_stock, output.toByteArray());
 		
 		doGet(request, response);
 	}

@@ -23,7 +23,6 @@
     <script type="text/javascript" src="slick/slick.min.js"></script>
     <!--Our Javascript for homepage-->
     <script type="text/javascript" src="scripts/index.js"></script>
-    <script src="scripts/template.js"></script>
     <!-- <script type="text/javascript" src="scripts/validateInput.js"></script> -->
     <!-- Custom styles for this template -->
     <link type="text/css" href="css/index.css" rel="stylesheet">
@@ -32,10 +31,32 @@
 <body>
 <div class="container">
     <!--The login top bar which holds our options to Log In and Sign Up/Register-->
-    <div class="top_bar"></div>
+    <div class="top_bar">
+        <div class="container">
+            <div class="pull-right">
+                <ul class="pull-right">
+                    <li class="login"><a href="login.html">Log In</a></li>
+                    <li class="login"><small>or</small></li>
+                    <li class="login shift-left"><a href="registration.html">Create an Account</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
     <!--Navigation Bar at the top right which hold links to other sites on our page-->
-    <div id="navibar" class="header clearfix"></div>
+    <div class="header clearfix">
+        <nav>
+            <div class="navbar-header">
+                <h3>Logo TBD</h3>
+            </div>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation"><a href="#">Home</a></li>
+                <li role="presentation"><a href="#">Browse All Books</a></li>
+                <li role="presentation"><a href="#">About</a></li>
+                <li role="presentation"><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
 
 	<!--Main information for the page is here-->
 	
@@ -212,7 +233,9 @@
 		</form>
     </div>
 
-    <footer class="footer"></footer>
+    <footer class="footer">
+        <p>&copy; 2016 Company, Inc.</p>
+    </footer>
 
 </div>
 </body>

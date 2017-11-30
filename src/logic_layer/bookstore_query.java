@@ -94,22 +94,16 @@ public class bookstore_query {
 	/*
 	 * This method is called from AddBook to add a new book to the database
 	 */
-	public void addBook(String title, String author, double price, String description, byte[] image) {
-		String query = "TBDDDDD";
-		ResultSet rs = null;
-		Connection con = DB_Access.connect();
-		
+	public void addBook(String title, String author, double price, String isbn, int edition, String publisher, String publication_year, String description, int quantity_in_stock, byte[] image) {
+		String query = "INSERT INTO book (price, isbn,  title, author, edition, publisher, publication_year, description, quantity_in_stock)\n" + 
+				"VALUES (" + price + ", '" + isbn + "', '" + title +  "', '" + author + "', " + edition + ", '" + publisher + "', '" + publication_year + "', '" + description + "', " +  quantity_in_stock + ")";
+		int r = 0;
 		try{
-			rs = DB_Access.retrieve(con, query);
-			if (rs.next()) { // enter here if successfully login
-				//return true;
-			} 
+			r = DB_Access.insert(query);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
-
-			
-		DB_Access.disconnect(con);
+		//return r;
 	}
 	
 	/*
