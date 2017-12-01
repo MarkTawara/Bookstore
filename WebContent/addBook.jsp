@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -32,6 +33,7 @@
     
     <!--Our Javascript for homepage-->
     <script type="text/javascript" src="scripts/index.js"></script>
+    <script src="scripts/template.js"></script>
     
     <!-- Custom styles for this template -->
     <link type="text/css" href="css/index.css" rel="stylesheet">
@@ -40,54 +42,29 @@
 <body>
 	<div class="container">
 		<!--The login top bar which holds our options to Log In and Sign Up/Register-->
-		<div class="top_bar">
-			<div class="container">
-				<div class="pull-right">
-					<ul class="pull-right">
-						<li class="login">Welcome! Admin</li>
-						<li class="login"><a href="adminView.html">admin action</a>
-						<li class="login"><a href="account.html">manage account</a></li>
-						<li class="login"><a href="">order status</a></li>
-						<li class="login shift-left"><a href="shoppingCart.html"><img
-								src="images/shopping-cart.png"></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
+		<div class="top_bar"></div>
 
 		<!--Navigation Bar at the top right which hold links to other sites on our page-->
-		<div class="header clearfix">
-			<nav>
-				<div class="navbar-header">
-					<h3>Logo TBD</h3>
-				</div>
-				<ul class="nav nav-pills pull-right">
-					<li role="presentation"><a href="#">Home</a></li>
-					<li role="presentation" class="active"><a href="#">Browse
-							All Books</a></li>
-					<li role="presentation"><a href="#">About</a></li>
-					<li role="presentation"><a href="#">Contact</a></li>
-				</ul>
-			</nav>
-		</div>
+		<div id="navibar" class="header clearfix"></div>
 
  		<!-- 
  		This is the form used to input book info to the database 
  		Corresponds to the AddBook Servlet's post method.
  		Relies on addBook.js for error checking
  		-->
+ 		
 		<form ACTION="AddBook" method="post" id="addBookForm" enctype="multipart/form-data">
 			<fieldset>
 				<legend style="width:auto;">Add a book to the database</legend>
-				* Title: <input name="bookTitle" id="title" value=""><span id="titleFailure"></span><br />
-				* Author: <input name="author" id="author" value=""><span id="authorFailure"></span><br />
-				* Price: $<input name="price" id="price" value=""><span id="priceFailure"></span><br />
-				* ISBN: <input name="isbn" id="isbn" value=""><span id="isbnFailure"></span><br />
-				* Edition: <input name="edition" id="edition" value=""><span id="editionFailure"></span><br />
-				* Publisher: <input name="publisher" id="publisher" value=""><span id="publisherFailure"></span><br />
-				* Publication Year: <input name="publication_year" id="publication_year" value=""><span id="publication_yearFailure"></span><br />
-				* Description: <br /><textarea name="descr" id="descr" rows="5" cols="50"></textarea><div id="descrFailure"></div>
-				* Quantity in Stock: <input name="qty_in_stock" id="qty_in_stock" value=""><span id="qty_in_stockFailure"></span><br />
+				* Title: <input name="bookTitle" id="title" value="" required><br />
+				* Author: <input name="author" id="author" value="" required><br />
+				* Price: $<input type="number" step="000.01" name="price" id="price" value="" required><br />
+				* ISBN: <input name="isbn" id="isbn" value="" required><br />
+				* Edition: <input name="edition" id="edition" value="" required><br />
+				* Publisher: <input name="publisher" id="publisher" value="" required><br />
+				* Publication Year: <input name="publication_year" id="publication_year" value="" required><br />
+				* Description: <br /><textarea name="descr" id="descr" rows="5" cols="50" required></textarea><br />
+				* Quantity in Stock: <input name="qty_in_stock" id="qty_in_stock" value="" required><br />
 				* Image: <input type="file" name="image" id="image"/> (Accepted formats include .jpg, .jpeg, .png)<div id="imageFailure"></div><br />
 				* All inputs are required for submission.
 				<div class="bdBtnDiv">
@@ -96,9 +73,7 @@
 			</fieldset>
 		</form>
 		 
-		<footer class="footer">
-			<p>&copy; 2016 Company, Inc.</p>
-		</footer>
+		<footer class="footer"></footer>
 
 	</div>
 </body>
