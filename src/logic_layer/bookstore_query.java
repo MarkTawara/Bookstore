@@ -7,10 +7,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import object.Book;
 import persist_layer.DB_Access;
 
 public class bookstore_query {
@@ -172,5 +174,26 @@ public class bookstore_query {
 		DB_Access.disconnect(con);
 				
 		return false;
+	}
+	
+	public ArrayList<Book> getUserCart(String email){
+		ArrayList list = new ArrayList();
+		ResultSet rs = null;
+		Connection con = DB_Access.connect();
+		String query = "";
+		rs = DB_Access.retrieve(con, query);
+		
+		try{
+			while(rs.next()){
+				Book books = new Book();
+				list.add(books);
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		
+		DB_Access.disconnect(con);
+		return list;
 	}
 }
