@@ -26,7 +26,7 @@
 					</li>
 					<li class="login"><a href="account.jsp">View Account</a></li>
 					<li class="login"><small>|</small></li>
-					<li class="login"><a href="shoppingCart.jsp"><img src="images/shopping-cart.png"></a></li>
+					<li class="login"><a href="DisplayCartServlet"><img src="images/shopping-cart.png"></a></li>
 					<li class="login"><small>|</small></li>
 					<li class="login shift-left"><a href="LogoutServlet">Logout</a></li>
 				</ul>
