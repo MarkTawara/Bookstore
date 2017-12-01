@@ -31,6 +31,9 @@
 <body>
 <div class="container"></div>
 
+	<!--The login top bar which holds our options to Log In and Sign Up/Register-->
+    <div class="top_bar"></div>
+
     <!--Navigation Bar at the top right which hold links to other sites on our page-->
     <div id="navibar" class="header clearfix"></div>
 
