@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -177,23 +179,39 @@ public class bookstore_query {
 	}
 	
 	public ArrayList<Book> getUserCart(String email){
+		//This array list will hold all of the Book objects in one list.
 		ArrayList list = new ArrayList();
-		ResultSet rs = null;
+		//This Map maps together the quantity of books ordered (of the same isbn) and the ISBN of the books in the cart
+		Map<Integer, String> hm = new HashMap<Integer, String>();
+		ResultSet rs = null; //Holds Cart table info
+		ResultSet rs2 = null; //Holds Book table info
 		Connection con = DB_Access.connect();
-		String query = "";
-		rs = DB_Access.retrieve(con, query);
+		//Get the info from the cart table
+		String cartQuery = "select c.* from cart c, registered_customer rc where c.email=rc.email and rc.email ='" + email + "';";
+		String bookQuery;
+		rs = DB_Access.retrieve(con, cartQuery);
+		int quantity=0;
+		String isbn = "";
 		
 		try{
 			while(rs.next()){
-				Book books = new Book();
-				list.add(books);
+				//Put(Quantity, ISBN)
+				quantity = rs.getInt(3);
+				isbn = rs.getString(2);
+				hm.put(quantity, isbn);
+				//While we can still get the ISBN from getString(5), call another query
+				bookQuery = "select * from book where isbn= '"+ isbn + "';";
+				rs2 = DB_Access.retrieve(con, bookQuery);
+				if(rs2.next()){
+					Book books = new Book(rs2.getString(5), rs2.getString(3), rs2.getDouble(4), rs2.getString(2), rs2.getInt(7), rs2.getString(8), rs2.getInt(9), rs2.getString(10), quantity);
+					list.add(books);
+				}
 			}
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		
-		
 		DB_Access.disconnect(con);
+		System.out.println("FINISHED CART");
 		return list;
 	}
 }

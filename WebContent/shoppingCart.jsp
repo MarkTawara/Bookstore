@@ -29,7 +29,7 @@
 </head>
 
 <body>
-<div class="container"></div>
+<div class="container">
 
 	<!--The login top bar which holds our options to Log In and Sign Up/Register-->
     <div class="top_bar"></div>
@@ -37,6 +37,24 @@
     <!--Navigation Bar at the top right which hold links to other sites on our page-->
     <div id="navibar" class="header clearfix"></div>
 
+
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<table class="displayCart">
+		<tr>
+			<th>Title</th>
+			<th>Quantity</th>
+			<th>Price</th>
+		</tr>
+		<c:forEach items="${books}" var="book">
+			<tr>
+				<td><c:out value="${book.title}" /><!-- Insert Image Here --><br />ISBN:<c:out value="${book.isbn}" /></td>
+				<td><c:out value="${book.quantityInCart}" /></td>
+				<td><c:out value="${book.price}" /></td>
+			</tr>
+		</c:forEach>
+	</table>
+   
+ <!-- 
     <table> 
         <tr>
             <th><a href="#">Title</a></th>
@@ -68,7 +86,9 @@
             <td><input class="cartInput" type="text" value="1"></td>
             <td><button>Delete</button>
         </tr>
-    </table>
+    </table> 
+ -->
+   
     <hr>
     <div class="subTotalDiv">
     	<label>Subtotal: $43.96</label>

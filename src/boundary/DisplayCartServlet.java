@@ -1,6 +1,9 @@
 package boundary;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,10 +34,12 @@ public class DisplayCartServlet extends HttpServlet {
 		//Get user's current session
 		HttpSession session = request.getSession();
 		bookstore_query query = new bookstore_query();
-		
-		
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ArrayList list = new ArrayList();
+		list = query.getUserCart(session.getAttribute("email").toString());
+		request.setAttribute("books", list);
+		RequestDispatcher dispatcher;
+		dispatcher = request.getRequestDispatcher("/shoppingCart.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
