@@ -6,11 +6,13 @@ public class Book extends Item {
 	String isbn;
 	String author;
 	String title;
+	double price;
 	//CoverPictureVariable?
 	int edition;
 	String publisher;
 	int publicationYear;
 	String description;
+	int quantityInCart;
 	
 	//Default Constructor
 	public Book() {
@@ -18,19 +20,16 @@ public class Book extends Item {
 	}
 	
 	//Constructor
-	public Book(String isbn, String author, String title, int edition, String publisher, int publicationYear, String description) {
+	public Book(String isbn, String author, double price, String title, int edition, String publisher, int publicationYear, String description, int quantityInCart) {
 		this.isbn = isbn;
 		this.author = author;
+		this.price = price;
 		this.title = title;
 		this.edition = edition;
 		this.publisher = publisher;
 		this.publicationYear = publicationYear;
 		this.description = description;
-	}
-
-	//Remove a book from the store
-	public void removeBook(){
-		
+		this.quantityInCart = quantityInCart;
 	}
 	
 	//Getters and Setters
@@ -56,6 +55,14 @@ public class Book extends Item {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public double getPrice(){
+		return price;
+	}
+	
+	public void setPrice(double price){
+		this.price = price;
 	}
 
 	public int getEdition() {
@@ -90,6 +97,12 @@ public class Book extends Item {
 		this.description = description;
 	}
 	
+	public int getQuantityInCart(){
+		return quantityInCart;
+	}
 	
+	public void setQuantityInCart(int quantityInCart){
+		this.quantityInCart = quantityInCart;
+	}
 
 }
