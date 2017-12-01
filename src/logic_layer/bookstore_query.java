@@ -199,7 +199,7 @@ public class bookstore_query {
 				quantity = rs.getInt(3);
 				isbn = rs.getString(2);
 				hm.put(quantity, isbn);
-				//While we can still get the ISBN from getString(5), call another query
+				//While we can still get the ISBN from getString(2), call another query
 				bookQuery = "select * from book where isbn= '"+ isbn + "';";
 				rs2 = DB_Access.retrieve(con, bookQuery);
 				if(rs2.next()){
