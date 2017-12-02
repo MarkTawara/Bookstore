@@ -27,19 +27,19 @@ public class SearchBooksServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("doGet SearchBooksServlet");
-		bookstore_query query = new bookstore_query();		
-		ArrayList<Book> books = query.getAllBooks();		
+		bookstore_query query = new bookstore_query();
+		ArrayList<Book> books;
+		if(request.getParameter("keyword") != null) {
+			System.out.println((request.getParameter("keyword")));
+			books = query.getBooksByKeyword(request.getParameter("keyword"));			
+		} else {
+			System.out.println("No parameter keyword");
+			books = query.getAllBooks();		
+		}
 		request.setAttribute("results", books);
 		RequestDispatcher dispatcher;
 		dispatcher = request.getRequestDispatcher("/all_books.jsp");
 		dispatcher.forward(request, response);
-		// Get user's current session
-		// HttpSession session = request.getSession();
-		// bookstore_query query = new bookstore_query();
-		// ArrayList list = new ArrayList();
-		// list = query.getUserCart(session.getAttribute("email").toString());
-		// request.setAttribute("books", list);
-		//
 	}
 
 	/**

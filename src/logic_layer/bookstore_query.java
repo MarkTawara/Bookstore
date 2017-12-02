@@ -312,8 +312,6 @@ public class bookstore_query {
 	public ArrayList<Book> getAllBooks(){
 		//This array list will hold all of the Book objects in one list.
 		ArrayList<Book> list = new ArrayList<Book>();
-		//This Map maps together the quantity of books ordered (of the same isbn) and the ISBN of the books in the cart
-		Map<Integer, String> hm = new HashMap<Integer, String>();
 		ResultSet rs = null; //Holds Cart table info
 		Connection con = DB_Access.connect();
 		//Get the info from the cart table
@@ -329,6 +327,27 @@ public class bookstore_query {
 		}
 		DB_Access.disconnect(con);
 		System.out.println("FINISHED GETTING ALL BOOKS");
+		return list;
+	}
+	
+	public ArrayList<Book> getBooksByKeyword(String keyword){
+		//This array list will hold all of the Book objects in one list.
+		ArrayList<Book> list = new ArrayList<Book>();
+		ResultSet rs = null; //Holds Cart table info
+		Connection con = DB_Access.connect();
+		//Get the info from the cart table
+		String bookQuery = "select * from book where title like '%" + keyword + "%'";
+		rs = DB_Access.retrieve(con, bookQuery);				
+		try{
+			while(rs.next()){
+				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), rs.getBlob(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), 0);
+				list.add(book);
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		DB_Access.disconnect(con);
+		System.out.println("FINISHED GETTING BOOKS BY KEYWORD");
 		return list;
 	}
 }

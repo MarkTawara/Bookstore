@@ -89,7 +89,7 @@
 			</div>
 			<ul class="nav nav-pills pull-right">
 				<li role="presentation"><a href="index.jsp">Home</a></li>
-				<li role="presentation" class="active"><a href="all_books.jsp">Browse All
+				<li role="presentation" class="active"><a href="SearchBooksServlet">Browse All
 						Books</a></li>
 				<li role="presentation"><a href="about.jsp">About</a></li>
 				<li role="presentation"><a href="#">Contact</a></li>
@@ -104,7 +104,7 @@
 			</div>
 			<ul class="nav nav-pills pull-right">
 				<li role="presentation"><a href="index.jsp">Home</a></li>
-				<li role="presentation"><a href="all_books.jsp">Browse All
+				<li role="presentation"><a href="SearchBooksServlet">Browse All
 						Books</a></li>
 				<li role="presentation" class="active"><a href="about.jsp">About</a></li>
 				<li role="presentation"><a href="#">Contact</a></li>
@@ -119,7 +119,7 @@
 			</div>
 			<ul class="nav nav-pills pull-right">
 				<li role="presentation"><a href="index.jsp">Home</a></li>
-				<li role="presentation"><a href="all_books.jsp">Browse All
+				<li role="presentation"><a href="SearchBooksServlet">Browse All
 						Books</a></li>
 				<li role="presentation"><a href="about.jsp">About</a></li>
 				<li role="presentation"><a href="#">Contact</a></li>
