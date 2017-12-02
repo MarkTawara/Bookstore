@@ -10,6 +10,7 @@ $(function(){
 	}else{
 		$("#navibar").load("templates/template.jsp #navibar");
 	}
+	$(".searchBarDiv").load("templates/template.jsp .searchBarDiv")
 	$(".footer").load("templates/template.jsp .footer");
 	//alert('Got to template function');
 });
