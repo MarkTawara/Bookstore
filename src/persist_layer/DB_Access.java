@@ -50,6 +50,21 @@ public class DB_Access {
 		return rows;
 	}
 	
+	//Use update when you want to remove a row or change data
+	public static int update(String query){
+		int rows=0;
+		try{
+			Connection con = connect();
+			java.sql.PreparedStatement stmt = con.prepareStatement(query);
+			rows=stmt.executeUpdate();
+			disconnect(con);
+			return rows;
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rows;
+	}
+	
 	public static ResultSet retrieve (Connection con, String query) {
 		ResultSet rset = null;
 		try {

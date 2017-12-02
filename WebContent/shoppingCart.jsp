@@ -44,12 +44,14 @@
 			<th>Title</th>
 			<th>Quantity</th>
 			<th>Price</th>
+			<th>Options</th>
 		</tr>
 		<c:forEach items="${books}" var="book">
 			<tr>
 				<td><c:out value="${book.title}" /><!-- Insert Image Here --><br />ISBN:<c:out value="${book.isbn}" /></td>
 				<td><c:out value="${book.quantityInCart}" /></td>
 				<td><c:out value="${book.price}" /></td>
+				<td><a href="RemoveFromCartServlet?param=${book.isbn}">Remove from cart</a></td>
 			</tr>
 		</c:forEach>
 	</table>
