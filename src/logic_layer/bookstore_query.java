@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import object.Book;
+import object.Promotion;
 import persist_layer.DB_Access;
 
 public class bookstore_query {
@@ -249,6 +250,26 @@ public class bookstore_query {
 			e.printStackTrace();
 		}
 		System.out.println("FINISHED EMPTY CART");	
+	}
+	
+	public Promotion isPromotionValid(String promo){
+		Promotion p = new Promotion();
+		String promoQuery = "select * from promotion where code='" + promo+"';";
+		ResultSet rs = null;
+		Connection con = DB_Access.connect();
+		int rows=0;
+		try{
+			rs=DB_Access.retrieve(con, promoQuery);
+			if(rs.next()){//Promotion of this code was found
+				p.setCode(rs.getString(2));
+				p.setPercentOff(rs.getInt(4));
+			}else{//Promotion not found
+				return p;
+			}
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return p;
 	}
 
 	

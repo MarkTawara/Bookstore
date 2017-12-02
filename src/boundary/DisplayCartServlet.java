@@ -33,13 +33,24 @@ public class DisplayCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Get user's current session
 		HttpSession session = request.getSession();
+		RequestDispatcher dispatcher;
 		bookstore_query query = new bookstore_query();
 		ArrayList list = new ArrayList();
 		list = query.getUserCart(session.getAttribute("email").toString());
 		request.setAttribute("books", list);
-		RequestDispatcher dispatcher;
-		dispatcher = request.getRequestDispatcher("/shoppingCart.jsp");
-		dispatcher.forward(request, response);
+		if(request.getAttribute("checkoutBool") == null){
+			request.setAttribute("checkoutBool", "true");
+		}
+		
+		if(request.getAttribute("checkoutBool").equals("false")){
+			//The checkout was a failure, so send to checkout fail page
+			dispatcher = request.getRequestDispatcher("/checkoutFail.jsp");
+			dispatcher.forward(request, response);	
+		}else{
+			//Normal stuff happens - display cart on shopping cart page
+			dispatcher = request.getRequestDispatcher("/shoppingCart.jsp");
+			dispatcher.forward(request, response);	
+		}
 	}
 
 	/**

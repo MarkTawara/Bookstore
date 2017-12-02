@@ -69,15 +69,19 @@
 		</c:forEach>
 	</table>
    
-    <hr>
-    <div class="subTotalDiv">
-    	<label>Subtotal: <%out.print(totalPrice); %></label>
-    </div>
-    <div class="checkoutDiv">
-    	<button onclick="location.href='EmptyCartServlet'">Empty cart</button>
-    	<button onclick="location.href='checkout.html'">Process to checkout</button>    
-    </div>
+    <hr>    
     
+    <form id="checkout" action="PreCheckoutServlet">
+    	<div class="subTotalDiv">
+    		<label>Subtotal: <%out.print(totalPrice); %></label><br />
+    		<input type="hidden" value="<%out.print(totalPrice); %>" name="priceInCart">
+    		Promotion Code: <input type="text" name="promo">
+  	  	</div>
+   		<div class="checkoutDiv">
+    		<button onclick="location.href='EmptyCartServlet'">Empty cart</button>
+    		<button type="submit">Process to checkout</button>    
+  		</div>
+    </form>
     <footer class="footer"></footer>
 
 </div>

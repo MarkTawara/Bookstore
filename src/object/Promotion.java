@@ -7,6 +7,11 @@ public class Promotion {
 	String expirationDate;
 	int percentOff;
 	
+	//Default Constructor
+	public Promotion() {
+		
+	}	
+	
 	//Constructor
 	public Promotion(String code, String expirationDate, int percentOff) {
 		this.code = code;
