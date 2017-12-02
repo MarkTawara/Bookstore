@@ -68,7 +68,7 @@
 							<button class="btn btn-default blue" type="submit">Search</button>
 						</span>
 					</div>
-					<a class="input-advanced" href="advancedSearch.html">Advanced
+					<a class="input-advanced" href="SearchBooksServlet">Advanced
 						Search</a>
 				</div>
 			</form>
