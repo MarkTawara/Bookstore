@@ -47,31 +47,7 @@
 			<h2>Search for Books</h2>
 			<h2>Discover a new world unique to you</h2>
 			<h3>Should we get rid of the search button or keep it?</h3>
-			<form id="search_bar">
-				<div class="form-group">
-					<div class="input-group input-group-lg max_width">
-						<!-- <div class="input-group-addon white-background"><img id="search_img" src="images/search_img_small.png" alt="search"/></div> -->
-						<input type="text" class="form-control" id="inlineFormInputGroup"
-							placeholder="Search">
-						<!-- 
-                    <div class="input-group-addon white-background input-select">
-                    	<select class="selectField">
-                    		<option value="" disabled selected hidden>by</option>
-                    		<option value="title">Title</option>
-                    		<option value="author">Author</option>
-                    		<option value="isbn">ISBN</option>
-                    		<option value="subject">Subject</option>
-                    	</select>
-                    </div>
-                    -->
-						<span class="input-group-btn">
-							<button class="btn btn-default blue" type="submit">Search</button>
-						</span>
-					</div>
-					<a class="input-advanced" href="advancedSearch.html">Advanced
-						Search</a>
-				</div>
-			</form>
+			<div class="searchBarDiv"></div>
 		</div>
 
 
