@@ -60,8 +60,9 @@
 			<th><a href="#">Title</a></th>
             <th><a href="#">Author</a></th>
             <th><a href="#">Publisher</a></th>
-            <th><a href="#">Price</a></th>
+            <th><a href="#">Publisher</a></th>
 <!--             <th><a href="#">Rating</a></th> -->
+            <th><a href="#">Price</a></th>
             <th><a href="#">Option</a></th>
 		</tr>
 		<c:forEach items="${results}" var="book">
