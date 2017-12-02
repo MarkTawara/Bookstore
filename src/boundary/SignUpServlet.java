@@ -45,7 +45,6 @@ public class SignUpServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("fuck this23");
 		RequestDispatcher dispatcher;
 		dispatcher = request.getRequestDispatcher("/confirm_account.jsp");
 		dispatcher.forward(request, response);
@@ -55,7 +54,6 @@ public class SignUpServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("fuck this");
 		bookstore_query db = new bookstore_query();
 		
 		String firstname = request.getParameter("firstname").trim();
@@ -79,49 +77,48 @@ public class SignUpServlet extends HttpServlet {
 			RequestDispatcher dispatcher;
 			dispatcher = request.getRequestDispatcher("/Registration_fail.jsp");
 			dispatcher.forward(request, response);
-		} else {
-			System.out.println("ducking does not exists");
-		//}
+		} 
+		else {
 		
-		String password = request.getParameter("password");
-		String phone = request.getParameter("phonenum").trim();
-		int isSubscribed = Integer.parseInt(request.getParameter("subscribed"));
-		
-		String shipStreet = request.getParameter("street").trim();
-		String shipCity = request.getParameter("city").trim();
-		String shipState = request.getParameter("state").trim();
-		String shipZip = request.getParameter("zip").trim();
-		String shippingAddress = shipStreet + " " + shipCity + " " + shipState + " " + shipZip;
-		
-		String billingAddress;
-		/*
-		if (request.getParameter("billingEqualsShipping") == "true") {
-			billingAddress = shippingAddress;
-		}
-		else {*/
+			String password = request.getParameter("password");
+			String phone = request.getParameter("phonenum").trim();
+			int isSubscribed = Integer.parseInt(request.getParameter("subscribed"));
+			
+			String shipStreet = request.getParameter("street").trim();
+			String shipCity = request.getParameter("city").trim();
+			String shipState = request.getParameter("state").trim();
+			String shipZip = request.getParameter("zip").trim();
+			String shippingAddress = shipStreet + " " + shipCity + " " + shipState + " " + shipZip;
+			
+			String billingAddress;
+			/*
+			if (request.getParameter("billingEqualsShipping") == "true") {
+				billingAddress = shippingAddress;
+			}
+			else {*/
 			String billStreet = request.getParameter("street2").trim();
 			String billCity = request.getParameter("city2").trim();
 			String billState = request.getParameter("state2").trim();
 			String billZip = request.getParameter("zip2").trim();
 			billingAddress = billStreet + " " + billCity + " " + billState + " " + billZip;
-		//}
-		
-		String cardtype = request.getParameter("cardtype");
-		String cardnum = request.getParameter("cardnum").trim();
-		String expdate = request.getParameter("expireMM") + "/" + request.getParameter("expireYY");
-		//String ccv = request.getParameter("ccv").trim();
-		String accountType = "customer";
-		
-		String code = generateCode();
-		int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate, isSubscribed, accountType); // ADD TO DATABASE
-		
-		sendEmail(email, code); // SEND EMAIL 
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("email", email);
-		session.setAttribute("code", code);
-		
-		doGet(request, response);
+			//}
+			
+			String cardtype = request.getParameter("cardtype");
+			String cardnum = request.getParameter("cardnum").trim();
+			String expdate = request.getParameter("expireMM") + "/" + request.getParameter("expireYY");
+			//String ccv = request.getParameter("ccv").trim();
+			String accountType = "customer";
+			
+			String code = generateCode();
+			int x = db.addNewUser(name, email, password, phone, shippingAddress, billingAddress, cardtype, cardnum, expdate, isSubscribed, accountType); // ADD TO DATABASE
+			
+			sendEmail(email, code); // SEND EMAIL 
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("email", email);
+			session.setAttribute("code", code);
+			
+			doGet(request, response);
 		}
 	}
 	
@@ -167,7 +164,6 @@ public class SignUpServlet extends HttpServlet {
 
 			Transport.send(message);
 
-			//System.out.println("Done");
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);

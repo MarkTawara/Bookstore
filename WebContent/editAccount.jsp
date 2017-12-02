@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import= "logic_layer.bookstore_query"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -10,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Create account</title>
+    <title>Edit Account</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--Bootstrap CDN-->
@@ -24,41 +30,85 @@
     <!--Our Javascript for homepage-->
     <script type="text/javascript" src="scripts/index.js"></script>
     <script src="scripts/template.js"></script>
-    <!-- <script type="text/javascript" src="scripts/validateInput.js"></script> -->
     <!-- Custom styles for this template -->
     <link type="text/css" href="css/index.css" rel="stylesheet">
-</head>
+    <!-- JQuery template stuff -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  	<link rel="stylesheet" href="/resources/demos/style.css">
+  	<script>
+  		$( function() {
+   			$( "#tabs" ).tabs();
+ 		} );
+  	</script>
+	</head>
 
 <body>
 <div class="container">
     <!--The login top bar which holds our options to Log In and Sign Up/Register-->
 	<div class="top_bar"></div>
 	
-		<!--Navigation Bar at the top right which hold links to other sites on our page-->
+	<!--Navigation Bar at the top right which hold links to other sites on our page-->
     <div id="navibar" class="header clearfix"></div>
 
 	<!--Main information for the page is here-->
 	
-    <div class="regDiv">
-        <h1>Create account</h1>
-        All inputs are required
-        <form action="SignUpServlet" method="post" name="registration_form" id="registration_form" >
-			First name: <input type="text" name="firstname" id="firstname" required><br>
-			Last name: <input type="text" name="lastname" id="lastname" required><br>
-			Email: <input type="text" name="email" id="email" required>
-			<p id="email_error"></p> 
-			Password: <input type="password" name="password" id="password" required><br>
-			Phone Number: <input type="text" name="phonenum" id="phonenum" required><br>
+    
+    <h1>Edit Account</h1>
+    <div style="color: #FF0000;">${saveMessage}</div>
+    <% 
+    HttpSession sesh = request.getSession(false);
+	String email = (String)sesh.getAttribute("email");
+    bookstore_query db = new bookstore_query();
+	ResultSet rs = db.getUserInfo(email);
+	while (rs.next()){
+    %>
+ 
+	<div id="tabs">
+	  <ul>
+	    <li><a href="#tabs-1">General</a></li>
+	    <li><a href="#tabs-2">Shipping</a></li>
+	    <li><a href="#tabs-3">Billing</a></li>
+	  </ul>
+	  <div id="tabs-1">
+	  	<b>Current Settings:</b><br>
+	  	Name: <%out.println(rs.getString("customer_name"));%><br>
+	  	Email: <%out.println(rs.getString("email"));%><br>
+	  	Phone: <%out.println(rs.getString("phone_number"));%><br>
+	  	Subscribed to promotions and newsletter: 
+	  	<%if(rs.getInt("is_subscribed")==1){out.println("Yes");} 
+	  	else{out.println("No");}
+	  	%>
+		
+		<br><br>
+		<form action="EditAccountServlet" method="post" name="account_edit_form">
+			<input type="text" name="form_number" value = "1" hidden>
+		  	First Name: <input type="text" name="firstname" id="firstname"><br>
+		  	Last Name: <input type="text" name="lastname" id="lastname"><br>
+			Email: <input type="text" name="email" id="email">
+			<div style="color: #FF0000;">${errorMessage}</div> 
+			Password: <input type="password" name="password" id="password"><br>
+			Phone Number: <input type="text" name="phonenum" id="phonenum" ><br>
 			Subscribe to promotions and newsletter: 
-			<input type="radio" name="subscribed" value="1" checked> Yes
+			<input type="radio" name="subscribed" value="-1" hidden checked>
+			<input type="radio" name="subscribed" value="1"> Yes
 			<input type="radio" name="subscribed" value="0"> No
 			<br>
-			<br>
-			Shipping Address:<br>
-			Street: <input type="text" name="street" id="street" required><br>
-			City: <input type="text" name="city" id="city" required>
-			State: 
-			<select name="state" >
+			<input type="submit" id="save_changes_button" value="Save Changes">
+		</form>
+	  </div>
+	  
+	  <div id="tabs-2">
+	  <b>Current Shipping Address:</b><br>
+	  <%out.println(rs.getString("shipping_address"));%>
+	  <br><br>
+	  <form action="EditAccountServlet" method="post" name="account_edit_form">
+	  	<input type="text" name="form_number" value = "2" hidden>
+		Street: <input type="text" name="street" id="street" required><br>
+		City: <input type="text" name="city" id="city" required>
+		State: 
+		<select name="state" >
 				<option value="AL">Alabama</option>
 				<option value="AK">Alaska</option>
 				<option value="AZ">Arizona</option>
@@ -112,15 +162,28 @@
 				<option value="WY">Wyoming</option>
 			</select>
 			Zip Code: <input type="text" name="zip" id="zip" required><br>
-			<br>
-			Billing Info: <br>
+			<input type="submit" id="save_changes_button" value="Save Changes">
+			</form>
+	  </div>
+	  
+	  <div id="tabs-3">
+	  <b>Current Billing Information:</b><br>
+	  
+	  Card ending in: 
+	  <%String cardnum= rs.getString("card_num"); 
+	  out.println(cardnum.subSequence(cardnum.length()-4, cardnum.length()));%><br>
+	  Billing Address: <%out.println(rs.getString("billing_address"));%> 
+	  <br><br>
+	  <b>Change Card:</b>
+	  <form action="EditAccountServlet" method="post" name="account_edit_form">
+	  		<input type="text" name="form_number" value = "3" hidden>
 			<input type="radio" name="cardtype" value="visa" checked> Visa 
 	 		<input type="radio" name="cardtype" value="mastercard"> MasterCard 
 	  		<input type="radio" name="cardtype" value="americanexpress"> American Express
 			<br>
 			Card Number: <input type="text" name="cardnum" id="cardnum" required><br>
 			Expiration Date: 
-			<select name='expireMM' required>
+			<select name='expireMM'>
 		   		<!--  <option value=''>Month</option> -->
 		 		<option value='01'>01</option>
 		    		<option value='02'>02</option>
@@ -135,7 +198,7 @@
 		    		<option value='11'>11</option>
 		    		<option value='12'>12</option>
 			</select> 
-			<select name='expireYY' required>
+			<select name='expireYY'>
 			   <!-- <option value=''>Year</option>-->
 			    <option value='17'>2017</option>
 			    <option value='18'>2018</option>
@@ -146,7 +209,13 @@
 			
 			<!-- CCV:<input type="text" name="ccv" required><br> -->
 			<br>
-			Billing Address: <br>
+			<input type="submit" id="save_changes_button" value="Save Changes">
+			<br>
+			<br>
+		</form>
+		<form action="EditAccountServlet" method="post" name="account_edit_form">
+			<input type="text" name="form_number" value = "4" hidden>
+			<b>Change Billing Address:</b><br>
 			<!--  <input type="checkbox" name="billingEqualsShipping" value="true"> Same as shipping address<br>  -->
 			Street: <input type="text" name="street2" id="street2" required><br>
 			City: <input type="text" name="city2" id="city2" required>
@@ -205,11 +274,13 @@
 				<option value="WY">Wyoming</option>
 			</select>
 			Zip Code: <input type="text" name="zip2" id="zip2" required><br>
+			<input type="submit" id="save_changes_button" value="Save Changes">
 			
-			<br><br>
-			<input type="submit" id="create_account_button" value="Create Account">
-		</form>
-    </div>
+			</form>
+	  </div>
+	</div>
+   
+    <%} %>
 
     <footer class="footer"></footer>
 
