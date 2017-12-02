@@ -65,7 +65,8 @@
 				* Publication Year: <input name="publication_year" id="publication_year" value="" required><br />
 				* Description: <br /><textarea name="descr" id="descr" rows="5" cols="50" required></textarea><br />
 				* Quantity in Stock: <input name="qty_in_stock" id="qty_in_stock" value="" required><br />
-				* Image: <input type="file" name="image" id="image"/> (Accepted formats include .jpg, .jpeg, .png)<div id="imageFailure"></div><br />
+				<img id="myImg" src="http://shashgrewal.com/wp-content/uploads/2015/05/default-placeholder.png" alt="your image" width="150" height="200"/><br/>
+				* Image: <input type="file" name="image" id="image" onchange="readURL(this)" /> (Accepted formats include .jpg, .jpeg, .png)<div id="imageFailure"></div><br />
 				* All inputs are required for submission.
 				<div class="bdBtnDiv">
 					<input type="submit" name="submitBook" value="Add Book" />
@@ -77,4 +78,19 @@
 
 	</div>
 </body>
+
+<script type="text/javascript">
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#myImg')
+                .attr('src', e.target.result)
+                .width(150)
+                .height(200);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+    </script>
 </html>
