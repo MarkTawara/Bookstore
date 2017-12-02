@@ -221,9 +221,10 @@ public class bookstore_query {
 	/*
 	 * removes a book from the user's shopping cart
 	 */
-	public void removeBookFromCart(String email, String isbn){
+	public void removeBookFromCart(String email, String isbn, int quantity){
 		//Remove the book from the cart
-		String removeQuery = "delete from cart where email= '" + email+ "' and isbn='"+isbn+"';";
+		String removeQuery = "delete from cart where email= '" + email+ "' and isbn='"+isbn+"' and quantity='"+quantity+"';";
+		System.out.println(quantity);
 		int rows = 0;
 		
 		try{
@@ -232,6 +233,22 @@ public class bookstore_query {
 			e.printStackTrace();
 		}
 		System.out.println("FINISHED REMOVE FROM CART");	
+	}
+	
+	/*
+	 * removes a book from the user's shopping cart
+	 */
+	public void emptyCart(String email){
+		//Remove the book from the cart
+		String removeQuery = "delete from cart where email= '" + email+"';";
+		int rows = 0;
+		
+		try{
+			rows = DB_Access.update(removeQuery);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		System.out.println("FINISHED EMPTY CART");	
 	}
 
 	

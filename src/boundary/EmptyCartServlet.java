@@ -14,29 +14,26 @@ import javax.servlet.http.HttpSession;
 import logic_layer.bookstore_query;
 
 /**
- * Servlet implementation class RemoveFromCartServlet
+ * Servlet implementation class EmptyCartServlet
  */
-@WebServlet("/RemoveFromCartServlet")
-public class RemoveFromCartServlet extends HttpServlet {
+@WebServlet("/EmptyCartServlet")
+public class EmptyCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
-     * Default Constructor
+     * @see HttpServlet#HttpServlet()
      */
-    public RemoveFromCartServlet() {
+    public EmptyCartServlet() {
         super();
     }
 
 	/**
-	 * Go here first
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String isbn = request.getParameter("param");
-		int quantity = Integer.parseInt(request.getParameter("param2"));
-		System.out.println("ISBN is : " + isbn);
 		HttpSession session = request.getSession();
 		bookstore_query query = new bookstore_query();
-		query.removeBookFromCart(session.getAttribute("email").toString(), isbn, quantity);
+		query.emptyCart(session.getAttribute("email").toString());
 		ServletContext context = getServletContext();
 		RequestDispatcher rd = context.getRequestDispatcher("/DisplayCartServlet");
 		rd.forward(request, response);
