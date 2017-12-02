@@ -39,18 +39,6 @@
     <!--Jumbotron/Our Search area for books-->
     <div class="jumbotron">
         <h2>Looking for something in particular?</h2>
-        <form id="search_bar">
-             <div class="form-group">
-                 <div class="input-group input-group-lg max_width">
-                     <!-- <div class="input-group-addon white-background"><img id="search_img" src="images/search_img_small.png" alt="search"/></div> -->
-                     <input type="text" class="form-control" id="inlineFormInputGroup" name="keyword" placeholder="Search">
-                     <span class="input-group-btn">
-                         <button class="btn btn-default blue" type="submit">Search</button>
-                     </span>
-                 </div>
-                 <a class="input-advanced" href="advancedSearch.html">Advanced Search</a>
-             </div>
-         </form>
 		<div class="searchBarDiv"></div>
     </div>
 
