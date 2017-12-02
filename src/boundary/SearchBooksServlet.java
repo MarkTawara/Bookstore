@@ -28,10 +28,18 @@ public class SearchBooksServlet extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("doGet SearchBooksServlet");
 		bookstore_query query = new bookstore_query();
-		ArrayList<Book> books;
-		if(request.getParameter("keyword") != null) {
-			System.out.println((request.getParameter("keyword")));
-			books = query.getBooksByKeyword(request.getParameter("keyword"));			
+		ArrayList<Book> books = new ArrayList<Book>();
+		if(request.getParameter("type") != null) {
+			switch(request.getParameter("type")){
+			case "searchBar":	
+				System.out.println((request.getParameter("keyword")));
+				books = query.getBooksByKeyword(request.getParameter("keyword"));
+				break;
+			case "advSearch":
+				System.out.println((request.getParameter("re")));
+				books = query.getBooksAdvanced(request.getParameter("title"),request.getParameter("author"),request.getParameter("isbn"),request.getParameter("subject"));
+				break;
+			}
 		} else {
 			System.out.println("No parameter keyword");
 			books = query.getAllBooks();		

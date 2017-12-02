@@ -319,7 +319,7 @@ public class bookstore_query {
 		rs = DB_Access.retrieve(con, bookQuery);				
 		try{
 			while(rs.next()){
-				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), rs.getBlob(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), 0);
+				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), rs.getBlob(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), 0, rs.getString(13));
 				list.add(book);
 			}
 		} catch (Exception e){
@@ -340,7 +340,46 @@ public class bookstore_query {
 		rs = DB_Access.retrieve(con, bookQuery);				
 		try{
 			while(rs.next()){
-				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), rs.getBlob(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), 0);
+				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), rs.getBlob(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), 0, rs.getString(13));
+				list.add(book);
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		DB_Access.disconnect(con);
+		System.out.println("FINISHED GETTING BOOKS BY KEYWORD");
+		return list;
+	}
+	
+	public ArrayList<Book> getBooksAdvanced(String title, String author, String isbn, String subject){
+		//This array list will hold all of the Book objects in one list.
+		ArrayList<Book> list = new ArrayList<Book>();
+		ResultSet rs = null; //Holds Cart table info
+		Connection con = DB_Access.connect();
+		//Get the info from the cart table		
+		String bookQuery = "select * from book where ";
+		ArrayList<String> queryList = new ArrayList<String>();
+		if(!title.equals("")) {
+			queryList.add("title like '%" + title + "%'");
+		}
+		if(!author.equals("")) {
+			queryList.add("author like '%" + author + "%'");
+		}
+		if(!isbn.equals("")) {
+			queryList.add("isbn like '%" + isbn + "%'");
+		}
+		if(!subject.equals("")) {
+			queryList.add("subject like '%" + subject + "%'");
+		}
+		
+		for(String s : queryList) {
+			bookQuery += s + " and ";
+		}		
+		rs = DB_Access.retrieve(con, bookQuery.substring(0,bookQuery.length()-5));
+		System.out.println(bookQuery.substring(0,bookQuery.length()-5));
+		try{
+			while(rs.next()){
+				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), rs.getBlob(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), 0, rs.getString(13));
 				list.add(book);
 			}
 		} catch (Exception e){

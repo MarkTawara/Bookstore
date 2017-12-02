@@ -15,6 +15,7 @@ public class Book extends Item {
 	int publicationYear;
 	String description;
 	int quantityInCart;
+	String subject;
 	
 	//Default Constructor
 	public Book() {
@@ -34,7 +35,7 @@ public class Book extends Item {
 		this.quantityInCart = quantityInCart;
 	}
 	
-	public Book(String isbn, String author, double price, String title, Blob cover_picture, int edition, String publisher, int publicationYear, String description, int quantityInCart) {
+	public Book(String isbn, String author, double price, String title, Blob cover_picture, int edition, String publisher, int publicationYear, String description, int quantityInCart, String subject) {
 		this.isbn = isbn;
 		this.author = author;
 		this.price = price;
@@ -45,8 +46,9 @@ public class Book extends Item {
 		this.publicationYear = publicationYear;
 		this.description = description;
 		this.quantityInCart = quantityInCart;
+		this.subject = subject;
 	}
-	
+
 	//Getters and Setters
 	public String getIsbn() {
 		return isbn;
@@ -127,5 +129,12 @@ public class Book extends Item {
 	public void setCover_picture(Blob cover_picture) {
 		this.cover_picture = cover_picture;
 	}
+	
+	public String getSubject() {
+		return subject;
+	}
 
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 }
