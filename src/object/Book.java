@@ -1,5 +1,7 @@
 package object;
 
+import java.sql.Blob;
+
 public class Book extends Item {
 
 	//Variables
@@ -7,7 +9,7 @@ public class Book extends Item {
 	String author;
 	String title;
 	double price;
-	//CoverPictureVariable?
+	Blob cover_picture;
 	int edition;
 	String publisher;
 	int publicationYear;
@@ -25,6 +27,19 @@ public class Book extends Item {
 		this.author = author;
 		this.price = price;
 		this.title = title;
+		this.edition = edition;
+		this.publisher = publisher;
+		this.publicationYear = publicationYear;
+		this.description = description;
+		this.quantityInCart = quantityInCart;
+	}
+	
+	public Book(String isbn, String author, double price, String title, Blob cover_picture, int edition, String publisher, int publicationYear, String description, int quantityInCart) {
+		this.isbn = isbn;
+		this.author = author;
+		this.price = price;
+		this.title = title;
+		this.cover_picture = cover_picture;
 		this.edition = edition;
 		this.publisher = publisher;
 		this.publicationYear = publicationYear;
@@ -103,6 +118,14 @@ public class Book extends Item {
 	
 	public void setQuantityInCart(int quantityInCart){
 		this.quantityInCart = quantityInCart;
+	}
+
+	public Blob getCover_picture() {
+		return cover_picture;
+	}
+
+	public void setCover_picture(Blob cover_picture) {
+		this.cover_picture = cover_picture;
 	}
 
 }

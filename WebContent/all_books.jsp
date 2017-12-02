@@ -54,48 +54,31 @@
         </form>
     </div>
 
-    <table> 
-        <tr>
-            <th><a href="#">Title</a></th>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<table>
+		<tr>
+			<th><a href="#">Title</a></th>
             <th><a href="#">Author</a></th>
-            <th><a href="#">Subject</a></th>
+            <th><a href="#">Publisher</a></th>
             <th><a href="#">Price</a></th>
-            <th><a href="#">Rating</a></th>
+<!--             <th><a href="#">Rating</a></th> -->
             <th><a href="#">Option</a></th>
-        </tr>
-        <tr>
-            <td>Divergent<div><img class="center-img carousel-img" src="images/Divergent_Smaller.png" alt="book image"/></div>ISBN:123435</td>
-            <td>Veronica Roth</td>
-            <td>whatever</td>
-            <td>$10.99</td>
-            <td>2/5</td>
-            <td><form action="AddToCartServlet" method="post">Qty:<input type="number" name="qty" min="1" max="99"><input type="submit" value="Add to Cart""></form><td>
-        </tr>
-        <tr>
-            <td>Harry Potter and the Sorcerer's Stone<div><img class="center-img carousel-img" src="images/Harry%20Potter.jpg" alt="book image"/></div>ISBN:5783456</td>
-            <td>J. K. Rowling</td>
-            <td>whatever</td>
-            <td>$10.99</td>
-            <td>3/5</td>
-            <td><button>Add to Cart</button>
-        </tr>
-        <tr>
-            <td>The Hunger Games<div><img class="center-img carousel-img" src="images/The_Hunger_Games.jpg" alt="book image"/></div>ISBN:46543</td>
-            <td>Suzanne Collins</td>
-            <td>whatever</td>
-            <td>$10.99</td>
-            <td>1/5</td>
-            <td><button>Add to Cart</button>
-        </tr>
-        <tr>
-            <td>Percy Jackson<div><img class="center-img carousel-img" src="images/Percy%20Jackson.jpg" alt="book image"/></div>ISBN:573939</td>
-            <td>Rick Riordan</td>
-            <td>whatever</td>
-            <td>$10.99</td>
-            <td>1.5/5</td>
-            <td><button>Add to Cart</button>
-        </tr>
-    </table>
+		</tr>
+		<c:forEach items="${results}" var="book">
+			<tr>
+				<td>
+					${book.title}
+					<img class="center-img carousel-img" src="data:image/jpg;base64,'${book.cover_picture}'" alt="book image"/>
+					ISBN: ${book.isbn}
+				</td>
+				<td>${book.author}</td>
+				<td>${book.price}</td>
+				<td>${book.publisher}</td>
+				<td>${book.price}</td>
+				<td><form action="AddToCartServlet" method="post">Qty:<input type="number" name="qty" min="1" max="99"><input type="submit" value="Add to Cart""></form><td>
+			</tr>
+		</c:forEach>
+	</table>
     
     <footer class="footer"></footer>
 
