@@ -49,7 +49,7 @@
         </div>
         <div class="boxes">
         	<h4 class="center-text">Account Settings</h4>
-        	<button class="cool_buttons">Change Account Settings</button>
+        	<a href="editAccount.jsp">Change Account Settings</a>
         </div>
         <div class="boxes">
         	<h4 class="center-text">Cart</h4>

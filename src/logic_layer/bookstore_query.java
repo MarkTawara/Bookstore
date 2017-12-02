@@ -159,6 +159,9 @@ public class bookstore_query {
 		return r;
 	}
 	
+	/*
+	 * Check if email already exists in database
+	 */
 	public boolean isEmailAlreadyRegistered(String email) {
 		String query = "SELECT customer_name FROM registered_customer WHERE email = '"+email+"'";
 		ResultSet rs = null;
@@ -214,4 +217,62 @@ public class bookstore_query {
 		System.out.println("FINISHED CART");
 		return list;
 	}
+	
+	/*
+	 * used in editAccount.jsp
+	 */
+	public ResultSet getUserInfo(String email) {
+		String query = "SELECT * from registered_customer WHERE email = '" + email + "'";
+		Connection con = DB_Access.connect();
+		ResultSet rs = DB_Access.retrieve(con, query);
+		return rs;
+	}
+	
+	/*
+	 *  used in editAccountServlet
+	 */
+	public int editUser(String session_email, String name, String email, String password, String phone, String shippingAddress, String billingAddress,String cardtype, String cardnum, String expdate, int isSubscribed) {
+		int r = 0;
+		String query = "UPDATE registered_customer SET ";
+		if(name.length() > 0) {
+			query += " customer_name = '" + name + "',";
+		}
+		if(email.length() > 0) {
+			query += " email = '" + email + "',";
+		}
+		if(password.length() > 0) {
+			query += " password = '" + password + "',";
+		}
+		if(phone.length() > 0) {
+			query += " phone_number = '" + phone + "',";
+		}
+		if(shippingAddress.length() > 0) {
+			query += " shipping_address = '" + shippingAddress + "',";
+		}
+		if(billingAddress.length() > 0) {
+			query += " billing_address = '" + billingAddress + "',";
+		}
+		if(cardtype.length() > 0) {
+			query += " card_type = '" + cardtype + "',";
+		}
+		if(cardnum.length() > 0) {
+			query += " card_num = '" + cardnum + "',";
+		}
+		if(expdate.length() > 0) {
+			query += " card_exp_date = '" + expdate + "',";
+		}
+		if(isSubscribed > -1) {
+			query += " is_subscribed = " + isSubscribed + ",";
+		}
+		query = query.substring(0, query.length()-1);
+		query += " WHERE email = '" + session_email + "'";
+		//System.out.println(query);
+		try {
+			r=DB_Access.insert(query);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return r;
+	}
+	
 }
