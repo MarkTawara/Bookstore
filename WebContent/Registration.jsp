@@ -45,7 +45,7 @@
         <form action="SignUpServlet" method="post" name="registration_form" id="registration_form" >
 			First name: <input type="text" name="firstname" id="firstname" required><br>
 			Last name: <input type="text" name="lastname" id="lastname" required><br>
-			Email: <input type="text" name="email" id="email" required>
+			Email: <input type="email" name="email" id="email" required>
 			<p id="email_error"></p> 
 			Password: <input type="password" name="password" id="password" required><br>
 			Phone Number: <input type="text" name="phonenum" id="phonenum" required><br>
