@@ -206,7 +206,7 @@ public class bookstore_query {
 				bookQuery = "select * from book where isbn= '"+ isbn + "';";
 				rs2 = DB_Access.retrieve(con, bookQuery);
 				if(rs2.next()){
-					Book books = new Book(rs2.getString(5), rs2.getString(3), rs2.getDouble(4), rs2.getString(2), rs2.getInt(7), rs2.getString(8), rs2.getInt(9), rs2.getString(10), quantity);
+					Book books = new Book(rs2.getString(4), rs2.getString(3), rs2.getDouble(4), rs2.getString(2), rs2.getInt(7), rs2.getString(8), rs2.getInt(9), rs2.getString(10), quantity);
 					list.add(books);
 				}
 			}
@@ -214,7 +214,7 @@ public class bookstore_query {
 			e.printStackTrace();
 		}
 		DB_Access.disconnect(con);
-		System.out.println("FINISHED CART");
+		System.out.println("FINISHED DISPLAY CART");
 		return list;
 	}
 	
