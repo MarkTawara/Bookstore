@@ -40,6 +40,19 @@
 
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<table class="displayCart">
+	<%	double totalPrice = 0;	%>
+	<%@page import = "object.Book"%>
+	<%@page import = "java.util.ArrayList"%>
+	<%	Book b = new Book();
+		ArrayList<Book> l = (ArrayList<Book>)request.getAttribute("books");
+		if(l!=null){
+			for(Book z : l){
+				totalPrice = totalPrice + z.getPrice();
+			}
+		}else{
+			totalPrice = 0;
+		}
+	%>
 		<tr>
 			<th>Title</th>
 			<th>Quantity</th>
@@ -51,52 +64,17 @@
 				<td><c:out value="${book.title}" /><!-- Insert Image Here --><br />ISBN:<c:out value="${book.isbn}" /></td>
 				<td><c:out value="${book.quantityInCart}" /></td>
 				<td><c:out value="${book.price}" /></td>
-				<td><a href="RemoveFromCartServlet?param=${book.isbn}">Remove from cart</a></td>
+				<td><a href="RemoveFromCartServlet?param=${book.isbn}&param2=${book.quantityInCart}">Remove from cart</a></td>
 			</tr>
 		</c:forEach>
 	</table>
    
- <!-- 
-    <table> 
-        <tr>
-            <th><a href="#">Title</a></th>
-            <th><a href="#">Price</a></th>
-            <th><a href="#">Quantity</a></th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>Divergent<div><img class="center-img carousel-img" src="images/Divergent_Smaller.png" alt="book image"/></div>ISBN:123435</td>
-            <td>$10.99</td>
-            <td><input class="cartInput" type="text" value="1"></td>
-            <td><button>Delete</button>
-        </tr>
-        <tr>
-            <td>Harry Potter and the Sorcerer's Stone<div><img class="center-img carousel-img" src="images/Harry%20Potter.jpg" alt="book image"/></div>ISBN:5783456</td>
-            <td>$10.99</td>
-            <td><input class="cartInput" type="text" value="1"></td>
-            <td><button>Delete</button>
-        </tr>
-        <tr>
-            <td>The Hunger Games<div><img class="center-img carousel-img" src="images/The_Hunger_Games.jpg" alt="book image"/></div>ISBN:46543</td>        
-            <td>$10.99</td>
-            <td><input class="cartInput" type="text" value="1"></td>
-            <td><button>Delete</button>
-        </tr>
-        <tr>
-            <td>Percy Jackson<div><img class="center-img carousel-img" src="images/Percy%20Jackson.jpg" alt="book image"/></div>ISBN:573939</td>            
-            <td>$10.99</td>
-            <td><input class="cartInput" type="text" value="1"></td>
-            <td><button>Delete</button>
-        </tr>
-    </table> 
- -->
-   
     <hr>
     <div class="subTotalDiv">
-    	<label>Subtotal: $43.96</label>
+    	<label>Subtotal: <%out.print(totalPrice); %></label>
     </div>
     <div class="checkoutDiv">
-    	<button>Empty cart</button>
+    	<button onclick="location.href='EmptyCartServlet'">Empty cart</button>
     	<button onclick="location.href='checkout.html'">Process to checkout</button>    
     </div>
     
