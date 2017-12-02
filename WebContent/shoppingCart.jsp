@@ -40,6 +40,15 @@
 
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<table class="displayCart">
+	<%	double totalPrice = 0;	%>
+	<%@page import = "object.Book"%>
+	<%@page import = "java.util.ArrayList"%>
+	<%	Book b = new Book();
+		ArrayList<Book> l = (ArrayList<Book>)request.getAttribute("books");
+		for(Book z : l){
+			totalPrice = totalPrice + z.getPrice();
+		}
+	%>
 		<tr>
 			<th>Title</th>
 			<th>Quantity</th>
@@ -93,7 +102,7 @@
    
     <hr>
     <div class="subTotalDiv">
-    	<label>Subtotal: $43.96</label>
+    	<label>Subtotal: <%out.print(totalPrice); %></label>
     </div>
     <div class="checkoutDiv">
     	<button>Empty cart</button>
