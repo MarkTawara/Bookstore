@@ -1,5 +1,7 @@
 package object;
 
+import java.util.Date;
+
 public class Order {
 
 	//Variables used in class
@@ -13,6 +15,8 @@ public class Order {
 	String paymentMethod;
 	String billingAddress;
 	int cartId;
+	Date dateOrderedReal;
+	String shippingAddress;
 	
 	//Constructor
 	public Order(int orderId, String dateOrdered, String customerName, String customerId, String status, int shippingId, double totalPrice, String paymentMethod, String billingAddress, int cartId) {
@@ -28,15 +32,11 @@ public class Order {
 		this.cartId = cartId;
 	}
 	
-	//Send confirmation that an order has been placed.
-	public void sendConfirmation(){
+	public Order(){
 		
 	}
 	
-	//Updates the order to either on its way, delivered, or lost(?)
-	public void updateOrderStatus() {
-		
-	}
+	
 	
 	//Getters & Setters
 	public int getOrderId() {
@@ -45,6 +45,22 @@ public class Order {
 
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
+	}
+	
+	public Date getDateOrderedReal(){
+		return dateOrderedReal;
+	}
+	
+	public void setDateOrderedReal(Date date){
+		this.dateOrderedReal = date;
+	}
+	
+	public String getShippingAddress(){
+		return shippingAddress;
+	}
+	
+	public void setShippingAddress(String address){
+		this.shippingAddress = address;
 	}
 
 	public String getDateOrdered() {

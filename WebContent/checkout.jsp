@@ -37,45 +37,15 @@
     <div id="navibar" class="header clearfix"></div>
 
 	<!--Main information for the page is here-->
-	
-    <div class="coDiv">
-        <h1>Shipping Address</h1>
-        <div class="coAddress">
-			<label class="coLabel"> *Full name: <br>
-			<input class="coInputField" type="text" name="regUsername" value=""></label><br>
-        	<label class="coLabel"> *Address line 1: <br>
-        	<input class="coInputField" type="text" name="regEmail" value=""></label><br>
-        	<label class="coLabel"> Address line 2: <br>
-        	<input class="coInputField" type="text" name="regPassword" value=""></label><br>
-        	<label class="coLabel"> *City: <br>
-        	<input class="coInputField" type="text" name="regRePassword" value=""></label><br>
-        	<label class="coLabel"> *State: <br>
-        	<input class="coInputField" type="text" name="regRePassword" value=""></label><br>
-        	<label class="coLabel"> *ZIP: <br>
-        	<input class="coInputField" type="text" name="regRePassword" value=""></label><br>
-        	<label class="coLabel"> *County: <br>
-        	<input class="coInputField" type="text" name="regRePassword" value=""></label><br>
-        	<label class="coLabel"> *Phone number: <br>
-        	<input class="coInputField" type="text" name="regRePassword" value=""></label><br>
+	<form action="CheckoutServlet">
+    	<div class="finalPrice">
+        	Your final total after any promotional codes (if available): $${finalPrice}<br />
+        	We will be using your saved information to complete the order.
         </div>
-        <div class="coPayment">
-        	<h1>Credit or debit card</h1>
-        	<label class="coLabel"> *Card number: <br>
-        	<input class="coInputField" type="text" name="regRePassword" value=""></label><br>
-        	<label class="coLabel"> *Expiration date: <br>
-        	<input class="coInputField" type="text" name="regRePassword" value=""></label><br>
-        	<label class="coLabel"> *Security code: <br>
-        	<input class="coInputField" type="text" name="regRePassword" value=""></label><br>
-        	<label class="coLabel"> *Full name on card: <br>
-        	<input class="coInputField" type="text" name="regRePassword" value=""></label><br>
-        </div>
-        <div class="finalPrice">
-        	Your final total after any promotional codes (if available): ${finalPrice}
-        </div>
-        <input class="coCancel" type="submit" value="Cancel">
-        <input class="coConfirm" type="submit" value="Confirm">
-    </div>
-
+        <button type="button" onclick="location.href='DisplayCartServlet'">Cancel</button>
+        <input type="hidden" value="${finalPrice}" name="finalPrice">
+        <button type="submit">Confirm Order</button>
+	</form>
     <footer class="footer"></footer>
 
 </div>

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import object.Book;
+import object.Order;
 import object.Promotion;
 import persist_layer.DB_Access;
 
@@ -74,6 +75,29 @@ public class bookstore_query {
 		}		
 		DB_Access.disconnect(con);
 		return "Error in get_name() in bookstore_query.java";
+	}
+	
+	public static String getBookNames(int orderID){
+		String query = "SELECT b.title FROM book b, orderItems oi where oi.order_id='"+orderID+"' and oi.product_isbn=b.isbn;";
+		ResultSet rs = null;
+		Connection con = DB_Access.connect();
+		String bookList = "";
+		int count = 0;
+		try{
+			rs = DB_Access.retrieve(con, query);
+			while(rs.next()){
+				if(count==0){
+					bookList = rs.getString(1);
+					count++;
+				}else{
+					bookList = bookList + ", " + rs.getString(1);
+				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		DB_Access.disconnect(con);
+		return bookList;
 	}
 	
 	/*
@@ -237,7 +261,7 @@ public class bookstore_query {
 	}
 	
 	/*
-	 * removes a book from the user's shopping cart
+	 * removes all books from the user's shopping cart
 	 */
 	public void emptyCart(String email){
 		//Remove the book from the cart
@@ -252,12 +276,12 @@ public class bookstore_query {
 		System.out.println("FINISHED EMPTY CART");	
 	}
 	
+	//Check if the promotion is legit
 	public Promotion isPromotionValid(String promo){
 		Promotion p = new Promotion();
 		String promoQuery = "select * from promotion where code='" + promo+"';";
 		ResultSet rs = null;
 		Connection con = DB_Access.connect();
-		int rows=0;
 		try{
 			rs=DB_Access.retrieve(con, promoQuery);
 			if(rs.next()){//Promotion of this code was found
@@ -271,7 +295,90 @@ public class bookstore_query {
 		}
 		return p;
 	}
-
+	
+	//Add an order to the database
+	public int completeOrder(String email, double price){
+		//Create one row in the Orders table
+		String paymentType="";
+		String billingAddress="";
+		String shippingAddress="";
+		String userQuery = "select * from registered_customer where email='"+email+"';";
+		ResultSet rs = null;
+		Connection con = DB_Access.connect();
+		try{
+			rs = DB_Access.retrieve(con, userQuery);
+			if(rs.next()){
+				paymentType=rs.getString(9);
+				billingAddress=rs.getString(3);
+				shippingAddress=rs.getString(5);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		String orderQuery = "INSERT INTO `bookStore`.`orders` (`order_date`, `customer`, `status`, `total_price`, `payment_method`, `billing_address`, `shipping_address`) VALUES"
+				+ " (NOW(), '"+email+"', 'processing', '"+price+"', '"+paymentType+"', '"+billingAddress+"', '"+shippingAddress+"');";
+		int rows=0;
+		try{
+			rows=DB_Access.insert(orderQuery);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		//Now add all the books from the order to the orderItems table
+		int orderID = 0;
+		String orderIDQuery = "select order_id from orders where customer='"+email+"' and total_price='"+price+"';";
+		ResultSet id = DB_Access.retrieve(con, orderIDQuery);
+		try {
+			if(id.next()){
+				orderID = id.getInt(1);
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		String cartQuery = "select c.* from cart c, registered_customer rc where c.email=rc.email and rc.email ='" + email + "';";
+		String quantityInStockQuery = "";
+		String orderItemsQuery = "";
+		String isbn = "";
+		int quantity = 0;
+		rows=0;
+		int rows2=0;
+		ResultSet cart = DB_Access.retrieve(con, cartQuery);
+		//iterate through all the books to add
+		try{
+			while(cart.next()){
+				//Put each isbn and quantity into the orderItems table
+				quantity = cart.getInt(3);
+				isbn = cart.getString(2);
+				System.out.println("Quantity: "+quantity+ " ISBN: " + isbn);
+				//Be sure to decrease quantity in store
+				quantityInStockQuery = "update book set quantity_in_stock = quantity_in_stock-'"+quantity+"' where isbn='"+isbn+"' and quantity_in_stock>0;";
+				orderItemsQuery = "INSERT INTO `bookStore`.`orderItems` (`order_id`, `product_isbn`, `quantity`) VALUES ('"+orderID+"', '"+isbn+"', '"+quantity+"');";
+				rows=DB_Access.update(orderItemsQuery);
+				rows2=DB_Access.update(quantityInStockQuery);
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		System.out.println("FINISHED COMPLETE ORDER");
+		return orderID;
+	}
+	
+	public Order getOrder(int orderID){
+		String getOrderQuery = "select * from orders where order_id = '"+orderID+"';";
+		Order o = new Order();
+		Connection con = DB_Access.connect();
+		ResultSet rs = DB_Access.retrieve(con, getOrderQuery);
+		try {
+			if(rs.next()){
+				o.setDateOrderedReal(rs.getDate(2));
+				o.setShippingAddress(rs.getString(8));
+				o.setTotalPrice(rs.getDouble(5));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return o;
+	}
 	
 	/*
 	 * used in editAccount.jsp

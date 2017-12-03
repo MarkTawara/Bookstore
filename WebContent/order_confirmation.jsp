@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shopping Cart</title>
+    <title>Order Confirmation</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--Bootstrap CDN-->
@@ -30,59 +30,20 @@
 
 <body>
 <div class="container">
-
-	<!--The login top bar which holds our options to Log In and Sign Up/Register-->
+    <!--The login top bar which holds our options to Log In and Sign Up/Register-->
     <div class="top_bar"></div>
 
     <!--Navigation Bar at the top right which hold links to other sites on our page-->
     <div id="navibar" class="header clearfix"></div>
 
+	<!--Main information for the page is here-->
+	
+    <div class="information">
+        <h1 style="text-align: center;">Order Confirmation</h1>
+        <p>Your ordered is being processed. Please check you email for a confirmation number.</p>       
+		<p>Thank you for shopping with us.</p>
+    </div>
 
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	<table class="displayCart">
-	<%	double totalPrice = 0;	%>
-	<%@page import = "object.Book"%>
-	<%@page import = "java.util.ArrayList"%>
-	<%@page import = "java.text.DecimalFormat"%> 
-	<%	Book b = new Book();
-		ArrayList<Book> l = (ArrayList<Book>)request.getAttribute("books");
-		if(l!=null){
-			for(Book z : l){
-				totalPrice = totalPrice + z.getPrice();
-			}
-		}else{
-			totalPrice = 0;
-		}
-	%>
-		<tr>
-			<th>Title</th>
-			<th>Quantity</th>
-			<th>Price</th>
-			<th>Options</th>
-		</tr>
-		<c:forEach items="${books}" var="book">
-			<tr>
-				<td><c:out value="${book.title}" /><!-- Insert Image Here --><br />ISBN:<c:out value="${book.isbn}" /></td>
-				<td><c:out value="${book.quantityInCart}" /></td>
-				<td><c:out value="${book.price}" /></td>
-				<td><a href="RemoveFromCartServlet?param=${book.isbn}&param2=${book.quantityInCart}">Remove from cart</a></td>
-			</tr>
-		</c:forEach>
-	</table>
-   
-    <hr>   
-    <%DecimalFormat df2 = new DecimalFormat(".##"); %>
-    <form id="checkout" action="PreCheckoutServlet">
-    	<div class="subTotalDiv">
-    		<label>Subtotal: <%out.print(df2.format(totalPrice)); %></label><br />
-    		<input type="hidden" value="<%out.print(df2.format(totalPrice)); %>" name="priceInCart">
-    		Promotion Code: <input type="text" name="promo">
-  	  	</div>
-   		<div class="checkoutDiv">
-    		<button onclick="location.href='EmptyCartServlet'">Empty cart</button>
-    		<button type="submit">Process to checkout</button>    
-  		</div>
-    </form>
     <footer class="footer"></footer>
 
 </div>
