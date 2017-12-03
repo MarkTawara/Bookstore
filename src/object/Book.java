@@ -16,6 +16,7 @@ public class Book extends Item {
 	String description;
 	int quantityInCart;
 	String subject;
+	int quantityInStock;
 	
 	//Default Constructor
 	public Book() {
@@ -56,6 +57,14 @@ public class Book extends Item {
 
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
+	}
+	
+	public int getQuantityInStock(){
+		return quantityInStock;
+	}
+	
+	public void setQuantityInStock(int q){
+		this.quantityInStock = q;
 	}
 
 	public String getAuthor() {

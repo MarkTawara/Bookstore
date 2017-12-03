@@ -113,7 +113,6 @@ public class CheckoutServlet extends HttpServlet {
 			message.setSubject("Order confirmed");
 			message.setText("Hello "+customerName+ ",\r\n We are confirming your order for the following books: "+bookList+". \r\n Your confirmation number is " + confirmation + ". Your orderID is "+orderID+". "
 					+ "You ordered this on " + date+". The address it will be shipped to is "+address+". And finally, the total cost is $"+price+".\r\n Thank you for shopping with us!");
-
 			Transport.send(message);
 	} catch (MessagingException e) {
 		throw new RuntimeException(e);

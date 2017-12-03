@@ -132,14 +132,19 @@ public class bookstore_query {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
-		//return r;
 	}
 	
 	/*
 	 * This methods is called from AddToCartServlet to update a user's cart
 	 */
-	public void addToCart(String user, String cartID, String isbn, int qty) { 
-		// TODO this
+	public void addToCart(String email, String isbn, int quantity) { 
+		String query = "INSERT INTO `bookStore`.`cart` (`email`, `isbn`, `quantity`) VALUES ('"+email+"', '"+isbn+"', '"+quantity+"');";
+		int r=0;
+		try{
+			r=DB_Access.insert(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/*
@@ -326,7 +331,7 @@ public class bookstore_query {
 		
 		//Now add all the books from the order to the orderItems table
 		int orderID = 0;
-		String orderIDQuery = "select order_id from orders where customer='"+email+"' and total_price='"+price+"';";
+		String orderIDQuery = "select order_id from orders where customer='"+email+"' and order_date=NOW() and total_price='"+price+"';";
 		ResultSet id = DB_Access.retrieve(con, orderIDQuery);
 		try {
 			if(id.next()){
@@ -515,6 +520,41 @@ public class bookstore_query {
 		}
 		DB_Access.disconnect(con);
 		System.out.println("FINISHED GETTING BOOKS BY KEYWORD");
+		return list;
+	}
+	
+	public int checkQuantityInStore(String isbn){
+		int q = 0;
+		ResultSet rs = null;
+		Connection con = DB_Access.connect();
+		String checkQuantityQuery = "select quantity_in_stock from book where isbn= '" + isbn + "'";
+		rs = DB_Access.retrieve(con, checkQuantityQuery);
+		try {
+			if(rs.next()){
+				q = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return q;
+	}
+	
+	public ArrayList<Book> getBookInfo(String isbn){
+		ArrayList list = new ArrayList();
+		Book b = new Book();
+		ResultSet rs = null;
+		Connection con = DB_Access.connect();
+		String checkQuantityQuery = "select * from book where isbn= '" + isbn + "'";
+		rs = DB_Access.retrieve(con, checkQuantityQuery);
+		try {
+			if(rs.next()){
+				b.setTitle(rs.getString(2));
+				b.setQuantityInStock(Integer.parseInt(rs.getString(11)));
+				list.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return list;
 	}
 }

@@ -64,7 +64,7 @@
 				<td>${book.publisher}</td>
 				<td>${book.subject}</td>
 				<td>${book.price}</td>
-				<td><form action="AddToCartServlet" method="post">Qty:<input type="number" name="qty" min="1" max="99"><input type="submit" value="Add to Cart""></form><td>
+				<td><form action="AddToCartServlet?param=${book.isbn}" method="post">Qty:<input type="number" name="qty" min="1" max="99"><input type="submit" value="Add to Cart""></form><td>
 			</tr>
 		</c:forEach>
 	</table>
