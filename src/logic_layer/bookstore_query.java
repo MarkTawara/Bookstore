@@ -211,6 +211,24 @@ public class bookstore_query {
 		return false;
 	}
 	
+	public ArrayList<Order> getUserOrders(String email){
+		
+		ArrayList list = new ArrayList();
+		String query = "select * from orders where customer = '"+email+"';";
+		ResultSet rs = null;
+		Connection con = DB_Access.connect();
+		rs = DB_Access.retrieve(con, query);
+		try{
+			while(rs.next()){
+				Order o = new Order(rs.getInt(1), rs.getDate(2), rs.getDouble(5), rs.getString(4));
+				list.add(o);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	public ArrayList<Book> getUserCart(String email){
 		//This array list will hold all of the Book objects in one list.
 		ArrayList list = new ArrayList();

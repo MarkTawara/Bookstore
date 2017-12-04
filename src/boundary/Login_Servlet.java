@@ -76,8 +76,13 @@ public class Login_Servlet extends HttpServlet {
 			}
 		} else {
 			//The user provided the wrong password.
-			nextJSP = "login.jsp";
-			
+			nextJSP = "/loginFail.jsp";
+			RequestDispatcher disp = getServletContext().getRequestDispatcher(nextJSP);
+			try {
+				disp.forward(request, response);
+			} catch (ServletException | IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -37,31 +37,23 @@
     <div id="navibar" class="header clearfix"></div>
 
 	<!--Main information for the page is here-->
-	
-    <div class="row marketing">
-        <%
-			if (session.getAttribute("name") == null) {
-		%>
-        <h1 class="center-text">Hello USER</h1>
-        <%
-			}else{
-		%>
-		<h1 class="center-text">Hello <%out.println(session.getAttribute("name"));%></h1>
-		<%		
-			}
-        %>
-        <div class="boxes">
-        	<h4 class="center-text">Order History</h4>
-        	<button type="button" class="cool_buttons" onclick="location.href='OrderHistoryServlet'">View Order History</button>
-        </div>
-        <div class="boxes">
-        	<h4 class="center-text">Account Settings</h4>
-        	<button type="button" class="cool_buttons" onclick="location.href='editAccount.jsp'">Change Account Settings</button>
-        </div>
-        <div class="boxes">
-        	<h4 class="center-text">Cart</h4>
-        	<button type="button" class="cool_buttons" onclick="location.href='DisplayCartServlet'">View Cart</button>
-        </div>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+	<%@ page import="java.util.*" %>
+	<div class="row marketing">
+        <h1 class="center-text">Order History</h1>
+        
+        <c:forEach items="${orders}" var="order">
+      		<div class="order_sections">
+      		  	<h3>OrderID: <c:out value="${order.orderId}" /></h3>
+      		  	<c:set var="keyString" value="${order.orderId}"/>
+      		  	<strong>Date ordered:</strong> <c:out value="${order.dateOrderedReal}" /><br />
+        		<strong>Book titles purchased:</strong>  <c:out value="${order.titleList}" /><br />      		
+        		<strong>Total price:</strong> $<c:out value="${order.totalPrice}" /><br>
+        		<strong>Order status:</strong> <c:out value="${order.status}" /><br>
+       		</div>
+        </c:forEach>
+       
     </div>
 
     <footer class="footer"></footer>
