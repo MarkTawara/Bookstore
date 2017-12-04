@@ -37,11 +37,8 @@
     <div id="navibar" class="header clearfix"></div>
 
     <div class="adminActionDiv">
-    <button type="button" class="cool_buttons" onclick="location.href='manageBooks.jsp'">Manage Books</button><br>
-    <button type="button" class="cool_buttons" onclick="location.href='manageUser.html'">Manage Users</button><br>
-    <button type="button" class="cool_buttons" onclick="location.href=''">Add Promotion</button><br>
-    <button type="button" class="cool_buttons" onclick="location.href=''">View Reports</button>
-
+    <button type="button" class="cool_buttons" onclick="location.href='addBook.jsp'">Add a Book</button><br>
+	<button type="button" class="cool_buttons" onclick="location.href='editBooks.jsp'">Edit/Remove Books</button>
     </div>
 
     <footer class="footer"></footer>
