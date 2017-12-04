@@ -17,6 +17,7 @@ public class Book extends Item {
 	int quantityInCart;
 	String subject;
 	int quantityInStock;
+	String pic;
 	
 	//Default Constructor
 	public Book() {
@@ -48,6 +49,32 @@ public class Book extends Item {
 		this.description = description;
 		this.quantityInCart = quantityInCart;
 		this.subject = subject;
+	}
+	
+	public Book(String isbn, String author, double price, String title, String cover_picture, int edition, String publisher, int publicationYear, String description, int quantityInCart, String subject) {
+		this.isbn = isbn;
+		this.author = author;
+		this.price = price;
+		this.title = title;
+		this.pic = cover_picture;
+		this.edition = edition;
+		this.publisher = publisher;
+		this.publicationYear = publicationYear;
+		this.description = description;
+		this.quantityInCart = quantityInCart;
+	}
+	
+	public Book(String isbn, String author, double price, String title, String cover_picture, int edition, String publisher, int publicationYear, String description, int quantityInCart) {
+		this.isbn = isbn;
+		this.author = author;
+		this.price = price;
+		this.title = title;
+		this.pic = cover_picture;
+		this.edition = edition;
+		this.publisher = publisher;
+		this.publicationYear = publicationYear;
+		this.description = description;
+		this.quantityInCart = quantityInCart;
 	}
 
 	//Getters and Setters
@@ -145,5 +172,13 @@ public class Book extends Item {
 
 	public void setSubject(String subject) {
 		this.subject = subject;
+	}
+	
+	public String getPic() {
+		return pic;
+	}
+	
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 }

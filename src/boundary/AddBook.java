@@ -23,12 +23,12 @@ import logic_layer.bookstore_query;
 public class AddBook extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
-    public AddBook() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor. 
+	 */
+	public AddBook() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,13 +38,9 @@ public class AddBook extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Create a Logic class to use & Send queries to.
-		bookstore_query base = new bookstore_query();
-		
+	public void breakEverything(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		bookstore_query query = new bookstore_query();
+
 		//All Get Parameter methods retrieve information from the HTML page.
 		//The getParameter parameter corresponds with the 'name' tag in html.
 		String title = request.getParameter("bookTitle");
@@ -56,25 +52,19 @@ public class AddBook extends HttpServlet {
 		String publisher = request.getParameter("publisher");
 		String publication_year = request.getParameter("publication_year");
 		int quantity_in_stock = Integer.parseInt(request.getParameter("qty_in_stock"));
-		/**
-		 * The 'Part' 'fileName' and 'InputStream' are needed for uploading an image.
-		 * The next few lines of code convert the InputStream of the 
-		 * image contents into a byte array, which we can upload to 
-		 * the database as a BLOB type. 
-		 */
-		Part filePart = request.getPart("image");
-		String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-		InputStream fileContent = filePart.getInputStream();
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
-		byte[] buffer = new byte[10240];
-		for(int length=0; (length=fileContent.read(buffer)) > 0;) {
-			output.write(buffer, 0, length);
-		}
+		Part image = request.getPart("image");
 		
-		//Now send information collected to the logic using a method
-		base.addBook(title, author, price, isbn, edition, publisher, publication_year, description, quantity_in_stock, output.toByteArray());
+		query.addBook(title, author, price, isbn, edition, publisher, publication_year, description, quantity_in_stock, null);
+		query.addImage(isbn, image);
 		
 		doGet(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		breakEverything(request, response);
 	}
 
 }
