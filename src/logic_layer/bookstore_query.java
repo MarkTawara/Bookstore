@@ -414,6 +414,16 @@ public class bookstore_query {
 	}
 	
 	/*
+	 * used in editBooks.jsp
+	 */
+	public ResultSet getBooks() {
+		String query = "SELECT * from book";
+		Connection con = DB_Access.connect();
+		ResultSet rs = DB_Access.retrieve(con, query);
+		return rs;
+	}
+	
+	/*
 	 *  used in editAccountServlet
 	 */
 	public int editUser(String session_email, String name, String email, String password, String phone, String shippingAddress, String billingAddress,String cardtype, String cardnum, String expdate, int isSubscribed) {
@@ -575,4 +585,14 @@ public class bookstore_query {
 		}
 		return list;
 	}
+	
+	public void removeBookFromDb(String title) {
+		String query = "DELETE from book WHERE title='" + title + "'";
+		try{
+			DB_Access.insert(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+	}
+	
 }
