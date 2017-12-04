@@ -630,7 +630,7 @@ public class bookstore_query {
 		}
 		query = query.substring(0, query.length()-1);
 		query += " WHERE title = '" + title + "'";
-		System.out.println(query);
+		//System.out.println(query);
 		
 		try{
 			DB_Access.insert(query);
