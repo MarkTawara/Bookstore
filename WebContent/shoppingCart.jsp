@@ -48,7 +48,7 @@
 		ArrayList<Book> l = (ArrayList<Book>)request.getAttribute("books");
 		if(l!=null){
 			for(Book z : l){
-				totalPrice = totalPrice + z.getPrice();
+				totalPrice = totalPrice + z.getPrice() * z.getQuantityInCart();
 			}
 		}else{
 			totalPrice = 0;

@@ -595,4 +595,49 @@ public class bookstore_query {
 		}	
 	}
 	
+	public ResultSet getBookFromDb(String title) {
+		String query = "SELECT * from book WHERE title = '" + title + "'";
+		Connection con = DB_Access.connect();
+		ResultSet rs = DB_Access.retrieve(con, query);
+		return rs;
+	}
+	
+	public void updateBook(String title, String author, String isbn, String publisher, String publication_year, String description, double price, int edition, int qty_in_stock) {
+		String query = "UPDATE book SET ";
+		if(author.length() > 0) {
+			query += " author = '" + author + "',";
+		}
+		if(isbn.length() > 0) {
+			query += " isbn = '" + isbn + "',";
+		}
+		if(publisher.length() > 0) {
+			query += " publisher = '" + publisher + "',";
+		}
+		if(publication_year.length() > 0) {
+			query += " publication_year = '" + publication_year + "',";
+		}
+		if(description.length() > 0) {
+			query += " description = '" + description + "',";
+		}
+		if(price > 0) {
+			query += " price = " + price + ",";
+		}
+		if(edition > 0) {
+			query += " edition = " + edition + ",";
+		}
+		if(qty_in_stock > 0) {
+			query += " quantity_in_stock = " + qty_in_stock + ",";
+		}
+		query = query.substring(0, query.length()-1);
+		query += " WHERE title = '" + title + "'";
+		System.out.println(query);
+		
+		try{
+			DB_Access.insert(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

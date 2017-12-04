@@ -47,6 +47,7 @@
    	<table>
  		<tr>
  			<th>Title</th>
+ 			<th>Image</th>
  			<th>Author</th>
  			<th>Price</th>
  			<th>ISBN</th>
@@ -56,6 +57,7 @@
  			<th>In Stock</th>
  			<th>Minimum Threshold</th>
  			<th>Action</th>
+ 			
  		</tr>
  		<% 
    		bookstore_query db = new bookstore_query();
@@ -65,6 +67,7 @@
  		
  		<tr>
  			<td><%=rs.getString("title") %></td>
+ 			<td>image here</td>
  			<td><%=rs.getString("author") %></td>
  			<td><%=rs.getDouble("price") %></td>
  			<td><%=rs.getString("isbn") %></td>
@@ -76,7 +79,7 @@
  			<td>
  			<form action="EditBookServlet" method="post">
   				<input type="text" name="title" value="<%=rs.getString("title") %>" hidden>
-  				<input type="submit" value="Edit">
+  				<input type="submit" value="Update">
 			</form> 	
 			<form action="RemoveBookServlet" method="post">
   				<input type="text" name="title" value="<%=rs.getString("title") %>" hidden>
