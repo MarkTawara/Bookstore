@@ -60,11 +60,11 @@
 				* Author: <input name="author" id="author" value="" required><br />
 				* Price: $<input type="number" step="000.01" name="price" id="price" value="" required><br />
 				* ISBN: <input name="isbn" id="isbn" value="" required><br />
-				* Edition: <input name="edition" id="edition" value="" required><br />
+				* Edition: <input type="number" name="edition" id="edition" value="" required><br />
 				* Publisher: <input name="publisher" id="publisher" value="" required><br />
-				* Publication Year: <input name="publication_year" id="publication_year" value="" required><br />
+				* Publication Year: <input type="number" name="publication_year" id="publication_year" value="" required><br />
 				* Description: <br /><textarea name="descr" id="descr" rows="5" cols="50" required></textarea><br />
-				* Quantity in Stock: <input name="qty_in_stock" id="qty_in_stock" value="" required><br />
+				* Quantity in Stock: <input type="number" name="qty_in_stock" id="qty_in_stock" value="" required><br />
 				<img id="myImg" src="http://shashgrewal.com/wp-content/uploads/2015/05/default-placeholder.png" alt="your image" width="150" height="200"/><br/>
 				* Image: <input type="file" name="image" id="image" onchange="readURL(this)" /> (Accepted formats include .jpg, .jpeg, .png)<div id="imageFailure"></div><br />
 				* All inputs are required for submission.
