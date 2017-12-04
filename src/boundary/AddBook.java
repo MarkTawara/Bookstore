@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -34,8 +35,9 @@ public class AddBook extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher dispatcher;
+		dispatcher = request.getRequestDispatcher("/manageBooks.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	public void breakEverything(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
