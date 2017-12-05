@@ -822,7 +822,7 @@ public class bookstore_query {
 		ResultSet rs = null;
 		Connection con = DB_Access.connect();
 
-		String query = "select * from registered_customer where account_type <> 'admin'";
+		String query = "select * from registered_customer where account_type <> 'admin' order by account_type DESC";
 		rs = DB_Access.retrieve(con, query);	
 		
 		try{
