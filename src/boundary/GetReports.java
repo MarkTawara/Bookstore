@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import logic_layer.bookstore_query;
+import object.Book;
 //import logic_layer.Logic;
 import object.Order;
 
@@ -54,6 +55,7 @@ public class GetReports extends HttpServlet {
 		
 		ResultSet rs = query.getOrdersReport(startDate, endDate);
 		ArrayList<Order> orders = new ArrayList<>();
+		ArrayList<Book> lowBooks = new ArrayList<>();
 		
 		while (rs.next()) {
 			System.out.println(curDate);
@@ -62,8 +64,11 @@ public class GetReports extends HttpServlet {
 			orders.add(order);
 		}
 		
+		lowBooks = query.getLowOrders();
+		
 		request.setAttribute("orderResults", orders);
 		request.setAttribute("totalPrice", total_price);
+		request.setAttribute("bookResults", lowBooks);
 		
 		RequestDispatcher dispatcher;
 		dispatcher = request.getRequestDispatcher("/pullReports.jsp");

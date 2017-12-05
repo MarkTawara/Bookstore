@@ -746,4 +746,28 @@ public class bookstore_query {
 		return rs;
 	}
 	
+	public ArrayList<Book> getLowOrders(){
+		//This array list will hold all of the Book objects in one list.
+		ArrayList<Book> list = new ArrayList<Book>();
+		ResultSet rs = null; //Holds Cart table info
+		Connection con = DB_Access.connect();
+		//Get the info from the cart table
+		String bookQuery = "select * from book where quantity_in_stock < 100";
+		rs = DB_Access.retrieve(con, bookQuery);				
+		try{
+			while(rs.next()){
+				byte[] imgData = rs.getBytes("cover_picture"); // blob field 
+				String encode = Base64.getEncoder().encodeToString(imgData);
+				
+				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), encode, rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getInt("quantity_in_stock"));
+				list.add(book);
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		DB_Access.disconnect(con);
+		System.out.println("FINISHED GETTING ALL BOOKS");
+		return list;
+	}
+	
 }
