@@ -43,6 +43,7 @@
     <div id="navibar" class="header clearfix"></div>
 
 	<div style="color: #FF0000;">${removeMessage}</div>
+	<a href="manageSuppliersAndShipment.jsp">Go Back</a>
 	<form action="editSuppliersAndShipmentAgency.jsp">
         		<select name="business_type" >
 				<option value="shipping_agency">Shipment Agency</option>
@@ -50,6 +51,7 @@
 			</select>
 			<input type="submit">
 	</form>
+	
 	
 	
 	
