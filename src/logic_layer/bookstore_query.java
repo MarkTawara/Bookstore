@@ -45,14 +45,16 @@ public class bookstore_query {
 	 * This method is called from Login_Servlet to check if the user exists and allows the user to log in
 	 */
 	public static boolean validate_user(HttpServletRequest request, HttpServletResponse response, String email, String password) {
-		String query = "SELECT 1 FROM registered_customer WHERE email = '"+email+"' AND password = '"+password+"'";
+		String query = "SELECT * FROM registered_customer WHERE email = '"+email+"' AND password = '"+password+"'";
 		ResultSet rs = null;
 		Connection con = DB_Access.connect();
 
 		try{
 			rs = DB_Access.retrieve(con, query);
-			if (rs.next() && !rs.getString("account_status").equals("Suspended")) { // enter here if successfully login
-				return true;
+			if (rs.next()) { // enter here if successfully login
+				String status = rs.getString(12);
+				
+				return !status.equals("Suspended");
 			} 
 		} catch (Exception e) {
 			e.printStackTrace();

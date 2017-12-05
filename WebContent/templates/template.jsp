@@ -72,7 +72,19 @@
 				<%
 					} else {
 				%>
-				<!-- Idk if it actually goes here ever -->
+				<ul class="pull-right">
+				<li class="login">
+					<%
+							String name = session.getAttribute("name").toString();
+								out.println("Welcome  " + name + "        ");
+						%>
+				</li>
+				<li class="login"><a href="account.jsp">View Account</a></li>
+				<li class="login"><small>|</small></li>
+				<li class="login"><a href="adminView.jsp">Admin View</a></li>
+				<li class="login"><small>|</small></li>
+				<li class="login shift-left"><a href="LogoutServlet">Logout</a></li>
+				</ul>
 				<%
 					}
 				%>
@@ -145,9 +157,10 @@
 			<div class="form-group">
 				<div class="input-group input-group-lg max_width">
 					<!-- <div class="input-group-addon white-background"><img id="search_img" src="images/search_img_small.png" alt="search"/></div> -->
-					<input type="hidden" name="type" value="searchBar">
-					<input type="text" class="form-control" id="inlineFormInputGroup" name="keyword"
-						placeholder="Search"> <span class="input-group-btn">
+					<input type="hidden" name="type" value="searchBar"> <input
+						type="text" class="form-control" id="inlineFormInputGroup"
+						name="keyword" placeholder="Search"> <span
+						class="input-group-btn">
 						<button class="btn btn-default blue" type="submit">Search</button>
 					</span>
 				</div>
