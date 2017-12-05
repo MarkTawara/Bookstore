@@ -5,6 +5,8 @@ public class User {
 	//Variables
 	String userId;
 	String loginStatus;
+	String userStatus;
+	boolean check;
 
 	//Default Constructor
 	public User(){
@@ -18,8 +20,9 @@ public class User {
 	}
 
 	//Constructor
-	public User(String userId) {
+	public User(String userId, String userStatus, boolean check) {
 		this.userId = userId;
+		this.userStatus = userStatus;
 	}
 
 	//Register as a User of the site
@@ -44,6 +47,12 @@ public class User {
 		this.loginStatus = loginStatus;
 	}
 
+	public String getUserStatus() {
+		return userStatus;
+	}
 
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
+	}
 
 }

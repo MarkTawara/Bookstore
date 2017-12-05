@@ -65,11 +65,13 @@
 	<table>
 		<tr>
 			<th><a href="#">Email</a></th>
+			<th><a href="#">Account Status</a></th>
 		</tr>
 		
 		<c:forEach items="${userResults}" var="user">
 			<tr>
 				<td>${user.userId}</td>
+				<td>${user.userStatus}</td>
 				<td class="muCol2">
 					<form ACTION="ManageUsers?param=${user.userId}" method="post" id="getReports">
 						<button type="submit" name="delete">Delete</button>
