@@ -41,7 +41,7 @@
     <button type="button" class="cool_buttons" onclick="location.href='manageUser.html'">Manage Users</button><br>
     <button type="button" class="cool_buttons" onclick="location.href='manageSuppliersAndShipment.jsp'">Manage Suppliers/Shipment</button><br>
     <button type="button" class="cool_buttons" onclick="location.href='addPromo.jsp'">Add Promotion</button><br>
-    <button type="button" class="cool_buttons" onclick="location.href=''">View Reports</button>
+    <button type="button" class="cool_buttons" onclick="location.href='pullReports.jsp'">View Reports</button>
 
     </div>
 
