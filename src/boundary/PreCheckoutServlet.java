@@ -1,7 +1,12 @@
 package boundary;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -36,6 +41,8 @@ public class PreCheckoutServlet extends HttpServlet {
 		RequestDispatcher dispatcher;
 		bookstore_query query = new bookstore_query();
 		DecimalFormat df2 = new DecimalFormat(".##");
+		Calendar c = Calendar.getInstance();
+		Calendar tempCal = Calendar.getInstance();
 		double pOff = 0;
 		//Get promo code
 		double price = Double.parseDouble(request.getParameter("priceInCart"));
@@ -47,7 +54,9 @@ public class PreCheckoutServlet extends HttpServlet {
 		}else{ //Promo code was entered
 			//Check if promo code is valid
 			Promotion p = query.isPromotionValid(promo);
-			if(p.getCode()!=null){
+			java.util.Date d = p.getDate();
+			tempCal.setTime(d);
+			if(p.getCode()!=null && (tempCal.compareTo(c)>0 || tempCal.compareTo(c)==0)){
 				//Code was valid, update price
 				pOff = price * (p.getPercentOff()*.01);
 				price = price - pOff;

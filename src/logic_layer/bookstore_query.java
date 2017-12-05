@@ -345,6 +345,7 @@ public class bookstore_query {
 			if(rs.next()){//Promotion of this code was found
 				p.setCode(rs.getString(2));
 				p.setPercentOff(rs.getInt(4));
+				p.setDate(rs.getDate(3));
 			}else{//Promotion not found
 				return p;
 			}
