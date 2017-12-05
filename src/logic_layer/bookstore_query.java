@@ -852,4 +852,18 @@ public class bookstore_query {
 		
 		return (result != 0);
 	}
+	
+	public boolean suspendUser(String email) {
+		String query = "update registered_customer set account_status = 'Suspended' where email = '" + email + "'";
+		int result = 0;
+	
+		try {
+			result = DB_Access.insert(query);
+		} catch (Exception e) {
+			System.out.println("Delete User Failed");
+			return false;
+		}
+		
+		return (result != 0);
+	}
 }

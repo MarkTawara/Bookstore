@@ -56,11 +56,6 @@ public class ManageUsers extends HttpServlet {
 	public void deleteUser(HttpServletRequest request, HttpServletResponse response) {
 		String email = request.getParameter("param");
 		bookstore_query query = new bookstore_query();
-		ArrayList<User> users = new ArrayList<>();
-		
-		users = query.getAllUsers();
-		
-		request.setAttribute("userResults", users);
 		
 		if (query.deleteUser(email)) { // Deleted succesfully
 			RequestDispatcher dispatcher;
@@ -79,6 +74,28 @@ public class ManageUsers extends HttpServlet {
 		}
 	}
 	
+	public void suspendUser(HttpServletRequest request, HttpServletResponse response) {
+		String email = request.getParameter("param");
+		bookstore_query query = new bookstore_query();
+		
+		if (query.suspendUser(email)) { // Deleted succesfully
+			RequestDispatcher dispatcher;
+			dispatcher = request.getRequestDispatcher("/adminView.jsp");
+			try {
+				dispatcher.forward(request, response);
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else { //Failed to delete
+			System.out.println("failed to delete the user");
+		}
+	
+	}
+	
 	/**
 	 * Go to verify login
 	 */
@@ -87,7 +104,7 @@ public class ManageUsers extends HttpServlet {
 				if (request.getParameter("delete") != null) {
 					deleteUser(request, response);
 				} else if (request.getParameter("suspend") != null) {
-					
+					suspendUser(request, response);
 				} else {
 					getUsers(request, response);
 				}
