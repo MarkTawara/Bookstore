@@ -50,18 +50,21 @@
 			</select>
 			<input type="submit">
 	</form>
-    <div class="businessTable">
-   	<table>
- 		<tr>
- 			<th>Business Name</th>
- 			<th>Address</th>
- 			<th>Business Phone</th>
- 			<th>Contact Name</th>
- 			<th>Email</th>
- 			<th>Work phone</th>
- 			<th>Cell phone</th>
- 			<th>Action</th>
- 		</tr>
+	
+	
+	
+	    <div class="businessTable">
+	   	<table>
+	 		<tr>
+	 			<th>Business Name</th>
+	 			<th>Address</th>
+	 			<th>Business Phone</th>
+	 			<th>Contact Name</th>
+	 			<th>Email</th>
+	 			<th>Work phone</th>
+	 			<th>Cell phone</th>
+	 			<th>Action</th>
+	 		</tr>
  		<% 
  		String business_type = request.getParameter("business_type");
  		//System.out.println(business_type);
@@ -69,28 +72,33 @@
  			bookstore_query db = new bookstore_query();
 			ResultSet rs = db.getSuppliersOrShipment(business_type);
 			while (rs.next()){
-    		%>
+    			%>
  		
- 		<tr>
- 			<td><%=rs.getString("business_name") %></td>
- 			<td><%=rs.getString("business_address") %></td>
- 			<td><%=rs.getString("business_phone") %></td>
- 			<td><%=rs.getString("contact_name") %></td>
- 			<td><%=rs.getString("email") %></td>
- 			<td><%=rs.getString("workphone") %></td>
- 			<td><%=rs.getString("cellphone") %></td>
- 			<td>
- 			<form action="EditShipmentServlet" method="post">
-  				<input type="text" name="business_name" value="<%=rs.getString("business_name") %>" hidden>
-  				<input type="submit" value="Update">
-			</form> 	
-			<form action="RemoveShipmentServlet" method="post">
-  				<input type="text" name="business_name" value="<%=rs.getString("business_name") %>" hidden>
-  				<input type="submit" value="Remove">
-			</form>
-			</td>
-  		</tr>
-  		<%}}%>
+	 		<tr>
+	 			<td><%=rs.getString("business_name") %></td>
+	 			<td><%=rs.getString("business_address") %></td>
+	 			<td><%=rs.getString("business_phone") %></td>
+	 			<td><%=rs.getString("contact_name") %></td>
+	 			<td><%=rs.getString("email") %></td>
+	 			<td><%=rs.getString("workphone") %></td>
+	 			<td><%=rs.getString("cellphone") %></td>
+	 			<td>
+	 			<form action="EditShipmentServlet" method="post">
+	  				<input type="text" name="business_name" value="<%=rs.getString("business_name") %>" hidden>
+	  				<input type="submit" value="Update">
+				</form> 	
+				<form action="RemoveShipmentServlet" method="post">
+	  				<input type="text" name="business_name" value="<%=rs.getString("business_name") %>" hidden>
+	  				<input type="text" name="business_type" value="<%=business_type%>" hidden>
+	  				<input type="submit" value="Remove">
+				</form>
+				</td>
+	  		</tr>
+  		<%	}
+		}
+		else{
+			out.println("Please select an option");
+		}%>
   	</table>
     </div>
 

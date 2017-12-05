@@ -711,6 +711,16 @@ public class bookstore_query {
 		return rs;
 	}
 
+	public void removeShipmentFromDb(String business_type, String business_name) {
+		String query = "DELETE from " + business_type + " WHERE business_name" + "='" + business_name + "'";
+		System.out.println(query);
+		try{
+			DB_Access.insert(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+	}
+	
 	public void addPromo(String code, Date date, int discount){
 		String query = "INSERT INTO `bookStore`.`promotion` (`code`, `exp_date`, `percentage`) VALUES (?, ?, ?)";
 		Connection con = DB_Access.connect();
