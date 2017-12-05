@@ -115,7 +115,7 @@
 			
 			<br><br>
 			<input type="submit" value="Add">
-			<a href="">Cancel</a>
+			<a href="manageSuppliersAndShipment.jsp">Cancel</a>
 		</form>
     </div>
 

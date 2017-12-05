@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Bookstore</title>
+    <title>Manage Suppliers and Shipment</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--Bootstrap CDN-->
@@ -37,12 +37,8 @@
     <div id="navibar" class="header clearfix"></div>
 
     <div class="adminActionDiv">
-    <button type="button" class="cool_buttons" onclick="location.href='manageBooks.jsp'">Manage Books</button><br>
-    <button type="button" class="cool_buttons" onclick="location.href='manageUser.html'">Manage Users</button><br>
-    <button type="button" class="cool_buttons" onclick="location.href='manageSuppliersAndShipment.jsp'">Manage Suppliers/Shipment</button><br>
-    <button type="button" class="cool_buttons" onclick="location.href='addPromo.jsp'">Add Promotion</button><br>
-    <button type="button" class="cool_buttons" onclick="location.href=''">View Reports</button>
-
+    <button type="button" class="cool_buttons" onclick="location.href='addSupplierOrShipment.jsp'">Add a Supplier / Shipment Agency</button><br>
+	<button type="button" class="cool_buttons" onclick="location.href=''">Update or Remove Suppliers / Shipment Agency</button>
     </div>
 
     <footer class="footer"></footer>
