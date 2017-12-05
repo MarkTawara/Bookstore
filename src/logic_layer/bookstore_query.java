@@ -22,10 +22,11 @@ import javax.servlet.http.Part;
 import object.Book;
 import object.Order;
 import object.Promotion;
+import object.User;
 import persist_layer.DB_Access;
 
 public class bookstore_query {
-	
+
 	/*
 	 * This method is called from the Login_Servlet, and it creates a query to that is executed to enter a new user into the database.
 	 */
@@ -39,7 +40,7 @@ public class bookstore_query {
 		}	
 		return r;
 	}
-	
+
 	/*
 	 * This method is called from Login_Servlet to check if the user exists and allows the user to log in
 	 */
@@ -47,7 +48,7 @@ public class bookstore_query {
 		String query = "SELECT 1 FROM registered_customer WHERE email = '"+email+"' AND password = '"+password+"'";
 		ResultSet rs = null;
 		Connection con = DB_Access.connect();
-		
+
 		try{
 			rs = DB_Access.retrieve(con, query);
 			if (rs.next()) { // enter here if successfully login
@@ -56,11 +57,11 @@ public class bookstore_query {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
-	
+
 		DB_Access.disconnect(con);
 		return false;
 	}
-	
+
 	/*
 	 * This method is called from Login_Servlet to add get the name of the user based on their email login
 	 */
@@ -68,7 +69,7 @@ public class bookstore_query {
 		String query = "SELECT customer_name FROM registered_customer WHERE email = '"+email+"'";
 		ResultSet rs = null;
 		Connection con = DB_Access.connect();
-		
+
 		try{
 			rs = DB_Access.retrieve(con, query);
 			if (rs.next()) { // enter here if successfully gotten the customer name
@@ -80,7 +81,7 @@ public class bookstore_query {
 		DB_Access.disconnect(con);
 		return "Error in get_name() in bookstore_query.java";
 	}
-	
+
 	public static String getBookNames(int orderID){
 		String query = "SELECT b.title FROM book b, orderItems oi where oi.order_id='"+orderID+"' and oi.product_isbn=b.isbn;";
 		ResultSet rs = null;
@@ -103,7 +104,7 @@ public class bookstore_query {
 		DB_Access.disconnect(con);
 		return bookList;
 	}
-	
+
 	/*
 	 * This method is called from Login_Servlet to add get the name of the user based on their email login
 	 */
@@ -111,7 +112,7 @@ public class bookstore_query {
 		String query = "SELECT account_type FROM registered_customer WHERE email = '"+email+"'";
 		ResultSet rs = null;
 		Connection con = DB_Access.connect();
-		
+
 		try{
 			rs = DB_Access.retrieve(con, query);
 			if (rs.next()) { // enter here if successfully gotten the customer account type
@@ -123,7 +124,7 @@ public class bookstore_query {
 		DB_Access.disconnect(con);
 		return "Error in get_name() in bookstore_query.java";
 	}
-	
+
 	/*
 	 * This method is called from AddBook to add a new book to the database
 	 */
@@ -138,37 +139,37 @@ public class bookstore_query {
 			e.printStackTrace();
 		}	
 	}
-	
+
 	public void addImage(String isbn, Part image) {
 		String sql = "UPDATE book set cover_picture=?" +  " where isbn = '"+isbn+"'";
 		PreparedStatement myStmt = null;
 		Connection con = null;
 		int result = 0;
-		
-		 System.out.println(image);
-		
+
+		System.out.println(image);
+
 		try {
 			con = DB_Access.connect();
 			myStmt = con.prepareStatement(sql);
-			
+
 			InputStream is = image.getInputStream();
 			myStmt.setBlob(1, is);
-			
+
 			result = myStmt.executeUpdate();
-			
-			
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		//DB_Access.disconnect(con);
-		
+
 		if (result > 0) {
 			System.out.println("worked");
 		} else {
 			System.out.println("failed");
 		}
 	}
-	
+
 	/*
 	 * This methods is called from AddToCartServlet to update a user's cart
 	 */
@@ -181,7 +182,7 @@ public class bookstore_query {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/*
 	 * This method is called from SignUpServlet to add a new user to the db
 	 */
@@ -196,7 +197,7 @@ public class bookstore_query {
 		}	
 		return r;
 	}
-	
+
 	/*
 	 * Changes account status (active, suspended, etc)
 	 */
@@ -210,7 +211,7 @@ public class bookstore_query {
 		}	
 		return r;
 	}
-	
+
 	//After a user submits an email for a forgotten password
 	//The database is updated to reflect the random password that was generated
 	public int changePassword(String email, String password){
@@ -223,7 +224,7 @@ public class bookstore_query {
 		}
 		return r;
 	}
-	
+
 	/*
 	 * Check if email already exists in database
 	 */
@@ -231,7 +232,7 @@ public class bookstore_query {
 		String query = "SELECT customer_name FROM registered_customer WHERE email = '"+email+"'";
 		ResultSet rs = null;
 		Connection con = DB_Access.connect();
-		
+
 		try{
 			rs = DB_Access.retrieve(con, query);
 			if (rs.next()) { // enter here if email exists
@@ -242,12 +243,12 @@ public class bookstore_query {
 		}
 
 		DB_Access.disconnect(con);
-				
+
 		return false;
 	}
-	
+
 	public ArrayList<Order> getUserOrders(String email){
-		
+
 		ArrayList list = new ArrayList();
 		String query = "select * from orders where customer = '"+email+"';";
 		ResultSet rs = null;
@@ -263,7 +264,7 @@ public class bookstore_query {
 		}
 		return list;
 	}
-	
+
 	public ArrayList<Book> getUserCart(String email){
 		//This array list will hold all of the Book objects in one list.
 		ArrayList list = new ArrayList();
@@ -278,7 +279,7 @@ public class bookstore_query {
 		rs = DB_Access.retrieve(con, cartQuery);
 		int quantity=0;
 		String isbn = "";
-		
+
 		try{
 			while(rs.next()){
 				//Put(Quantity, ISBN)
@@ -300,7 +301,7 @@ public class bookstore_query {
 		System.out.println("FINISHED DISPLAY CART");
 		return list;
 	}
-	
+
 	/*
 	 * removes a book from the user's shopping cart
 	 */
@@ -309,7 +310,7 @@ public class bookstore_query {
 		String removeQuery = "delete from cart where email= '" + email+ "' and isbn='"+isbn+"' and quantity='"+quantity+"';";
 		System.out.println(quantity);
 		int rows = 0;
-		
+
 		try{
 			rows = DB_Access.update(removeQuery);
 		} catch(Exception e){
@@ -317,7 +318,7 @@ public class bookstore_query {
 		}
 		System.out.println("FINISHED REMOVE FROM CART");	
 	}
-	
+
 	/*
 	 * removes all books from the user's shopping cart
 	 */
@@ -325,7 +326,7 @@ public class bookstore_query {
 		//Remove the book from the cart
 		String removeQuery = "delete from cart where email= '" + email+"';";
 		int rows = 0;
-		
+
 		try{
 			rows = DB_Access.update(removeQuery);
 		} catch(Exception e){
@@ -333,7 +334,7 @@ public class bookstore_query {
 		}
 		System.out.println("FINISHED EMPTY CART");	
 	}
-	
+
 	//Check if the promotion is legit
 	public Promotion isPromotionValid(String promo){
 		Promotion p = new Promotion();
@@ -354,7 +355,7 @@ public class bookstore_query {
 		}
 		return p;
 	}
-	
+
 	//Add an order to the database
 	public int completeOrder(String email, double price){
 		//Create one row in the Orders table
@@ -382,7 +383,7 @@ public class bookstore_query {
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-		
+
 		//Now add all the books from the order to the orderItems table
 		int orderID = 0;
 		String orderIDQuery = "select order_id from orders where customer='"+email+"' and order_date=NOW() and total_price='"+price+"';";
@@ -421,7 +422,7 @@ public class bookstore_query {
 		System.out.println("FINISHED COMPLETE ORDER");
 		return orderID;
 	}
-	
+
 	public Order getOrder(int orderID){
 		String getOrderQuery = "select * from orders where order_id = '"+orderID+"';";
 		Order o = new Order();
@@ -438,7 +439,7 @@ public class bookstore_query {
 		}
 		return o;
 	}
-	
+
 	/*
 	 * used in editAccount.jsp
 	 */
@@ -448,7 +449,7 @@ public class bookstore_query {
 		ResultSet rs = DB_Access.retrieve(con, query);
 		return rs;
 	}
-	
+
 	/*
 	 * used in editBooks.jsp
 	 */
@@ -458,7 +459,7 @@ public class bookstore_query {
 		ResultSet rs = DB_Access.retrieve(con, query);
 		return rs;
 	}
-	
+
 	/*
 	 *  used in editAccountServlet
 	 */
@@ -505,7 +506,7 @@ public class bookstore_query {
 		}
 		return r;
 	}
-	
+
 	public ArrayList<Book> getAllBooks(){
 		//This array list will hold all of the Book objects in one list.
 		ArrayList<Book> list = new ArrayList<Book>();
@@ -518,7 +519,7 @@ public class bookstore_query {
 			while(rs.next()){
 				byte[] imgData = rs.getBytes("cover_picture"); // blob field 
 				String encode = Base64.getEncoder().encodeToString(imgData);
-				
+
 				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), encode, rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), 0, rs.getString(13));
 				list.add(book);
 			}
@@ -529,7 +530,7 @@ public class bookstore_query {
 		System.out.println("FINISHED GETTING ALL BOOKS");
 		return list;
 	}
-	
+
 	public ArrayList<Book> getBooksByKeyword(String keyword){
 		//This array list will hold all of the Book objects in one list.
 		ArrayList<Book> list = new ArrayList<Book>();
@@ -542,7 +543,7 @@ public class bookstore_query {
 			while(rs.next()){
 				byte[] imgData = rs.getBytes("cover_picture"); // blob field 
 				String encode = Base64.getEncoder().encodeToString(imgData);
-				
+
 				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), encode, rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), 0, rs.getString(13));
 				list.add(book);
 			}
@@ -553,7 +554,7 @@ public class bookstore_query {
 		System.out.println("FINISHED GETTING BOOKS BY KEYWORD");
 		return list;
 	}
-	
+
 	public ArrayList<Book> getBooksAdvanced(String title, String author, String isbn, String subject){
 		//This array list will hold all of the Book objects in one list.
 		ArrayList<Book> list = new ArrayList<Book>();
@@ -562,7 +563,7 @@ public class bookstore_query {
 		//Get the info from the cart table		
 		String bookQuery = "select * from book where ";
 		ArrayList<String> queryList = new ArrayList<String>();
-		
+
 		if(!title.equals("")) {
 			queryList.add("title like '%" + title + "%'");
 		}
@@ -575,7 +576,7 @@ public class bookstore_query {
 		if(!subject.equals("")) {
 			queryList.add("subject like '%" + subject + "%'");
 		}
-		
+
 		for(String s : queryList) {
 			bookQuery += s + " and ";
 		}		
@@ -585,7 +586,7 @@ public class bookstore_query {
 			while(rs.next()){
 				byte[] imgData = rs.getBytes("cover_picture"); // blob field 
 				String encode = Base64.getEncoder().encodeToString(imgData);
-				
+
 				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), encode, rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), 0, rs.getString(13));
 				list.add(book);
 			}
@@ -596,7 +597,7 @@ public class bookstore_query {
 		System.out.println("FINISHED GETTING BOOKS BY KEYWORD");
 		return list;
 	}
-	
+
 	public int checkQuantityInStore(String isbn){
 		int q = 0;
 		ResultSet rs = null;
@@ -612,7 +613,7 @@ public class bookstore_query {
 		}
 		return q;
 	}
-	
+
 	public ArrayList<Book> getBookInfo(String isbn){
 		ArrayList list = new ArrayList();
 		Book b = new Book();
@@ -631,7 +632,7 @@ public class bookstore_query {
 		}
 		return list;
 	}
-	
+
 	public void removeBookFromDb(String title) {
 		String query = "DELETE from book WHERE title='" + title + "'";
 		try{
@@ -640,14 +641,14 @@ public class bookstore_query {
 			e.printStackTrace();
 		}	
 	}
-	
+
 	public ResultSet getBookFromDb(String title) {
 		String query = "SELECT * from book WHERE title = '" + title + "'";
 		Connection con = DB_Access.connect();
 		ResultSet rs = DB_Access.retrieve(con, query);
 		return rs;
 	}
-	
+
 	public void updateBook(String title, String author, String isbn, String publisher, String publication_year, String description, double price, int edition, int qty_in_stock) {
 		String query = "UPDATE book SET ";
 		if(author.length() > 0) {
@@ -677,27 +678,27 @@ public class bookstore_query {
 		query = query.substring(0, query.length()-1);
 		query += " WHERE title = '" + title + "'";
 		//System.out.println(query);
-		
+
 		try{
 			DB_Access.insert(query);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public void addSupplierOrShipment(String business_type, String business_name, String business_address, String business_phone, String contact_name, String email, String workphone, String cellphone) {
 		String query = "INSERT INTO " + business_type + " (business_name, business_address, business_phone, contact_name, email, workphone, cellphone)" + 
 				" VALUES ('" + business_name + "', '" + business_address + "', '" + business_phone + "', '" + contact_name + "', '" + email + "', '" + workphone + "', '" + cellphone + "')";
 		//System.out.println(query);
-		
+
 		try{
 			int r = DB_Access.insert(query);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
 	}
-	
+
 	public ResultSet getSuppliersOrShipment(String business_type) {
 		String query = "SELECT * from ";
 		if (business_type.equals("shipping_agency")) {
@@ -720,11 +721,11 @@ public class bookstore_query {
 			e.printStackTrace();
 		}	
 	}
-	
+
 	public void addPromo(String code, Date date, int discount){
 		String query = "INSERT INTO `bookStore`.`promotion` (`code`, `exp_date`, `percentage`) VALUES (?, ?, ?)";
 		Connection con = DB_Access.connect();
-		
+
 		try {
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, code);
@@ -736,29 +737,28 @@ public class bookstore_query {
 			e.printStackTrace();
 		} 
 	}
-	
+
 	public ResultSet getOrdersReport(String startDate, String endDate) {
 		String query = "SELECT * FROM orders WHERE order_date >= " + startDate + " AND order_date < " + endDate;
 		Connection con = DB_Access.connect();
 		ResultSet rs = DB_Access.retrieve(con, query);
 		//DB_Access.disconnect(con);
-		
+
 		return rs;
 	}
-	
+
 	public ArrayList<Book> getLowOrders(){
-		//This array list will hold all of the Book objects in one list.
 		ArrayList<Book> list = new ArrayList<Book>();
-		ResultSet rs = null; //Holds Cart table info
+		ResultSet rs = null; 
 		Connection con = DB_Access.connect();
-		//Get the info from the cart table
+
 		String bookQuery = "select * from book where quantity_in_stock < 100";
 		rs = DB_Access.retrieve(con, bookQuery);				
 		try{
 			while(rs.next()){
-				byte[] imgData = rs.getBytes("cover_picture"); // blob field 
+				byte[] imgData = rs.getBytes("cover_picture");
 				String encode = Base64.getEncoder().encodeToString(imgData);
-				
+
 				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), encode, rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getInt("quantity_in_stock"));
 				list.add(book);
 			}
@@ -766,8 +766,29 @@ public class bookstore_query {
 			e.printStackTrace();
 		}
 		DB_Access.disconnect(con);
-		System.out.println("FINISHED GETTING ALL BOOKS");
 		return list;
 	}
-	
+
+	public ArrayList<User> getAllUsers() {
+		ArrayList<User> list = new ArrayList<User>();
+		ResultSet rs = null;
+		Connection con = DB_Access.connect();
+
+		String query = "select * from registered_customer where account_type <> 'admin'";
+		rs = DB_Access.retrieve(con, query);	
+		
+		try{
+			while(rs.next()){
+				User user = new User(rs.getString("email"));
+				list.add(user);
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		DB_Access.disconnect(con);
+		
+		return list;
+	}
+
 }

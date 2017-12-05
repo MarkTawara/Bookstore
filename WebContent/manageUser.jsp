@@ -69,56 +69,14 @@
 		
 		<c:forEach items="${userResults}" var="user">
 			<tr>
-				<td>${book.author}</td>
-				<td>${book.publisher}</td>
-				<td>${book.subject}</td>
-				<td>${book.price}</td>
-				<td><form action="AddToCartServlet?param=${book.isbn}" method="post">Qty:<input type="number" name="qty" min="1" max="99"><input type="submit" value="Add to Cart""></form><td>
+				<td>${user.userId}</td>
+				<td class="muCol2">
+		            	<button>Delete</button>
+		            	<button>Suspend</button>
+            		<td>
 			</tr>
 		</c:forEach>
 	</table>
-	
-	
-	
-	
-    <table> 
-        <tr>
-            <th><a href="#">Username</a></th>
-            <th class="muCol2"><a href="#"></a></th>
-        </tr>
-        <tr>
-            <td>User1<td>
-            <td class="muCol2">
-            	<button>Edit</button>
-            	<button>Delete</button>
-            	<button>Suspend</button>
-            <td>
-        </tr>
-        <tr>
-            <td>User2<td>
-            <td class="muCol2">
-            	<button>Edit</button>
-            	<button>Delete</button>
-            	<button>Suspend</button>
-            <td>
-        </tr>
-        <tr>
-            <td>User3<td>
-            <td class="muCol2">
-            	<button>Edit</button>
-            	<button>Delete</button>
-            	<button>Suspend</button>
-            <td>
-        </tr>
-        <tr>
-            <td>User4<td>
-            <td class="muCol2">
-            	<button>Edit</button>
-            	<button>Delete</button>
-            	<button>Suspend</button>
-            <td>
-        </tr>
-    </table>
     
     <footer class="footer">
         <p>&copy; 2016 Company, Inc.</p>
