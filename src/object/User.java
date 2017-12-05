@@ -6,7 +6,7 @@ public class User {
 	String userId;
 	String loginStatus;
 	String userStatus;
-	boolean check;
+	String accountStatus;
 
 	//Default Constructor
 	public User(){
@@ -20,9 +20,10 @@ public class User {
 	}
 
 	//Constructor
-	public User(String userId, String userStatus, boolean check) {
+	public User(String userId, String userStatus, String accountStatus) {
 		this.userId = userId;
 		this.userStatus = userStatus;
+		this.accountStatus = accountStatus;
 	}
 
 	//Register as a User of the site
@@ -54,5 +55,12 @@ public class User {
 	public void setUserStatus(String userStatus) {
 		this.userStatus = userStatus;
 	}
+	
+	public String getAccountStatus() {
+		return accountStatus;
+	}
 
+	public void setAccountStatus(String accountStatus) {
+		this.accountStatus = accountStatus;
+	}
 }

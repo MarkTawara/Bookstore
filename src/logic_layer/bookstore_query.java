@@ -827,7 +827,7 @@ public class bookstore_query {
 		
 		try{
 			while(rs.next()){
-				User user = new User(rs.getString("email"), rs.getString("account_status"), true);
+				User user = new User(rs.getString("email"), rs.getString("account_status"), rs.getString("account_type"));
 				list.add(user);
 			}
 		} catch (Exception e){
