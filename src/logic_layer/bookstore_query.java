@@ -640,4 +640,17 @@ public class bookstore_query {
 		
 	}
 	
+	public void addSupplierOrShipment(String business_type, String business_name, String business_address, String business_phone, String contact_name, String email, String workphone, String cellphone) {
+		String query = "INSERT INTO " + business_type + " (business_name, business_address, business_phone, contact_name, email, workphone, cellphone)" + 
+				" VALUES ('" + business_name + "', '" + business_address + "', '" + business_phone + "', '" + contact_name + "', '" + email + "', '" + workphone + "', '" + cellphone + "')";
+		//System.out.println(query);
+		
+		try{
+			int r = DB_Access.insert(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		
+	}
+	
 }

@@ -66,7 +66,7 @@
 			* Edition: <input name="edition" id="edition" value=<%=rs.getInt("edition")%>><br />
 			* Publisher: <input name="publisher" id="publisher" value="<%=rs.getString("publisher")%>"><br />
 			* Publication Year: <input name="publication_year" id="publication_year" value="<%=rs.getString("publication_year")%>"><br />
-			* Description: <br /><textarea name="descr" id="descr" rows="5" cols="50" value="<%=rs.getString("description")%>"></textarea><br />
+			* Description: <br /><textarea name="descr" id="descr" rows="5" cols="50" value=""><%=rs.getString("description")%></textarea><br />
 			* Quantity in Stock: <input name="qty_in_stock" id="qty_in_stock" value="<%=rs.getInt("quantity_in_stock")%>"><br />
 			<img id="myImg" src="http://shashgrewal.com/wp-content/uploads/2015/05/default-placeholder.png" alt="your image" width="150" height="200"/><br/>
 			* Image: <input type="file" name="image" id="image" onchange="readURL(this)" /> (Accepted formats include .jpg, .jpeg, .png)<div id="imageFailure"></div><br />
