@@ -557,7 +557,7 @@ public class bookstore_query {
 		return list;
 	}
 
-	public ArrayList<Book> getBooksAdvanced(String title, String author, String isbn, String subject){
+	public ArrayList<Book> getBooksAdvanced(String title, String author, String isbn){
 		//This array list will hold all of the Book objects in one list.
 		ArrayList<Book> list = new ArrayList<Book>();
 		ResultSet rs = null; //Holds Cart table info
@@ -575,9 +575,9 @@ public class bookstore_query {
 		if(!isbn.equals("")) {
 			queryList.add("isbn like '%" + isbn + "%'");
 		}
-		if(!subject.equals("")) {
-			queryList.add("subject like '%" + subject + "%'");
-		}
+//		if(!subject.equals("")) {
+//			queryList.add("subject like '%" + subject + "%'");
+//		}
 
 		for(String s : queryList) {
 			bookQuery += s + " and ";

@@ -37,7 +37,7 @@ public class SearchBooksServlet extends HttpServlet {
 				break;
 			case "advSearch":
 				System.out.println((request.getParameter("re")));
-				books = query.getBooksAdvanced(request.getParameter("title"),request.getParameter("author"),request.getParameter("isbn"),request.getParameter("subject"));
+				books = query.getBooksAdvanced(request.getParameter("title"),request.getParameter("author"),request.getParameter("isbn"));
 				break;
 			}
 		} else {
