@@ -67,7 +67,7 @@
 	 	Cellphone: <%out.println(rs.getString("cellphone")); %><br>
 	 	<%} %>
         <form action="UpdateShippingAgencyServlet" method="post">
-       		Business Name: <input type="text" name="business_name"><br>
+       		<!--  Business Name: <input type="text" name="business_name"><br> -->
        		<b>Address</b> <br>
        		Street: <input type="text" name="street" id="street"><br>
 			City: <input type="text" name="city" id="city">
@@ -130,9 +130,10 @@
        		<b>Contact person information: </b><br>
        		Name: <input type="text" name="contact_name" ><br>
        		E-mail address: <input type="email" name="email" id="email"><br>
-       		Business phone number: <input type="text" name="workphone"><br>
+       		Work phone number: <input type="text" name="workphone"><br>
        		Cellphone number: <input type="text" name="cellphone"><br>
-			
+			<input type="text" name="business_type" value="<%=business_type%>" hidden>
+			<input type="text" name="business_name" value="<%=business_name%>" hidden>
 			<br><br>
 			<input type="submit" value="Update">
 			<a href="editSuppliersAndShipmentAgency.jsp">Cancel</a>
