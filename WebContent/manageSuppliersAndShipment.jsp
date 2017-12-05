@@ -38,7 +38,8 @@
 
     <div class="adminActionDiv">
     <button type="button" class="cool_buttons" onclick="location.href='addSupplierOrShipment.jsp'">Add a Supplier / Shipment Agency</button><br>
-	<button type="button" class="cool_buttons" onclick="location.href='editSuppliersAndShipmentAgency.jsp'">Update or Remove Suppliers / Shipment Agency</button>
+	<button type="button" class="cool_buttons" onclick="location.href='editSuppliersAndShipmentAgency.jsp'">Update or Remove Suppliers / Shipment Agency</button><br>
+	<a href="adminView.jsp">Go Back</a>
     </div>
 
     <footer class="footer"></footer>

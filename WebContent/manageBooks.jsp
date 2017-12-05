@@ -38,7 +38,8 @@
 
     <div class="adminActionDiv">
     <button type="button" class="cool_buttons" onclick="location.href='addBook.jsp'">Add a Book</button><br>
-	<button type="button" class="cool_buttons" onclick="location.href='editBooks.jsp'">Update or Remove Books</button>
+	<button type="button" class="cool_buttons" onclick="location.href='editBooks.jsp'">Update or Remove Books</button><br>
+	<a href="adminView.jsp">Go Back</a>
     </div>
 
     <footer class="footer"></footer>
