@@ -16,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Edit Books</title>
+    <title>Edit Suppliers and Shipping Agencies</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--Bootstrap CDN-->
@@ -43,51 +43,54 @@
     <div id="navibar" class="header clearfix"></div>
 
 	<div style="color: #FF0000;">${removeMessage}</div>
-    <div class="bookTable">
+	<form action="editSuppliersAndShipmentAgency.jsp">
+        		<select name="business_type" >
+				<option value="shipping_agency">Shipment Agency</option>
+				<option value="supplier">Supplier</option>
+			</select>
+			<input type="submit">
+	</form>
+    <div class="businessTable">
    	<table>
  		<tr>
- 			<th>Title</th>
- 			<th>Image</th>
- 			<th>Author</th>
- 			<th>Price</th>
- 			<th>ISBN</th>
- 			<th>Edition</th>
- 			<th>Publisher</th>
- 			<th>Publication Year</th>
- 			<th>In Stock</th>
- 			<th>Minimum Threshold</th>
+ 			<th>Business Name</th>
+ 			<th>Address</th>
+ 			<th>Business Phone</th>
+ 			<th>Contact Name</th>
+ 			<th>Email</th>
+ 			<th>Work phone</th>
+ 			<th>Cell phone</th>
  			<th>Action</th>
- 			
  		</tr>
  		<% 
-   		bookstore_query db = new bookstore_query();
-		ResultSet rs = db.getBooks();
-		while (rs.next()){
+ 		String business_type = request.getParameter("business_type");
+ 		//System.out.println(business_type);
+ 		if(business_type != null){
+ 			bookstore_query db = new bookstore_query();
+			ResultSet rs = db.getSuppliersOrShipment(business_type);
+			while (rs.next()){
     		%>
  		
  		<tr>
- 			<td><%=rs.getString("title") %></td>
- 			<td>image here</td>
- 			<td><%=rs.getString("author") %></td>
- 			<td><%=rs.getDouble("price") %></td>
- 			<td><%=rs.getString("isbn") %></td>
- 			<td><%=rs.getInt("edition") %></td>
- 			<td><%=rs.getString("publisher") %></td>
- 			<td><%=rs.getString("publication_year") %></td>
- 			<td><%=rs.getInt("quantity_in_stock") %></td>
- 			<td><%=rs.getInt("minimum_threshold") %></td>
+ 			<td><%=rs.getString("business_name") %></td>
+ 			<td><%=rs.getString("business_address") %></td>
+ 			<td><%=rs.getString("business_phone") %></td>
+ 			<td><%=rs.getString("contact_name") %></td>
+ 			<td><%=rs.getString("email") %></td>
+ 			<td><%=rs.getString("workphone") %></td>
+ 			<td><%=rs.getString("cellphone") %></td>
  			<td>
- 			<form action="EditBookServlet" method="post">
-  				<input type="text" name="title" value="<%=rs.getString("title") %>" hidden>
+ 			<form action="EditShipmentServlet" method="post">
+  				<input type="text" name="business_name" value="<%=rs.getString("business_name") %>" hidden>
   				<input type="submit" value="Update">
 			</form> 	
-			<form action="RemoveBookServlet" method="post">
-  				<input type="text" name="title" value="<%=rs.getString("title") %>" hidden>
+			<form action="RemoveShipmentServlet" method="post">
+  				<input type="text" name="business_name" value="<%=rs.getString("business_name") %>" hidden>
   				<input type="submit" value="Remove">
 			</form>
 			</td>
   		</tr>
-  		<%}%>
+  		<%}}%>
   	</table>
     </div>
 

@@ -697,6 +697,19 @@ public class bookstore_query {
 			e.printStackTrace();
 		}	
 	}
+	
+	public ResultSet getSuppliersOrShipment(String business_type) {
+		String query = "SELECT * from ";
+		if (business_type.equals("shipping_agency")) {
+			query += "shipping_agency";
+		}
+		else {
+			query += "supplier";
+		}
+		Connection con = DB_Access.connect();
+		ResultSet rs = DB_Access.retrieve(con, query);
+		return rs;
+	}
 
 	public void addPromo(String code, Date date, int discount){
 		String query = "INSERT INTO `bookStore`.`promotion` (`code`, `exp_date`, `percentage`) VALUES (?, ?, ?)";
