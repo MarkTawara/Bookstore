@@ -16,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Edit Account</title>
+    <title>Edit Book</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--Bootstrap CDN-->

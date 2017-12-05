@@ -710,6 +710,20 @@ public class bookstore_query {
 		ResultSet rs = DB_Access.retrieve(con, query);
 		return rs;
 	}
+	
+	public ResultSet getABusiness(String business_type, String business_name) {
+		String query = "SELECT * from ";
+		if (business_type.equals("shipping_agency")) {
+			query += "shipping_agency";
+		}
+		else {
+			query += "supplier";
+		}
+		query += " WHERE business_name='" + business_name + "'";
+		Connection con = DB_Access.connect();
+		ResultSet rs = DB_Access.retrieve(con, query);
+		return rs;
+	}
 
 	public void removeShipmentFromDb(String business_type, String business_name) {
 		String query = "DELETE from " + business_type + " WHERE business_name" + "='" + business_name + "'";

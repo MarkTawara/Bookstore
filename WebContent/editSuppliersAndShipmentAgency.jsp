@@ -83,8 +83,9 @@
 	 			<td><%=rs.getString("workphone") %></td>
 	 			<td><%=rs.getString("cellphone") %></td>
 	 			<td>
-	 			<form action="EditShipmentServlet" method="post">
+	 			<form action="EditShipmentAgencyServlet" method="post">
 	  				<input type="text" name="business_name" value="<%=rs.getString("business_name") %>" hidden>
+	  				<input type="text" name="business_type" value="<%=business_type%>" hidden>
 	  				<input type="submit" value="Update">
 				</form> 	
 				<form action="RemoveShipmentServlet" method="post">
