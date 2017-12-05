@@ -51,7 +51,7 @@ public class bookstore_query {
 
 		try{
 			rs = DB_Access.retrieve(con, query);
-			if (rs.next()) { // enter here if successfully login
+			if (rs.next() && !rs.getString("account_status").equals("Suspended")) { // enter here if successfully login
 				return true;
 			} 
 		} catch (Exception e) {
