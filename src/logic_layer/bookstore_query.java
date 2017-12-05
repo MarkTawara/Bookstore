@@ -672,7 +672,7 @@ public class bookstore_query {
 		if(edition > 0) {
 			query += " edition = " + edition + ",";
 		}
-		if(qty_in_stock > 0) {
+		if(qty_in_stock > -1) {
 			query += " quantity_in_stock = " + qty_in_stock + ",";
 		}
 		query = query.substring(0, query.length()-1);
@@ -698,6 +698,40 @@ public class bookstore_query {
 			e.printStackTrace();
 		}	
 	}
+	
+	public void updateSupplierOrShipment(String business_type, String business_name, String business_address, String business_phone, String contact_name, String email, String workphone, String cellphone) {
+		String query = "UPDATE " + business_type + " SET ";
+		if(business_name.length() > 0) {
+			query += " business_name = '" + business_name + "',";
+		}
+		if(business_address.length() > 0) {
+			query += " business_address = '" + business_address + "',";
+		}
+		if(business_phone.length() > 0) {
+			query += " business_phone = '" + business_phone + "',";
+		}
+		if(contact_name.length() > 0) {
+			query += " contact_name = '" + contact_name + "',";
+		}
+		if(email.length() > 0) {
+			query += " email = '" + email + "',";
+		}
+		if(workphone.length() > 0) {
+			query += " workphone = '" + workphone + "',";
+		}
+		if(cellphone.length() > 0) {
+			query += " cellphone = '" + cellphone + "',";
+		}
+		query = query.substring(0, query.length()-1);
+		query += " WHERE business_name = '" + business_name + "'";
+		System.out.println(query);
+
+		try{
+			DB_Access.insert(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public ResultSet getSuppliersOrShipment(String business_type) {
 		String query = "SELECT * from ";
@@ -707,6 +741,20 @@ public class bookstore_query {
 		else {
 			query += "supplier";
 		}
+		Connection con = DB_Access.connect();
+		ResultSet rs = DB_Access.retrieve(con, query);
+		return rs;
+	}
+	
+	public ResultSet getABusiness(String business_type, String business_name) {
+		String query = "SELECT * from ";
+		if (business_type.equals("shipping_agency")) {
+			query += "shipping_agency";
+		}
+		else {
+			query += "supplier";
+		}
+		query += " WHERE business_name='" + business_name + "'";
 		Connection con = DB_Access.connect();
 		ResultSet rs = DB_Access.retrieve(con, query);
 		return rs;
