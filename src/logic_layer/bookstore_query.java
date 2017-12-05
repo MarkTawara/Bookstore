@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -682,6 +683,22 @@ public class bookstore_query {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void addPromo(String code, Date date, int discount){
+		String query = "INSERT INTO `bookStore`.`promotion` (`code`, `exp_date`, `percentage`) VALUES (?, ?, ?)";
+		Connection con = DB_Access.connect();
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, code);
+			ps.setDate(2, new java.sql.Date(date.getTime()));
+			ps.setInt(3, discount);
+			ps.execute();			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 	
 }
