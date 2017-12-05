@@ -59,61 +59,24 @@
         </nav>
     </div>
 
-    <!--Jumbotron/Our Search area for books-->
-    <div class="jumbotron">
-        <h2>Manage Users</h2>
-
-        <form id="search_bar">
-            <div class="form-group">
-                <div class="input-group input-group-lg max_width">
-                    <!-- <div class="input-group-addon white-background"><img id="search_img" src="images/search_img_small.png" alt="search"/></div> -->
-                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search with username">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default blue" type="submit">Search</button>
-                    </span>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <table> 
-        <tr>
-            <th><a href="#">Username</a></th>
-            <th class="muCol2"><a href="#"></a></th>
-        </tr>
-        <tr>
-            <td>User1<td>
-            <td class="muCol2">
-            	<button>Edit</button>
-            	<button>Delete</button>
-            	<button>Suspend</button>
-            <td>
-        </tr>
-        <tr>
-            <td>User2<td>
-            <td class="muCol2">
-            	<button>Edit</button>
-            	<button>Delete</button>
-            	<button>Suspend</button>
-            <td>
-        </tr>
-        <tr>
-            <td>User3<td>
-            <td class="muCol2">
-            	<button>Edit</button>
-            	<button>Delete</button>
-            	<button>Suspend</button>
-            <td>
-        </tr>
-        <tr>
-            <td>User4<td>
-            <td class="muCol2">
-            	<button>Edit</button>
-            	<button>Delete</button>
-            	<button>Suspend</button>
-            <td>
-        </tr>
-    </table>
+    <h2>Manage Users</h2>
+	
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<table>
+		<tr>
+			<th><a href="#">Email</a></th>
+		</tr>
+		
+		<c:forEach items="${userResults}" var="user">
+			<tr>
+				<td>${user.userId}</td>
+				<td class="muCol2">
+		            	<button>Delete</button>
+		            	<button>Suspend</button>
+            		<td>
+			</tr>
+		</c:forEach>
+	</table>
     
     <footer class="footer">
         <p>&copy; 2016 Company, Inc.</p>

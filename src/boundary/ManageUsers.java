@@ -19,9 +19,10 @@ import logic_layer.bookstore_query;
 import object.Book;
 //import logic_layer.Logic;
 import object.Order;
+import object.User;
 
-@WebServlet("/GetReports")
-public class GetReports extends HttpServlet {
+@WebServlet("/ManageUsers")
+public class ManageUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	String globalEmail = "";
@@ -29,7 +30,7 @@ public class GetReports extends HttpServlet {
 	/**
 	 * Constructor
 	 */
-	public GetReports() {
+	public ManageUsers() {
 		super();
 	}
 
@@ -39,39 +40,16 @@ public class GetReports extends HttpServlet {
 	 * @throws IOException 
 	 * @throws ServletException 
 	 */
-	public void getReport(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+	public void getUsers(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 		bookstore_query query = new bookstore_query();
-		Date date = new Date();
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH) + 1;
-		int day = cal.get(Calendar.DAY_OF_MONTH);
-		double total_price = 0;
+		ArrayList<User> users = new ArrayList<>();
 		
-		String startDate = "'" + year + "-" + month + "-" + day + " 00:00:00'";
-		String endDate = "'" + year + "-" + month + "-" + (day + 1) + " 00:00:00'";
-		String curDate = month + "/" + day + "/" + year;
+		users = query.getAllUsers();
 		
-		ResultSet rs = query.getOrdersReport(startDate, endDate);
-		ArrayList<Order> orders = new ArrayList<>();
-		ArrayList<Book> lowBooks = new ArrayList<>();
-		
-		while (rs.next()) {
-			System.out.println(curDate);
-			total_price += rs.getDouble("total_price");
-			Order order = new Order(rs.getInt("order_id"), rs.getString("customer"), curDate, rs.getDouble("total_price"));
-			orders.add(order);
-		}
-		
-		lowBooks = query.getLowOrders();
-		
-		request.setAttribute("orderResults", orders);
-		request.setAttribute("totalPrice", total_price);
-		request.setAttribute("bookResults", lowBooks);
+		request.setAttribute("userResults", users);
 		
 		RequestDispatcher dispatcher;
-		dispatcher = request.getRequestDispatcher("/pullReports.jsp");
+		dispatcher = request.getRequestDispatcher("/manageUser.jsp");
 		dispatcher.forward(request, response);
 	}
 	
@@ -80,7 +58,7 @@ public class GetReports extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			try {
-				getReport(request, response);
+				getUsers(request, response);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

@@ -5,23 +5,28 @@ public class User {
 	//Variables
 	String userId;
 	String loginStatus;
-	
+
 	//Default Constructor
 	public User(){
-		
+
 	}
-	
+
 	//Constructor
 	public User(String userId, String loginStatus) {
 		this.userId = userId;
 		this.loginStatus = loginStatus;
 	}
 
+	//Constructor
+	public User(String userId) {
+		this.userId = userId;
+	}
+
 	//Register as a User of the site
 	public void register(){
-		
+
 	}
-	
+
 	//Getters & Setters
 	public String getUserId() {
 		return userId;
@@ -38,7 +43,7 @@ public class User {
 	public void setLoginStatus(String loginStatus) {
 		this.loginStatus = loginStatus;
 	}
-	
-	
+
+
 
 }

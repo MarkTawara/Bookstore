@@ -95,22 +95,37 @@
 			</c:forEach>
 		</table>
 
-		<p><strong>Total Earned Today : $ ${totalPrice}</strong></p>
+		<p>
+			<strong>Total Earned Today : $ ${totalPrice}</strong>
+		</p>
 
 		<br />
 		<h1>Low Inventory Notices</h1>
 		<table>
 			<tr>
-				<th>Book Title</th>
-				<th>Quantity Left</th>
+				<th><a href="#">Title</a></th>
+				<th><a href="#">Author</a></th>
+				<th><a href="#">Publisher</a></th>
+				<th><a href="#">Subject</a></th>
+				<th><a href="#">Price</a></th>
+				<th><a href="#">Quantity</a></th>
 			</tr>
-			<tr>
-				<td>Pull book title from database</td>
-				<td>Pull quantity left (Only notice if less than... 5?)</td>
-			</tr>
-		</table>
-
-		<br />
+			<c:forEach items="${bookResults}" var="book">
+				<tr>
+					<td>${book.title} <img class="center-img carousel-img"
+						src="data:image/jpg;base64,${book.pic}" alt="book image" /> ISBN:
+						${book.isbn}
+					</td>
+					<td>${book.author}</td>
+					<td>${book.publisher}</td>
+					<td>${book.subject}</td>
+					<td>${book.price}</td>
+					<td>${book.quantityInStock}</td>
+			
+				</tr>
+		</c:forEach>
+	</table>
+	 <br />
 		<h1>Book Sales</h1>
 		<table>
 			<tr>
@@ -145,6 +160,7 @@
 		</footer>
 
 
-	</div>
+	
+					</div>
 </body>
 </html>

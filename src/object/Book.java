@@ -76,6 +76,26 @@ public class Book extends Item {
 		this.description = description;
 		this.quantityInCart = quantityInCart;
 	}
+	
+	public Book(String isbn, String author, double price, String title, String cover_picture, int edition, String publisher, int publicationYear, int quantityInStock) {
+		this.isbn = isbn;
+		this.author = author;
+		this.price = price;
+		this.title = title;
+		this.pic = cover_picture;
+		this.edition = edition;
+		this.publisher = publisher;
+		this.publicationYear = publicationYear;
+		this.quantityInStock = quantityInStock;
+	}
+	
+	public Book(String isbn, String author, double price, String title, int quantityInCart) {
+		this.isbn = isbn;
+		this.author = author;
+		this.price = price;
+		this.title = title;
+		this.quantityInCart = quantityInCart;
+	}
 
 	//Getters and Setters
 	public String getIsbn() {
