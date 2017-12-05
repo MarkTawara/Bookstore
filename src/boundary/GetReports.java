@@ -39,7 +39,7 @@ public class GetReports extends HttpServlet {
 	 * @throws IOException 
 	 * @throws ServletException 
 	 */
-	public void verify_login(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+	public void getReport(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 		bookstore_query query = new bookstore_query();
 		Date date = new Date();
 		Calendar cal = Calendar.getInstance();
@@ -80,7 +80,7 @@ public class GetReports extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			try {
-				verify_login(request, response);
+				getReport(request, response);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

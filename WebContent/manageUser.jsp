@@ -59,23 +59,28 @@
         </nav>
     </div>
 
-    <!--Jumbotron/Our Search area for books-->
-    <div class="jumbotron">
-        <h2>Manage Users</h2>
-
-        <form id="search_bar">
-            <div class="form-group">
-                <div class="input-group input-group-lg max_width">
-                    <!-- <div class="input-group-addon white-background"><img id="search_img" src="images/search_img_small.png" alt="search"/></div> -->
-                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search with username">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default blue" type="submit">Search</button>
-                    </span>
-                </div>
-            </div>
-        </form>
-    </div>
-
+    <h2>Manage Users</h2>
+	
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<table>
+		<tr>
+			<th><a href="#">Email</a></th>
+		</tr>
+		
+		<c:forEach items="${userResults}" var="user">
+			<tr>
+				<td>${book.author}</td>
+				<td>${book.publisher}</td>
+				<td>${book.subject}</td>
+				<td>${book.price}</td>
+				<td><form action="AddToCartServlet?param=${book.isbn}" method="post">Qty:<input type="number" name="qty" min="1" max="99"><input type="submit" value="Add to Cart""></form><td>
+			</tr>
+		</c:forEach>
+	</table>
+	
+	
+	
+	
     <table> 
         <tr>
             <th><a href="#">Username</a></th>
