@@ -42,6 +42,8 @@
     <!--Navigation Bar at the top right which hold links to other sites on our page-->
     <div id="navibar" class="header clearfix"></div>
 
+	<a href="manageBooks.jsp">Go Back</a>
+
 	<div style="color: #FF0000;">${removeMessage}</div>
     <div class="bookTable">
    	<table>
