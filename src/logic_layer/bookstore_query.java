@@ -791,4 +791,17 @@ public class bookstore_query {
 		return list;
 	}
 
+	public boolean deleteUser(String email) {
+		String query = "DELETE FROM registered_customer WHERE email = '" + email + "'";
+		int result = 0;
+	
+		try {
+			result = DB_Access.insert(query);
+		} catch (Exception e) {
+			System.out.println("Delete User Failed");
+			return false;
+		}
+		
+		return (result != 0);
+	}
 }

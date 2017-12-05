@@ -38,12 +38,12 @@
 
     <div class="adminActionDiv">
     <button type="button" class="cool_buttons" onclick="location.href='manageBooks.jsp'">Manage Books</button><br>
-    <form ACTION="ManageUsers" method="post" id="getReports">
+    <form action="ManageUsers" method="post" id="getReports">
     		<button type="submit" class="cool_buttons">Manage Users</button><br>
     </form>
     <button type="button" class="cool_buttons" onclick="location.href='manageSuppliersAndShipment.jsp'">Manage Suppliers/Shipment</button><br>
     <button type="button" class="cool_buttons" onclick="location.href='addPromo.jsp'">Add Promotion</button><br>
-    <form ACTION="GetReports" method="post" id="getReports">
+    <form action="GetReports" method="post" id="getReports">
     		<button type="submit" class="cool_buttons" onclick="location.href='pullReports.jsp'">View Reports</button>
     </form>
 

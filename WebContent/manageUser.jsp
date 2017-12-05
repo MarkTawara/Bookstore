@@ -71,8 +71,10 @@
 			<tr>
 				<td>${user.userId}</td>
 				<td class="muCol2">
-		            	<button>Delete</button>
-		            	<button>Suspend</button>
+					<form ACTION="ManageUsers?param=${user.userId}" method="post" id="getReports">
+						<button type="submit" name="delete">Delete</button>
+		            		<button type="submit" name="suspend">Suspend</button>
+					</form>
             		<td>
 			</tr>
 		</c:forEach>
