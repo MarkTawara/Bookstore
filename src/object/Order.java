@@ -18,6 +18,7 @@ public class Order {
 	Date dateOrderedReal;
 	String shippingAddress;
 	String titleList;
+	String dateOrderedInfo;
 	
 	//Constructor
 	public Order(int orderId, String dateOrdered, String customerName, String customerId, String status, int shippingId, double totalPrice, String paymentMethod, String billingAddress, int cartId) {
@@ -44,7 +45,12 @@ public class Order {
 		this.status = status;
 	}
 	
-	
+	public Order(int orderId, String customer, String date, double price){
+		this.customerName = customer;
+		this.orderId = orderId;
+		this.dateOrderedInfo = date;
+		this.totalPrice = price;
+	}
 	
 	//Getters & Setters
 	public int getOrderId() {
@@ -151,6 +157,12 @@ public class Order {
 		this.cartId = cartId;
 	}
 
-	
+	public String getDateOrderedInfo() {
+		return dateOrderedInfo;
+	}
+
+	public void setDateOrderedInfo(String dateOrderedInfo) {
+		this.dateOrderedInfo = dateOrdered;
+	}
 
 }

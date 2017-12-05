@@ -737,4 +737,13 @@ public class bookstore_query {
 		} 
 	}
 	
+	public ResultSet getOrdersReport(String startDate, String endDate) {
+		String query = "SELECT * FROM orders WHERE order_date >= " + startDate + " AND order_date < " + endDate;
+		Connection con = DB_Access.connect();
+		ResultSet rs = DB_Access.retrieve(con, query);
+		//DB_Access.disconnect(con);
+		
+		return rs;
+	}
+	
 }

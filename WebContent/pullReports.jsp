@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -57,16 +57,16 @@
 		<!--Navigation Bar at the top right which hold links to other sites on our page-->
 		<div class="header clearfix">
 			<nav>
-				<div class="navbar-header">
-					<h3>Logo TBD</h3>
-				</div>
-				<ul class="nav nav-pills pull-right">
-					<li role="presentation"><a href="#">Home</a></li>
-					<li role="presentation" class="active"><a href="#">Browse
-							All Books</a></li>
-					<li role="presentation"><a href="#">About</a></li>
-					<li role="presentation"><a href="#">Contact</a></li>
-				</ul>
+			<div class="navbar-header">
+				<h3>Logo TBD</h3>
+			</div>
+			<ul class="nav nav-pills pull-right">
+				<li role="presentation"><a href="#">Home</a></li>
+				<li role="presentation" class="active"><a href="#">Browse
+						All Books</a></li>
+				<li role="presentation"><a href="#">About</a></li>
+				<li role="presentation"><a href="#">Contact</a></li>
+			</ul>
 			</nav>
 		</div>
 
@@ -74,8 +74,29 @@
  		Shows the reports including end of day sales, 
  		low inventory notices, book sales, and publishers sale.
  		-->
- 		<h1>Total sales for today:</h1> (Pull all orders made on TODAY, calculate total outside of html)</p>
-		
+		<h1>Total sales for today:</h1>
+		<p>(Pull all orders made on TODAY, calculate total outside of
+			html)</p>
+		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+		<table>
+			<tr>
+				<th><a href="#">Order ID</a></th>
+				<th><a href="#">Order Date</a></th>
+				<th><a href="#">Customer</a></th>
+				<th><a href="#">Price</a></th>
+			</tr>
+			<c:forEach items="${orderResults}" var="order">
+				<tr>
+					<td>${order.orderId}</td>
+					<td>${order.dateOrderedInfo}</td>
+					<td>${order.customerName}</td>
+					<td>${order.totalPrice}</td>
+				</tr>
+			</c:forEach>
+		</table>
+
+		<p><strong>Total Earned Today : $ ${totalPrice}</strong></p>
+
 		<br />
 		<h1>Low Inventory Notices</h1>
 		<table>
@@ -88,7 +109,7 @@
 				<td>Pull quantity left (Only notice if less than... 5?)</td>
 			</tr>
 		</table>
-		
+
 		<br />
 		<h1>Book Sales</h1>
 		<table>
@@ -100,10 +121,11 @@
 			<tr>
 				<td>Pull book title from database</td>
 				<td>Pull the amount that were sold today?</td>
-				<td>Calculate the $ made based on the number of books sold today?</td>
+				<td>Calculate the $ made based on the number of books sold
+					today?</td>
 			</tr>
 		</table>
-		
+
 		<br />
 		<h1>Publisher's Sales Report</h1>
 		<table>
@@ -112,14 +134,16 @@
 				<th>$ Made on Publisher's Titles Today</th>
 			</tr>
 			<tr>
-				<td>Pull publisher name from database - Only show publisher names that have sold something today</td>
+				<td>Pull publisher name from database - Only show publisher
+					names that have sold something today</td>
 				<td>Calculate the $ made based on publisher</td>
 			</tr>
 		</table>
 
 		<footer class="footer">
-			<p>&copy; 2016 Company, Inc.</p>
+		<p>&copy; 2016 Company, Inc.</p>
 		</footer>
+
 
 	</div>
 </body>
