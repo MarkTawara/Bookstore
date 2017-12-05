@@ -3,16 +3,21 @@ package logic_layer;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import object.Book;
 import object.Order;
@@ -23,7 +28,6 @@ public class bookstore_query {
 	
 	/*
 	 * This method is called from the Login_Servlet, and it creates a query to that is executed to enter a new user into the database.
-	 * ???????????????????????????? what is this
 	 */
 	public static int insert_new_user(HttpServletRequest request, HttpServletResponse response, String name, String email, String password) {
 		String query = "INSERT INTO users (name, email, password) Values('"+name+"', '"+email+"', '"+password+"')";
@@ -124,14 +128,45 @@ public class bookstore_query {
 	 * This method is called from AddBook to add a new book to the database
 	 */
 	public void addBook(String title, String author, double price, String isbn, int edition, String publisher, String publication_year, String description, int quantity_in_stock, byte[] image) {
+		System.out.println(description);
 		String query = "INSERT INTO book (price, isbn,  title, author, edition, publisher, publication_year, description, quantity_in_stock)\n" + 
-				"VALUES (" + price + ", '" + isbn + "', '" + title +  "', '" + author + "', " + edition + ", '" + publisher + "', '" + publication_year + "', '" + description + "', " +  quantity_in_stock + ")";
+				"VALUES (" + price + ", '" + isbn + "', '" + title +  "', '" + author + "', " + edition + ", '" + publisher + "', '" + publication_year + "', \"" + description + "\", " +  quantity_in_stock + ")";
 		int r = 0;
 		try{
 			r = DB_Access.insert(query);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
+	}
+	
+	public void addImage(String isbn, Part image) {
+		String sql = "UPDATE book set cover_picture=?" +  " where isbn = '"+isbn+"'";
+		PreparedStatement myStmt = null;
+		Connection con = null;
+		int result = 0;
+		
+		 System.out.println(image);
+		
+		try {
+			con = DB_Access.connect();
+			myStmt = con.prepareStatement(sql);
+			
+			InputStream is = image.getInputStream();
+			myStmt.setBlob(1, is);
+			
+			result = myStmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//DB_Access.disconnect(con);
+		
+		if (result > 0) {
+			System.out.println("worked");
+		} else {
+			System.out.println("failed");
+		}
 	}
 	
 	/*
@@ -310,6 +345,7 @@ public class bookstore_query {
 			if(rs.next()){//Promotion of this code was found
 				p.setCode(rs.getString(2));
 				p.setPercentOff(rs.getInt(4));
+				p.setDate(rs.getDate(3));
 			}else{//Promotion not found
 				return p;
 			}
@@ -480,7 +516,10 @@ public class bookstore_query {
 		rs = DB_Access.retrieve(con, bookQuery);				
 		try{
 			while(rs.next()){
-				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), rs.getBlob(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), 0, rs.getString(13));
+				byte[] imgData = rs.getBytes("cover_picture"); // blob field 
+				String encode = Base64.getEncoder().encodeToString(imgData);
+				
+				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), encode, rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), 0, rs.getString(13));
 				list.add(book);
 			}
 		} catch (Exception e){
@@ -498,10 +537,13 @@ public class bookstore_query {
 		Connection con = DB_Access.connect();
 		//Get the info from the cart table
 		String bookQuery = "select * from book where title like '%" + keyword + "%'";
-		rs = DB_Access.retrieve(con, bookQuery);				
+		rs = DB_Access.retrieve(con, bookQuery);
 		try{
 			while(rs.next()){
-				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), rs.getBlob(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), 0, rs.getString(13));
+				byte[] imgData = rs.getBytes("cover_picture"); // blob field 
+				String encode = Base64.getEncoder().encodeToString(imgData);
+				
+				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), encode, rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), 0, rs.getString(13));
 				list.add(book);
 			}
 		} catch (Exception e){
@@ -520,6 +562,7 @@ public class bookstore_query {
 		//Get the info from the cart table		
 		String bookQuery = "select * from book where ";
 		ArrayList<String> queryList = new ArrayList<String>();
+		
 		if(!title.equals("")) {
 			queryList.add("title like '%" + title + "%'");
 		}
@@ -540,7 +583,10 @@ public class bookstore_query {
 		System.out.println(bookQuery.substring(0,bookQuery.length()-5));
 		try{
 			while(rs.next()){
-				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), rs.getBlob(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), 0, rs.getString(13));
+				byte[] imgData = rs.getBytes("cover_picture"); // blob field 
+				String encode = Base64.getEncoder().encodeToString(imgData);
+				
+				Book book = new Book(rs.getString(5), rs.getString(3), rs.getDouble(4), rs.getString(2), encode, rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), 0, rs.getString(13));
 				list.add(book);
 			}
 		} catch (Exception e){
@@ -639,7 +685,7 @@ public class bookstore_query {
 		}
 		
 	}
-	
+
 	public void addSupplierOrShipment(String business_type, String business_name, String business_address, String business_phone, String contact_name, String email, String workphone, String cellphone) {
 		String query = "INSERT INTO " + business_type + " (business_name, business_address, business_phone, contact_name, email, workphone, cellphone)" + 
 				" VALUES ('" + business_name + "', '" + business_address + "', '" + business_phone + "', '" + contact_name + "', '" + email + "', '" + workphone + "', '" + cellphone + "')";
@@ -650,7 +696,22 @@ public class bookstore_query {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
+	}
+
+	public void addPromo(String code, Date date, int discount){
+		String query = "INSERT INTO `bookStore`.`promotion` (`code`, `exp_date`, `percentage`) VALUES (?, ?, ?)";
+		Connection con = DB_Access.connect();
 		
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, code);
+			ps.setDate(2, new java.sql.Date(date.getTime()));
+			ps.setInt(3, discount);
+			ps.execute();			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 	
 }

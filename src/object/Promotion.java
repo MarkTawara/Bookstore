@@ -1,10 +1,13 @@
 package object;
 
+import java.util.Date;
+
 public class Promotion {
 
 	//Variables
 	String code;
 	String expirationDate;
+	Date expirationDateReal;
 	int percentOff;
 	
 	//Default Constructor
@@ -19,11 +22,14 @@ public class Promotion {
 		this.percentOff = percentOff;
 	}
 	
-	//Set the status of the promotion. Is it discontinued? 
-	public void updatePromotion() {
-		
+	public Date getDate(){
+		return expirationDateReal;
 	}
 
+	public void setDate(Date d){
+		this.expirationDateReal = d;		
+	}
+	
 	//Getters & Setters
 	public String getCode() {
 		return code;

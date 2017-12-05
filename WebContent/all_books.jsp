@@ -57,7 +57,7 @@
 			<tr>
 				<td>
 					${book.title}
-					<img class="center-img carousel-img" src="data:image/jpg;base64,'${book.cover_picture}'" alt="book image"/>
+					<img class="center-img carousel-img" src="data:image/jpg;base64,${book.pic}" alt="book image"/>
 					ISBN: ${book.isbn}
 				</td>
 				<td>${book.author}</td>
