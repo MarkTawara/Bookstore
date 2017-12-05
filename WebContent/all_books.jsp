@@ -48,7 +48,7 @@
 			<th><a href="#">Title</a></th>
             <th><a href="#">Author</a></th>
             <th><a href="#">Publisher</a></th>
-            <th><a href="#">Subject</a></th>
+<!--             <th><a href="#">Subject</a></th> -->
             <th><a href="#">Price</a></th>
 <!-- 		<th><a href="#">Rating</a></th> -->
             <th><a href="#">Option</a></th>
@@ -62,7 +62,7 @@
 				</td>
 				<td>${book.author}</td>
 				<td>${book.publisher}</td>
-				<td>${book.subject}</td>
+<%-- 				<td>${book.subject}</td> --%>
 				<td>${book.price}</td>
 				<td><form action="AddToCartServlet?param=${book.isbn}" method="post">Qty:<input type="number" name="qty" min="1" max="99"><input type="submit" value="Add to Cart""></form><td>
 			</tr>

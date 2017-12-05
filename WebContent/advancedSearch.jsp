@@ -59,10 +59,10 @@
 						<label class="asLabel">ISBN: </label> <input class="asInputField"
 							type="text" name="isbn" value="">
 					</div>
-					<div class="asblock">
-						<label class="asLabel">Subject: </label> <input
-							class="asInputField" type="text" name="subject" value="">
-					</div>
+<!-- 					<div class="asblock"> -->
+<!-- 						<label class="asLabel">Subject: </label> <input -->
+<!-- 							class="asInputField" type="text" name="subject" value=""> -->
+<!-- 					</div> -->
 					<input class="asBtn" type="submit" value="Advanced Search">
 				</form>
 			</div>
